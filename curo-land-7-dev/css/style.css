@@ -260,7 +260,7 @@ h6 {
   content: "";
   width: 3840px;
   height: 3840px;
-  background: url("../img/cards-roll.webp") no-repeat center center/cover;
+  background: url("../img/cards-roll_2k.webp") no-repeat center center/cover;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -293,6 +293,7 @@ h6 {
   .hero__image::after {
     width: 2420px;
     height: 2420px;
+    background: url("../img/cards-roll_big.webp") no-repeat center center/cover;
   }
 }
 @media screen and (max-width: 1199.98px) {
@@ -315,6 +316,11 @@ h6 {
   .hero__image {
     margin-top: -190px;
     margin-bottom: -328px;
+  }
+  .hero__image::after {
+    width: 2000px;
+    height: 2000px;
+    background: url("../img/cards-roll.webp") no-repeat center center/cover;
   }
 }
 @media screen and (max-width: 991.98px) {
