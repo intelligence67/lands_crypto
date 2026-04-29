@@ -244,6 +244,7 @@ h6 {
   text-align: center;
   position: relative;
   z-index: 1;
+  padding-top: 150px;
 }
 .hero__logo {
   margin: 0 auto;
@@ -259,7 +260,7 @@ h6 {
 .hero__image {
   width: 1024px;
   height: 876px;
-  top: 5px;
+  top: 155px;
   position: absolute;
 }
 .hero__image img {
@@ -321,6 +322,14 @@ h6 {
   }
   100% {
     transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+@media screen and (max-width: 1920.98px) {
+  .hero__content {
+    padding-top: 0;
+  }
+  .hero__content__image {
+    top: 5px;
   }
 }
 @media screen and (max-width: 1199.98px) {

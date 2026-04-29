@@ -6,7 +6,7 @@
 // Брейки
 
 $bp-big: 2559.98px;
-$bp-main: 1919.98px;
+$bp-main: 1920.98px;
 $bp-xxl: 1439.98px;
 $bp-xl: 1199.98px;
 $bp-lg: 991.98px;
@@ -163,6 +163,7 @@ h6 {
     text-align: center;
     position: relative;
     z-index: 1;
+    padding-top: 150px;
   }
 
   &__logo {
@@ -182,7 +183,7 @@ h6 {
   &__image {
     width: 1024px;
     height: 876px;
-    top: 5px;
+    top: 155px;
     position: absolute;
 
     img {
@@ -258,6 +259,16 @@ h6 {
 
     100% {
       transform: translateY(0) scale(1) rotate(0deg);
+    }
+  }
+
+  @include breakpoint($bp-main) {
+    &__content {
+      padding-top: 0;
+
+      &__image {
+        top: 5px;
+      }
     }
   }
 
