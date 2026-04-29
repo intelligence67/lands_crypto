@@ -1,6 +1,6 @@
-# Patricio Landing
+# Baraja Landing
 
-`patricio.cuatrobet.com` keeps the original campaign design and adds the standard CuatroBet registration business logic underneath it.
+`baraja.cuatrobet.com` keeps its own campaign design and now supports the standalone CuatroBet server deployment flow.
 
 ## What stays unchanged
 
@@ -14,7 +14,8 @@
 - the CuatroBet registration payload contract
 - MTFEF-aware marketing metadata collection
 - shared main-repo export through `../../template/scripts/build-repo.mjs`
-- integrated-repo compatibility via `auth-helper-v2.js` and `landing-welcome-adapter.js`
+- standalone server export through `../../template/scripts/build-server.mjs`
+- direct MTFEF bootstrap plus marketing-link propagation for dedicated-host deployment
 
 ## Local development
 
@@ -67,3 +68,16 @@ CUATRO_MAIN_REPO_DIR=/abs/path/to/inicio.cuatrobet.com npm run build:repo
 - In the raw repo, Patricio can submit directly to the registration API for local testing.
 - In the integrated repo, Patricio detects `window.sendApiRequest` and uses the shared CuatroBet submit path instead.
 - The visual DOM is Patricio-specific, so this landing ships its own bridge logic while still using the same backend/auth/MTFEF stack as Bono after export.
+
+## Standalone server export
+
+```bash
+npm run build:server
+```
+
+This landing's `landing.export.json` defines:
+
+- `serverHost: "baraja.cuatrobet.com"`
+- `nnbonus: "1"`
+
+`build:server` copies the built files into `/Volumes/DATA/Work/cuatro/landings/server/baraja.cuatrobet.com` for direct sync to `/var/www/baraja.cuatrobet.com`.
