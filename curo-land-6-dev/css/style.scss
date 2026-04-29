@@ -5,11 +5,15 @@
 
 // Брейки
 
+$bp-big: 2559.98px;
+$bp-main: 1919.98px;
 $bp-xxl: 1439.98px;
 $bp-xl: 1199.98px;
 $bp-lg: 991.98px;
 $bp-md: 767.98px;
 $bp-sm: 575.98px;
+$bp-xs: 399.98px;
+
 
 html,
 body {
@@ -154,13 +158,15 @@ h6 {
     display: flex;
     flex-direction: column;
     flex: 1;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
+    justify-content: flex-start;
+    align-items: center;
     text-align: center;
+    position: relative;
+    z-index: 1;
   }
 
   &__logo {
+    margin: 0 auto;
     margin-bottom: 12px;
 
     img {
@@ -168,10 +174,56 @@ h6 {
     }
   }
 
+  &__top {
+    position: relative;
+    z-index: 3;
+  }
+
+  &__image {
+    width: 1024px;
+    height: 876px;
+    top: 5px;
+    position: absolute;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    &::after {
+      content: '';
+      width: 320px;
+      height: 320px;
+      background: url('../img/crown.png') top center / contain no-repeat;
+      top: 170px;
+      left: 80px;
+      position: absolute;
+      z-index: 1;
+      animation: crownFloat 5s ease-in-out infinite;
+
+      transform-origin: center;
+    }
+
+    &::before {
+      content: '';
+      width: 400px;
+      height: 400px;
+      background: url('../img/pot.png') top center / contain no-repeat;
+      bottom: 0;
+      right: 70px;
+      position: absolute;
+      z-index: 1;
+
+      animation: potFloat 6s ease-in-out infinite;
+
+      transform-origin: center;
+    }
+  }
+
   &__title {
     font-style: italic;
     font-weight: 800;
-    font-size: 72px;
+    font-size: 60px;
     line-height: 120%;
     text-transform: uppercase;
     color: #ffffff;
@@ -181,18 +233,42 @@ h6 {
     }
   }
 
-  @include breakpoint($bp-xxl) {
-    background: url('../img/bg_xxl.jpg') top center / cover no-repeat;
+  @keyframes crownFloat {
+    0% {
+      transform: translateY(0) scale(1) rotate(0deg);
+    }
+
+    50% {
+      transform: translateY(-18px) scale(1.04) rotate(-2deg);
+    }
+
+    100% {
+      transform: translateY(0) scale(1) rotate(0deg);
+    }
+  }
+
+  @keyframes potFloat {
+    0% {
+      transform: translateY(0) scale(1) rotate(0deg);
+    }
+
+    50% {
+      transform: translateY(14px) scale(0.96) rotate(2deg);
+    }
+
+    100% {
+      transform: translateY(0) scale(1) rotate(0deg);
+    }
   }
 
   @include breakpoint($bp-xl) {
-    padding: 80px 0 80px 0;
+    padding: 100px 0 100px 0;
     background: url('../img/bg_xl.jpg') top center / cover no-repeat;
 
     .container {
       flex-direction: column;
       align-items: center;
-      gap: 60px;
+      gap: 80px;
     }
 
     &__content {
@@ -200,24 +276,70 @@ h6 {
       align-items: center;
       text-align: center;
       flex: none;
+      flex-direction: column-reverse;
+    }
+
+    &__image {
+      top: -100px;
+
+      &::after {
+        top: 0;
+      }
+
+      &::before {
+        bottom: -140px;
+        right: 0;
+      }
+    }
+  }
+
+  @include breakpoint($bp-lg) {
+    padding: 80px 0 80px 0;
+
+    .container {
+      gap: 140px;
+    }
+
+    &__image {
+      width: 840px;
+      height: 720px;
+      top: -50px;
+
+      &::after {
+        top: -50px;
+      }
+
+      &::before {
+        bottom: -300px;
+        right: -60px;
+      }
     }
   }
 
   @include breakpoint($bp-md) {
     background: url('../img/bg_tablet.jpg') top center / cover no-repeat;
 
-    &__title {
-      font-size: 10.00vw;
-    }
-
     .register {
       max-width: 100%;
+    }
+
+    &__image {
+
+      &::after {
+        width: 240px;
+        height: 240px;
+        top: -70px;
+        left: 160px;
+      }
+
+      &::before {
+        display: none;
+      }
     }
   }
 
   @include breakpoint($bp-sm) {
     padding: 80px 0 20px 0;
-    background: url('../img/bg_sm.jpg') top center / cover no-repeat;
 
     .container {
       gap: 100px;
@@ -225,6 +347,30 @@ h6 {
 
     &__logo {
       max-width: 153px;
+    }
+
+    &__image {
+      width: 400px;
+      height: 342px;
+
+      &::after {
+        width: 160px;
+        height: 160px;
+        top: -50px;
+        left: 45px;
+      }
+
+      &::before {
+        display: block;
+        width: 200px;
+        height: 200px;
+        top: 160px;
+        right: -10px;
+      }
+    }
+
+    &__title {
+      font-size: 10.00vw;
     }
   }
 }
