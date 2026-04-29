@@ -462,6 +462,7 @@ h6 {
   color: #ffffff;
   cursor: pointer;
   text-align: left;
+  pointer-events: none;
 }
 .bonus-select__left {
   display: flex;
@@ -492,15 +493,13 @@ h6 {
   color: rgba(255, 255, 255, 0.7);
 }
 .bonus-select__value {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   font-size: 16px;
   line-height: 1.3;
 }
 .bonus-select__arrow {
   flex: 0 0 auto;
   opacity: 0.8;
+  display: none;
 }
 
 .form-field {
