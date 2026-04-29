@@ -1,27 +1,35 @@
-const REGISTRATION_ERROR_MESSAGE = 'Algo salio mal.';
+const REGISTRATION_ERROR_MESSAGE = 'Algo salió mal.';
 const PASSWORD_MIN_LENGTH = 6;
 const AR_COUNTRY_CODE = '54';
 const AR_LOCAL_PHONE_LENGTH = 10;
+const API_BASE_URL = 'https://apg.cuatrobet.com/v0/identity';
 const FINGERPRINT_SCRIPT_URL = 'https://openfpcdn.io/fingerprintjs/v4';
+const MARKETING_LIBRARY_URL = 'https://cuatrobet.com/mtapi/js/v2/mlibrary.js';
+const TRACKING_QUERY_KEYS = [
+  'qtag',
+  'adtag',
+  'btag',
+  'stag',
+  'voluum_clickid',
+  'siteid',
+  'utm',
+  'utm_source',
+  'utm_medium',
+  'utm_campaign',
+  'utm_content',
+  'utm_term',
+  'gclid',
+  'fbclid',
+];
 
 const readEnv = (key, fallback) => {
   const value = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env[key] : undefined;
   return typeof value === 'string' && value.trim() ? value.trim() : fallback;
 };
 
-const formatApgUrl = () => {
-  try {
-    const currentUrl = new URL(window.location.href);
-    currentUrl.hostname = currentUrl.hostname.replace(/^[^.]+/, 'apg');
-    return `${currentUrl.origin}/v0/identity`;
-  } catch (_error) {
-    return 'https://apg.cuatrobet.com/v0/identity';
-  }
-};
-
 const landingConfig = {
   apiKey: readEnv('VITE_CUATROBET_API_KEY', 'f57361d7-f180-46d8-8b71-805288f3fb2a'),
-  registrationUrl: readEnv('VITE_CUATROBET_REGISTRATION_URL', `${formatApgUrl()}/registration/byform`),
+  registrationUrl: readEnv('VITE_CUATROBET_REGISTRATION_URL', `${API_BASE_URL}/registration/byform`),
   redirectDomain: readEnv('VITE_CUATROBET_REDIRECT_DOMAIN', 'https://cuatrobet.com'),
   defaultCurrency: readEnv('VITE_CUATROBET_DEFAULT_CURRENCY', 'ARS'),
   selectedLanguage: readEnv('VITE_CUATROBET_SELECTED_LANGUAGE', 'es'),
@@ -29,6 +37,20 @@ const landingConfig = {
 };
 
 let fingerprintVisitorIdPromise;
+
+const ensureMtfeFShim = () => {
+  if (typeof window.MTFEF === 'undefined') {
+    window.MTFEF = {};
+  }
+
+  if (typeof window.MTFEF.registerCallback !== 'function') {
+    window.MTFEF.registerCallback = () => {};
+  }
+
+  if (typeof window.MTFEF.loginCallback !== 'function') {
+    window.MTFEF.loginCallback = () => {};
+  }
+};
 
 const readCookie = (name) => {
   const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -124,21 +146,17 @@ const collectMarketingMeta = () => {
     iohash: readCookie('iohash'),
   };
 
-  const queryMap = [
-    'utm_source',
-    'utm_medium',
-    'utm_campaign',
-    'utm_term',
-    'utm_content',
-    'gclid',
-    'fbclid',
-  ].reduce((accumulator, key) => {
+  const queryMap = TRACKING_QUERY_KEYS.reduce((accumulator, key) => {
     const value = query.get(key);
     if (value) {
       accumulator[key] = value;
     }
     return accumulator;
   }, {});
+
+  if (typeof window.clstrmid === 'string' && window.clstrmid.trim()) {
+    queryMap.clstrmid = window.clstrmid.trim();
+  }
 
   return Object.entries({ ...cookieMap, ...queryMap }).reduce((accumulator, [key, value]) => {
     if (typeof value === 'string' && value.trim()) {
@@ -247,6 +265,89 @@ const buildRedirectUrl = (redirectDomain, bonusCode) => {
   return `${baseUrl.toString()}?${parts.join('&')}`;
 };
 
+const readTrackingQueryParam = (key) => {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(key);
+};
+
+const insertUrlParam = (key, value, href) => {
+  try {
+    const url = new URL(href);
+    url.searchParams.set(key, value);
+    return url.toString();
+  } catch {
+    return href;
+  }
+};
+
+const applyBonusToHref = (href) => {
+  const bonusCode = window.nnbonus || document.getElementById('selected-bonus-code')?.value || '';
+  return bonusCode ? insertUrlParam('regBonus', bonusCode, href) : href;
+};
+
+const applyClusterIdToHref = (href) => {
+  const clusterId = typeof window.clstrmid === 'string' ? window.clstrmid.trim() : '';
+  return clusterId ? insertUrlParam('clstrmid', clusterId, href) : href;
+};
+
+const syncTrackingLinks = () => {
+  const anchors = document.querySelectorAll('a[href]');
+
+  anchors.forEach((anchor) => {
+    const href = anchor.getAttribute('href');
+
+    if (!href || href.includes('//nativeapp') || (!href.startsWith('https://') && !href.startsWith('http://'))) {
+      return;
+    }
+
+    let nextHref = href;
+
+    TRACKING_QUERY_KEYS.forEach((key) => {
+      const value = readTrackingQueryParam(key);
+      if (value) {
+        nextHref = insertUrlParam(key, value, nextHref);
+      }
+    });
+
+    nextHref = applyBonusToHref(nextHref);
+    nextHref = applyClusterIdToHref(nextHref);
+    anchor.href = nextHref;
+  });
+};
+
+const initMarketingLibrary = () => {
+  ensureMtfeFShim();
+
+  const initMtfeF = () => {
+    if (window.MTFEF && typeof window.MTFEF.init === 'function') {
+      try {
+        window.MTFEF.init();
+      } catch (_error) {
+        // Tracking must not break the landing runtime.
+      }
+    }
+  };
+
+  if (document.querySelector(`script[data-mtfef-lib="${MARKETING_LIBRARY_URL}"]`)) {
+    initMtfeF();
+    window.setTimeout(syncTrackingLinks, 1200);
+    return;
+  }
+
+  const script = document.createElement('script');
+  script.src = MARKETING_LIBRARY_URL;
+  script.async = true;
+  script.setAttribute('data-mtfef-lib', MARKETING_LIBRARY_URL);
+  script.onload = () => {
+    initMtfeF();
+    window.setTimeout(syncTrackingLinks, 1200);
+  };
+  script.onerror = () => {
+    window.setTimeout(syncTrackingLinks, 0);
+  };
+  document.head.appendChild(script);
+};
+
 const submitRegistrationDirect = async (payload) => {
   const headers = await buildHeaders();
   let response;
@@ -289,6 +390,9 @@ const submitRegistrationDirect = async (payload) => {
 };
 
 const initRegistrationForm = () => {
+  initMarketingLibrary();
+  syncTrackingLinks();
+
   const form = document.getElementById('register-form');
   if (!form || form.dataset.patricioInitialized === 'true') {
     return;
@@ -439,6 +543,7 @@ const initRegistrationForm = () => {
 
     window.nnbonus = bonusCode;
     window.landing_type = 'registration_on_landing';
+    syncTrackingLinks();
   };
 
   const getPhoneDigits = (value) => getPhoneLocalDigits(value).slice(0, AR_LOCAL_PHONE_LENGTH);

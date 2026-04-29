@@ -1,4 +1,5 @@
 {
   "mode": "bono",
-  "nnbonus": "1"
+  "nnbonus": "1",
+  "serverHost": "apuestas.cuatrobet.com"
 }
