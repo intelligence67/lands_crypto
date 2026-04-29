@@ -53,20 +53,20 @@
         </div>
 
         <form class="register-form" id="register-form" novalidate>
-          <input type="hidden" name="selectedBonus" id="selected-bonus-input" value="sports">
-          <input type="hidden" name="nnBonus" id="selected-bonus-code" value="2">
+          <input type="hidden" name="selectedBonus" id="selected-bonus-input" value="live">
+          <input type="hidden" name="nnBonus" id="selected-bonus-code" value="3">
           <input type="hidden" name="selectedLanguage" value="es">
           <input type="hidden" name="defaultCurrency" value="ARS">
           <button type="button" class="bonus-select" id="openBonusModal">
             <div class="bonus-select__left">
               <div class="bonus-select__icon">
-                <img id="selectedBonusImage" src="./img/bonus-icon-2.webp" alt="Bonus" width="32" height="32">
+                <img id="selectedBonusImage" src="./img/bonus-icon-3.webp" alt="Bonus" width="32" height="32">
               </div>
 
               <div class="bonus-select__content">
-                <div class="bonus-select__label">Bono de Bienvenida para Slotsde Casino</div>
+                <div class="bonus-select__label">Bono de Bienvenida para Casino en Vivo</div>
                 <div class="bonus-select__value" id="selectedBonusText">
-                  Bono de Slots de hasta el 150% + 60 FS con tu primer depósito
+                  👑 Bono de Casino en Vivo de hasta el 150% con tu primer depósito
                 </div>
               </div>
             </div>
@@ -170,7 +170,7 @@
       </div>
 
       <div class="bonus-list">
-        <button type="button" class="bonus-card is-active" data-bonus-id="casino" data-nn-bonus="1"
+        <button type="button" class="bonus-card" data-bonus-id="casino" data-nn-bonus="3"
           data-bonus="Bono de Slots de hasta el 150% + 60 FS con tu primer depósito">
           <div class="bonus-card__icon">
             <img src="./img/bonus-icon-1.webp" alt="Bonus" width="32" height="32">
@@ -184,7 +184,7 @@
           <span class="bonus-card__check"></span>
         </button>
 
-        <button type="button" class="bonus-card" data-bonus-id="sports" data-nn-bonus="2"
+        <button type="button" class="bonus-card" data-bonus-id="sports" data-nn-bonus="3"
           data-bonus="Obtén un Bono de Bienvenida para Deportes de hasta el 120% con tu primer depósito">
           <div class="bonus-card__icon">
             <img src="./img/bonus-icon-2.webp" alt="Bonus" width="32" height="32">
@@ -199,7 +199,7 @@
           <span class="bonus-card__check"></span>
         </button>
 
-        <button type="button" class="bonus-card" data-bonus-id="live" data-nn-bonus="3"
+        <button type="button" class="bonus-card is-active" data-bonus-id="live" data-nn-bonus="3"
           data-bonus="Bono de Casino en Vivo de hasta el 150% con tu primer depósito">
           <div class="bonus-card__icon">
             <img src="./img/bonus-icon-3.webp" alt="Bonus" width="32" height="32">

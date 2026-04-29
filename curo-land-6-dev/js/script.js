@@ -2,6 +2,7 @@ const REGISTRATION_ERROR_MESSAGE = 'Algo salió mal.';
 const PASSWORD_MIN_LENGTH = 6;
 const AR_COUNTRY_CODE = '54';
 const AR_LOCAL_PHONE_LENGTH = 10;
+const DEFAULT_NN_BONUS = '3';
 const API_BASE_URL = 'https://apg.cuatrobet.com/v0/identity';
 const FINGERPRINT_SCRIPT_URL = 'https://openfpcdn.io/fingerprintjs/v4';
 const MARKETING_LIBRARY_URL = 'https://cuatrobet.com/mtapi/js/v2/mlibrary.js';
@@ -281,7 +282,7 @@ const insertUrlParam = (key, value, href) => {
 };
 
 const applyBonusToHref = (href) => {
-  const bonusCode = window.nnbonus || document.getElementById('selected-bonus-code')?.value || '';
+  const bonusCode = window.nnbonus || document.getElementById('selected-bonus-code')?.value || DEFAULT_NN_BONUS;
   return bonusCode ? insertUrlParam('regBonus', bonusCode, href) : href;
 };
 
@@ -386,7 +387,7 @@ const submitRegistrationDirect = async (payload) => {
     }
   }
 
-  window.location.assign(buildRedirectUrl(redirectDomain, payload.nnBonus || '1'));
+  window.location.assign(buildRedirectUrl(redirectDomain, payload.nnBonus || DEFAULT_NN_BONUS));
 };
 
 const initRegistrationForm = () => {
@@ -518,7 +519,7 @@ const initRegistrationForm = () => {
     const bonusSmall = card.querySelector('.bonus-card__small');
     const bonusImg = card.querySelector('.bonus-card__icon img');
     const bonusId = card.dataset.bonusId || 'casino';
-    const bonusCode = card.dataset.nnBonus || '1';
+    const bonusCode = DEFAULT_NN_BONUS;
 
     if (selectedBonusText && bonusTitle) {
       selectedBonusText.textContent = bonusTitle.textContent.trim();
@@ -648,7 +649,7 @@ const initRegistrationForm = () => {
     data.defaultCurrency = data.defaultCurrency || landingConfig.defaultCurrency;
     data.selectedLanguage = data.selectedLanguage || landingConfig.selectedLanguage;
     data.phone = normalizePhone(data.phone);
-    data.nnBonus = data.nnBonus || '1';
+    data.nnBonus = DEFAULT_NN_BONUS;
     data.isPlayerAgree = true;
     data.formName = 'SHORTREGISTRATIONBYPHONE';
     data.marketingMeta = collectMarketingMeta();
@@ -664,7 +665,7 @@ const initRegistrationForm = () => {
   };
 
   const submitThroughSharedFlow = (data) => {
-    window.nnbonus = data.nnBonus || '1';
+    window.nnbonus = DEFAULT_NN_BONUS;
     window.landing_type = 'registration_on_landing';
 
     return new Promise((resolve, reject) => {

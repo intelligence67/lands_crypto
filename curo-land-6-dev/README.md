@@ -78,6 +78,6 @@ npm run build:server
 This landing's `landing.export.json` defines:
 
 - `serverHost: "apuestas.cuatrobet.com"`
-- `nnbonus: "1"`
+- `nnbonus: "3"`
 
 `build:server` copies the built files into `/Volumes/DATA/Work/cuatro/landings/server/apuestas.cuatrobet.com` for direct sync to `/var/www/apuestas.cuatrobet.com`.
