@@ -265,10 +265,10 @@ h6 {
   @include breakpoint($bp-main) {
     &__content {
       padding-top: 0;
+    }
 
-      &__image {
-        top: 5px;
-      }
+    &__image {
+      top: 5px;
     }
   }
 
