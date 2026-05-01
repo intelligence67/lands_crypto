@@ -695,17 +695,13 @@ const initRegistrationForm = () => {
   if (phoneBox && phoneInput) {
     phoneDisplay = document.createElement('div');
     phoneDisplay.className = 'phone-box__display';
+    phoneDisplay.setAttribute('aria-hidden', 'true');
     phoneBox.insertBefore(phoneDisplay, phoneInput);
     updatePhoneInput('');
 
     phoneInput.addEventListener('focus', () => {
       touched.phone = true;
       renderPhoneDisplay();
-    });
-
-    phoneInput.addEventListener('click', () => {
-      phoneInput.blur();
-      phoneInput.focus();
     });
 
     phoneInput.addEventListener('keydown', (event) => {
