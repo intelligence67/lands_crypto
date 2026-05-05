@@ -80,4 +80,4 @@ This landing's `landing.export.json` defines:
 - `serverHost: "baraja.cuatrobet.com"`
 - `nnbonus: "3"`
 
-`build:server` copies the built files into `/Volumes/DATA/Work/cuatro/landings/server/baraja.cuatrobet.com` for direct sync to `/var/www/baraja.cuatrobet.com`.
+`build:server` copies the built files into `/Volumes/DATA/Work/cuatro/landings/server/baraja.cuatrobet.com` for direct sync to `/var/www/landings/baraja.cuatrobet.com`.
