@@ -640,9 +640,6 @@ h6 {
   .hero .hero-advantages {
     flex-direction: column;
   }
-  .hero .hero-advantages__item {
-    justify-content: center;
-  }
   .hero .hero-steps__content {
     flex-direction: column;
     border: none !important;
