@@ -328,6 +328,8 @@ const initRegistrationForm = () => {
   const appealOverlay = document.getElementById('appealOverlay');
   const appealBtn = document.getElementById('appeal-btn');
 
+  const notificationWrapper = document.querySelector('.hero-notify');
+
   const phoneBox = phoneInput ? phoneInput.closest('.phone-box') : null;
   const emailBox = emailInput ? emailInput.closest('.field-box') : null;
   const passwordBox = passwordInput ? passwordInput.closest('.field-box') : null;
@@ -757,6 +759,16 @@ const initRegistrationForm = () => {
     closeRegisterModalFn();
   });
 
+  if (notificationWrapper) {
+    notificationWrapper.addEventListener('click', (event) => {
+      const notificationItem = event.target.closest('.hero-notify__item');
+
+      if (notificationItem) {
+        openRegisterModalFn();
+      }
+    });
+  }
+
   const activeCard = getActiveBonusCard();
   if (activeCard) {
     updateSelectedBonus(activeCard);
@@ -870,16 +882,12 @@ const notifyData = [
 const notifyWrapper = document.querySelector('.hero-notify');
 
 let currentIndex = 0;
+let isFirstRun = true;
 
-// Создаем HTML
 notifyData.forEach((item, index) => {
   const notification = document.createElement('div');
 
   notification.className = 'hero-notify__item';
-
-  if (index === 0) {
-    notification.classList.add('active');
-  }
 
   notification.innerHTML = `
     <img src="${item.image}" alt="Winner" width="72" height="72">
@@ -903,19 +911,25 @@ function showNotification(index) {
   notifications[index].classList.add('active');
 }
 
-setInterval(() => {
+function startNotificationCycle() {
+  showNotification(0);
 
-  notifications[currentIndex].classList.remove('active');
+  setInterval(() => {
+    notifications[currentIndex].classList.remove('active');
 
-  currentIndex++;
+    currentIndex++;
 
-  if (currentIndex >= notifications.length) {
-    currentIndex = 0;
-  }
+    if (currentIndex >= notifications.length) {
+      currentIndex = 0;
+    }
 
-  setTimeout(() => {
-    notifications[currentIndex].classList.add('active');
-  }, 400);
+    setTimeout(() => {
+      notifications[currentIndex].classList.add('active');
+    }, 400);
 
-}, 10000);
+  }, 7000);
+}
 
+setTimeout(() => {
+  startNotificationCycle();
+}, 5000);

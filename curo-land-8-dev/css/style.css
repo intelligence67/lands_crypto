@@ -464,7 +464,7 @@ h6 {
   z-index: 50;
   width: 100%;
   max-width: 620px;
-  pointer-events: none;
+  cursor: pointer;
 }
 .hero .hero-notify__item {
   position: absolute;
@@ -948,7 +948,7 @@ h6 {
     display: none;
   }
   .appeal__title {
-    font-size: 8.75vw;
+    font-size: 7.5vw;
   }
   .appeal__btn {
     min-width: 100%;

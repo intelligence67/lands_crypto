@@ -422,7 +422,7 @@ h6 {
     z-index: 50;
     width: 100%;
     max-width: 620px;
-    pointer-events: none;
+    cursor: pointer;
 
     &__item {
       position: absolute;
@@ -1028,7 +1028,7 @@ h6 {
     }
     
     &__title {
-      font-size: 8.75vw;
+      font-size: 7.50vw;
     }
 
     &__btn {
