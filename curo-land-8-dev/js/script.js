@@ -893,7 +893,7 @@ setInterval(() => {
 }, 10000);
 
 let idleTimer = null;
-const IDLE_TIME = 10000;
+const IDLE_TIME = 15000;
 
 const resetIdleTimer = () => {
   if (idleTimer) {
