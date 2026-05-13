@@ -581,6 +581,7 @@ h6 {
   position: relative;
   flex: 1;
   min-width: 0;
+  cursor: text;
 }
 .field-box input,
 .phone-box input {
@@ -628,9 +629,6 @@ h6 {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.phone-box {
-  cursor: text;
-}
 .phone-box input {
   letter-spacing: 0.2px;
   color: transparent;
@@ -689,6 +687,7 @@ h6 {
     opacity: 0;
   }
 }
+
 .phone-flag {
   width: 54px;
   height: 54px;
