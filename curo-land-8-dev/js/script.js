@@ -707,6 +707,33 @@ const initRegistrationForm = () => {
     }
   });
 
+  let idleTimer = null;
+  const IDLE_TIME = 15000;
+
+  const resetIdleTimer = () => {
+    if (idleTimer) {
+      clearTimeout(idleTimer);
+    }
+
+    idleTimer = setTimeout(() => {
+      // не показываем если уже открыты другие модалки
+      if (
+        (bonusModal && !bonusModal.hidden) ||
+        (registerModal && !registerModal.hidden)
+      ) {
+        return;
+      }
+
+      openAppealModal();
+    }, IDLE_TIME);
+  };
+
+  ['mousemove', 'keydown', 'scroll', 'click', 'touchstart'].forEach((event) => {
+    document.addEventListener(event, resetIdleTimer, { passive: true });
+  });
+
+  resetIdleTimer();
+
   bonusCards.forEach((card) => {
     card.addEventListener('click', () => {
       touched.bonus = true;
@@ -892,29 +919,3 @@ setInterval(() => {
 
 }, 10000);
 
-let idleTimer = null;
-const IDLE_TIME = 15000;
-
-const resetIdleTimer = () => {
-  if (idleTimer) {
-    clearTimeout(idleTimer);
-  }
-
-  idleTimer = setTimeout(() => {
-    // не показываем если уже открыты другие модалки
-    if (
-      (bonusModal && !bonusModal.hidden) ||
-      (registerModal && !registerModal.hidden)
-    ) {
-      return;
-    }
-
-    openAppealModal();
-  }, IDLE_TIME);
-};
-
-['mousemove', 'keydown', 'scroll', 'click', 'touchstart'].forEach((event) => {
-  document.addEventListener(event, resetIdleTimer, { passive: true });
-});
-
-resetIdleTimer();
