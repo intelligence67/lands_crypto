@@ -699,6 +699,14 @@ const initRegistrationForm = () => {
   bonusModalOverlay?.addEventListener('click', closeModal);
   appealOverlay?.addEventListener('click', closeAppealModal);
 
+  appealBtn?.addEventListener('click', () => {
+    closeAppealModal();
+
+    if (typeof openRegisterModalFn === 'function') {
+      openRegisterModalFn();
+    }
+  });
+
   bonusCards.forEach((card) => {
     card.addEventListener('click', () => {
       touched.bonus = true;
@@ -884,16 +892,8 @@ setInterval(() => {
 
 }, 10000);
 
-appealBtn?.addEventListener('click', () => {
-  closeAppealModal();
-
-  if (typeof openRegisterModalFn === 'function') {
-    openRegisterModalFn();
-  }
-});
-
 let idleTimer = null;
-const IDLE_TIME = 30000;
+const IDLE_TIME = 10000;
 
 const resetIdleTimer = () => {
   if (idleTimer) {
