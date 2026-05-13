@@ -643,6 +643,29 @@ h6 {
       flex-direction: column;
     }
 
+    .hero-points {
+      &__title {
+        font-size: 24px;
+
+        br {
+          display: inline-block;
+        }
+      }
+
+      &__text {
+        font-size: 16px;
+
+        br {
+          display: inline-block;
+        }
+      }
+
+      img {
+        width: 132px;
+        height: 110px;
+      }
+    }
+
     .hero-steps {
       &__content {
         flex-direction: column;

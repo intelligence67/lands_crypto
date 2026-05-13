@@ -640,6 +640,22 @@ h6 {
   .hero .hero-advantages {
     flex-direction: column;
   }
+  .hero .hero-points__title {
+    font-size: 24px;
+  }
+  .hero .hero-points__title br {
+    display: inline-block;
+  }
+  .hero .hero-points__text {
+    font-size: 16px;
+  }
+  .hero .hero-points__text br {
+    display: inline-block;
+  }
+  .hero .hero-points img {
+    width: 132px;
+    height: 110px;
+  }
   .hero .hero-steps__content {
     flex-direction: column;
     border: none !important;
