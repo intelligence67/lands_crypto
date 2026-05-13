@@ -318,6 +318,12 @@ const initRegistrationForm = () => {
   const agreementInput = document.getElementById('agreement');
   const agreementField = document.getElementById('agreementField');
 
+  const heroBtn = document.getElementById('hero-btn');
+
+  const registerModal = document.getElementById('registerModal');
+  const registerOverlay = document.getElementById('registerOverlay');
+  const closeRegisterModal = document.getElementById('closeRegisterModal');
+
   const phoneBox = phoneInput ? phoneInput.closest('.phone-box') : null;
   const emailBox = emailInput ? emailInput.closest('.field-box') : null;
   const passwordBox = passwordInput ? passwordInput.closest('.field-box') : null;
@@ -402,6 +408,25 @@ const initRegistrationForm = () => {
     }
 
     bonusModal.hidden = true;
+    document.body.style.overflow = '';
+  };
+
+  const openRegisterModalFn = () => {
+    if (!registerModal) {
+      return;
+    }
+
+    registerModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeRegisterModalFn = () => {
+
+    if (!registerModal) {
+      return;
+    }
+
+    registerModal.hidden = true;
     document.body.style.overflow = '';
   };
 
@@ -660,6 +685,18 @@ const initRegistrationForm = () => {
       closeModal();
       validateForm(hasAttemptedSubmit);
     });
+  });
+
+  heroBtn?.addEventListener('click', () => {
+    openRegisterModalFn();
+  });
+
+  closeRegisterModal?.addEventListener('click', () => {
+    closeRegisterModalFn();
+  });
+
+  registerOverlay?.addEventListener('click', () => {
+    closeRegisterModalFn();
   });
 
   const activeCard = getActiveBonusCard();

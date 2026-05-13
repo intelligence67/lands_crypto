@@ -755,18 +755,55 @@ h6 {
 }
 
 .register {
-  max-width: 480px;
-  width: 100%;
-  background: #0d0d19;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.register[hidden] {
+  display: none;
+}
+.register__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+.register__dialog {
+  width: calc(100% - 24px);
+  max-width: 500px;
+  max-height: calc(100dvh - 24px);
+  overflow: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border: 1px solid #16162f;
-  border-radius: 8px;
+  border-radius: 20px;
+  background: #0c0c19;
   color: #fff;
-  align-self: center;
-  position: relative;
   z-index: 1;
+}
+.register__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: #FF5900;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  cursor: pointer;
 }
 .register__header {
   padding: 16px 24px 12px 24px;
+  border-top: 1px solid #16162f;
   border-bottom: 1px solid #16162f;
   background: #0d0d19;
   display: flex;
