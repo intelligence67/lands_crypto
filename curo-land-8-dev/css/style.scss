@@ -241,8 +241,6 @@ h6 {
     }
 
     img {
-      width: 147px;
-      height: 122px;
       bottom: 0;
       right: 0;
       position: absolute;
@@ -807,6 +805,236 @@ h6 {
   @include breakpoint($bp-sm) {
     .container {
       padding: 0 20px;
+    }
+  }
+}
+
+.appeal {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.80);
+  }
+
+  &__dialog {
+    width: calc(100% - 24px);
+    max-width: 560px;
+    max-height: calc(100dvh - 24px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    z-index: 1;
+  }
+
+  &__jocker {
+    margin: 0 auto;
+  }
+
+  &__content {
+    background: #0b0b17;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+    padding: 28px;
+    position: relative;
+    z-index: 1;
+
+    &::after {
+      content: '';
+      width: 175px;
+      height: 175px;
+      top: 3px;
+      left: -94px;
+      background: url('../img/appeal_coin-1.webp') top center / contain no-repeat;
+      position: absolute;
+      z-index: -1;
+    }
+
+    &::before {
+      content: '';
+      width: 79px;
+      height: 79px;
+      top: 27px;
+      right: -39px;
+      background: url('../img/appeal_coin-2.webp') top center / contain no-repeat;
+      position: absolute;
+      z-index: -1;
+    }
+  }
+
+  &__title {
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 120%;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    text-align: center;
+
+    span {
+      color: #FF5900;
+    }
+  }
+
+  &__text {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 130%;
+    letter-spacing: -0.02em;
+    text-align: center;
+    opacity: 0.66;
+    margin-bottom: 20px;
+  }
+
+  .appeal-points {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    margin: 0 auto 28px;
+
+    &__item {
+      padding: 12px 20px;
+      text-align: left;
+      background: linear-gradient(90deg, #171722 0%, #0b0b17 100%);
+      border-radius: 28px;
+      position: relative;
+      flex: 100%;
+      z-index: 1;
+    }
+
+    &__title {
+      font-style: italic;
+      font-weight: 800;
+      font-size: 24px;
+      line-height: 120%;
+      text-transform: uppercase;
+      color: #FF5900;
+      margin-bottom: 15px;
+    }
+
+    &__text {
+      font-family: "Zalando Sans Expanded", sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 16px;
+      line-height: 120%;
+      text-transform: uppercase;
+    }
+
+    img {
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      z-index: -1;
+    }
+  }
+
+  &__btn {
+    font-size: 21px;
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 120%;
+    text-transform: uppercase;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    min-width: 368px;
+    min-height: 90px;
+    padding: 12px 12px;
+    background: url('../img/btn.svg') no-repeat center center / contain;
+    border: none;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 60%;
+      height: 200%;
+      background: linear-gradient(115deg,
+          transparent 0%,
+          transparent 40%,
+          rgba(255, 255, 255, 0.5) 50%,
+          rgba(255, 255, 255, 0.8) 55%,
+          transparent 60%,
+          transparent 100%);
+      transform: translateX(-50%) rotate(25deg);
+      filter: blur(8px);
+      pointer-events: none;
+      animation: shine-btn 6s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+  }
+
+  &__btn:hover,
+  &__btn:focus {
+    -webkit-filter: brightness(0.90);
+    filter: brightness(0.90);
+  }
+
+  &__btn:hover,
+  &__btn:not(:hover) {
+    transition: All 0.4s ease;
+  }
+
+  @include breakpoint($bp-md) {
+    &__content {
+      padding: 20px;
+
+      &::after {
+        left: -115px;
+      }
+    }
+
+    .appeal-points {
+      flex-direction: column;
+
+      &__text {
+        br {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @include breakpoint($bp-sm) {
+    &__content {
+
+      &::after {
+       display: none;
+      }
+
+      &::before {
+       display: none;
+      }
+    }
+    
+    &__title {
+      font-size: 8.75vw;
+    }
+
+    &__btn {
+      min-width: 100%;
+      font-size: 16px;
+      min-height: 68px;
     }
   }
 }

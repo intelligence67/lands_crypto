@@ -324,6 +324,10 @@ const initRegistrationForm = () => {
   const registerOverlay = document.getElementById('registerOverlay');
   const closeRegisterModal = document.getElementById('closeRegisterModal');
 
+  const appealModal = document.getElementById('appealModal');
+  const appealOverlay = document.getElementById('appealOverlay');
+  const appealBtn = document.getElementById('appeal-btn');
+
   const phoneBox = phoneInput ? phoneInput.closest('.phone-box') : null;
   const emailBox = emailInput ? emailInput.closest('.field-box') : null;
   const passwordBox = passwordInput ? passwordInput.closest('.field-box') : null;
@@ -427,6 +431,24 @@ const initRegistrationForm = () => {
     }
 
     registerModal.hidden = true;
+    document.body.style.overflow = '';
+  };
+
+  const openAppealModal = () => {
+    if (!appealModal) {
+      return;
+    }
+
+    appealModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeAppealModal = () => {
+    if (!appealModal) {
+      return;
+    }
+
+    appealModal.hidden = true;
     document.body.style.overflow = '';
   };
 
@@ -675,6 +697,7 @@ const initRegistrationForm = () => {
 
   closeBonusModal?.addEventListener('click', closeModal);
   bonusModalOverlay?.addEventListener('click', closeModal);
+  appealOverlay?.addEventListener('click', closeAppealModal);
 
   bonusCards.forEach((card) => {
     card.addEventListener('click', () => {
@@ -845,7 +868,6 @@ function showNotification(index) {
   notifications[index].classList.add('active');
 }
 
-// Цикл
 setInterval(() => {
 
   notifications[currentIndex].classList.remove('active');
@@ -861,3 +883,38 @@ setInterval(() => {
   }, 400);
 
 }, 10000);
+
+appealBtn?.addEventListener('click', () => {
+  closeAppealModal();
+
+  if (typeof openRegisterModalFn === 'function') {
+    openRegisterModalFn();
+  }
+});
+
+let idleTimer = null;
+const IDLE_TIME = 30000;
+
+const resetIdleTimer = () => {
+  if (idleTimer) {
+    clearTimeout(idleTimer);
+  }
+
+  idleTimer = setTimeout(() => {
+    // не показываем если уже открыты другие модалки
+    if (
+      (bonusModal && !bonusModal.hidden) ||
+      (registerModal && !registerModal.hidden)
+    ) {
+      return;
+    }
+
+    openAppealModal();
+  }, IDLE_TIME);
+};
+
+['mousemove', 'keydown', 'scroll', 'click', 'touchstart'].forEach((event) => {
+  document.addEventListener(event, resetIdleTimer, { passive: true });
+});
+
+resetIdleTimer();
