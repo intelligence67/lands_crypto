@@ -950,6 +950,9 @@ h6 {
   .appeal__title {
     font-size: 7.5vw;
   }
+  .appeal .appeal-points__text br {
+    display: inline-block;
+  }
   .appeal__btn {
     min-width: 100%;
     font-size: 16px;

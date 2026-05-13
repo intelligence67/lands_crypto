@@ -1031,6 +1031,15 @@ h6 {
       font-size: 7.50vw;
     }
 
+    .appeal-points {
+
+      &__text {
+        br {
+          display: inline-block;
+        }
+      }
+    }
+
     &__btn {
       min-width: 100%;
       font-size: 16px;
