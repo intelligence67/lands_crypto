@@ -322,25 +322,26 @@ h6 {
   z-index: -1;
 }
 .hero__btn {
-  font-size: 24px;
+  font-size: 21px;
   font-family: "Zalando Sans Expanded", sans-serif;
   font-weight: 800;
-  color: #ffffff;
+  color: #fff;
   line-height: 120%;
   text-transform: uppercase;
   margin: 0 auto 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 28px;
-  min-width: 409px;
-  min-height: 100px;
-  padding: 12px 12px;
-  background: url("../img/btn.svg") no-repeat center center/contain;
+  min-width: 368px;
+  min-height: 90px;
+  padding: 12px;
   border: none;
   outline: none;
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
+  background: #FC6200;
+  -webkit-mask: url("../img/btn.svg") no-repeat center/contain;
+  mask: url("../img/btn.svg") no-repeat center/contain;
 }
 .hero__btn::before {
   content: "";
@@ -889,22 +890,23 @@ h6 {
   font-size: 21px;
   font-family: "Zalando Sans Expanded", sans-serif;
   font-weight: 800;
-  color: #ffffff;
+  color: #fff;
   line-height: 120%;
   text-transform: uppercase;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 28px;
   min-width: 368px;
   min-height: 90px;
-  padding: 12px 12px;
-  background: url("../img/btn.svg") no-repeat center center/contain;
+  padding: 12px;
   border: none;
   outline: none;
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
+  background: #FC6200;
+  -webkit-mask: url("../img/btn.svg") no-repeat center/contain;
+  mask: url("../img/btn.svg") no-repeat center/contain;
 }
 .appeal__btn::before {
   content: "";

@@ -710,7 +710,7 @@ const initRegistrationForm = () => {
   });
 
   let idleTimer = null;
-  const IDLE_TIME = 15000;
+  const IDLE_TIME = 17000;
 
   const resetIdleTimer = () => {
     if (idleTimer) {
@@ -718,7 +718,7 @@ const initRegistrationForm = () => {
     }
 
     idleTimer = setTimeout(() => {
-      // не показываем если уже открыты другие модалки
+
       if (
         (bonusModal && !bonusModal.hidden) ||
         (registerModal && !registerModal.hidden)
