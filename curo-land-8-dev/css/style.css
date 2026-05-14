@@ -1199,6 +1199,9 @@ h6 {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.phone-box {
+  cursor: text;
+}
 .phone-box input {
   letter-spacing: 0.2px;
   color: transparent;
@@ -1208,6 +1211,7 @@ h6 {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+  cursor: text;
 }
 .phone-box input::-moz-placeholder {
   color: transparent;
@@ -1230,8 +1234,31 @@ h6 {
 .phone-box__filled {
   color: #fff;
 }
+.phone-box__filled::after {
+  content: "";
+  display: none;
+  width: 1px;
+  height: 18px;
+  margin-left: 2px;
+  background: #fff;
+  border-radius: 1px;
+  vertical-align: -3px;
+}
 .phone-box__rest {
   color: rgba(255, 255, 255, 0.7);
+}
+.phone-box:focus-within .phone-box__filled::after {
+  display: inline-block;
+  animation: phone-caret-blink 1s steps(2, start) infinite;
+}
+
+@keyframes phone-caret-blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
 }
 
 .phone-flag {
