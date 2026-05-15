@@ -875,7 +875,6 @@ const notifyData = [
 const notifyWrapper = document.querySelector('.hero-notify');
 
 let currentIndex = 0;
-let intervalId = null;
 
 notifyWrapper.innerHTML = notifyData
   .map(
@@ -895,19 +894,28 @@ const notifications = notifyWrapper.querySelectorAll('.hero-notify__item');
 
 function showNotification(nextIndex) {
   notifications.forEach((item) => {
-    item.classList.remove('active');
-    item.classList.remove('animate');
+    item.classList.remove('active', 'animate');
   });
 
   const el = notifications[nextIndex];
 
+  el.style.animation = 'none';
   void el.offsetWidth;
+  el.style.animation = '';
 
   el.classList.add('active');
   el.classList.add('animate');
 }
 
+let intervalId = null;
+let isStarted = false;
+
 function startNotificationCycle() {
+  if (isStarted) return;
+  isStarted = true;
+
+  console.log('START CYCLE');
+
   if (intervalId) clearInterval(intervalId);
 
   currentIndex = 0;
@@ -920,13 +928,12 @@ function startNotificationCycle() {
 }
 
 window.addEventListener('load', () => {
-  setTimeout(() => {
-    startNotificationCycle();
-  }, 5000);
+  setTimeout(startNotificationCycle, 5000);
 });
 
 window.addEventListener('pageshow', (e) => {
   if (e.persisted) {
+    isStarted = false;
     startNotificationCycle();
   }
 });
