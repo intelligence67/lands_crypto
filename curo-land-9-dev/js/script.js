@@ -850,25 +850,21 @@ const notifyData = [
     title: '¡Hasta ahora, 200 jugadores han ganado!',
     text: 'Sé el próximo ganador'
   },
-
   {
     image: './img/notify-2.webp',
     title: 'Ku***ro hizo su primer giro y ganó 1,025,430 ARS en Sun of Egypt 5',
     text: '¡Haz tu primer giro tú también!'
   },
-
   {
     image: './img/notify-3.webp',
     title: '¡Da***ia ganó hoy 7,530,432 ARS en 3 Hot Chillies!',
     text: 'Prueba tu suerte'
   },
-
   {
     image: './img/notify-4.webp',
     title: '¡An***ta ganó 3,560,341 ARS en Fortune Gems 2 nada más registrarse!',
     text: 'Regístrate en CuatroBet'
   },
-
   {
     image: './img/notify-5.webp',
     title: '¡Ma****10 se ganó el Jackpot de 5,000,000,000 ARS en Voltage Blitz Zeus Up!',
@@ -879,52 +875,58 @@ const notifyData = [
 const notifyWrapper = document.querySelector('.hero-notify');
 
 let currentIndex = 0;
-
-notifyData.forEach((item, index) => {
-  const notification = document.createElement('div');
-
-  notification.className = 'hero-notify__item';
-
-  notification.innerHTML = `
-    <img src="${item.image}" alt="Winner" width="72" height="72">
-
-    <div class="hero-notify__content">
-      <h3>${item.title}</h3>
-      <p>${item.text}</p>
-    </div>
-  `;
-
-  notifyWrapper.append(notification);
-});
-
-const notifications = document.querySelectorAll('.hero-notify__item');
-
-function showNotification(index) {
-  notifications.forEach(item => {
-    item.classList.remove('active');
-  });
-
-  notifications[index].classList.add('active');
-}
-
 let intervalId = null;
 
-function startNotificationCycle() {
+notifyWrapper.innerHTML = notifyData
+  .map(
+    (item) => `
+    <div class="hero-notify__item">
+      <img src="${item.image}" alt="Winner" width="72" height="72">
+      <div class="hero-notify__content">
+        <h3>${item.title}</h3>
+        <p>${item.text}</p>
+      </div>
+    </div>
+  `
+  )
+  .join('');
 
-  if (intervalId) clearInterval(intervalId); // защита Safari
+const notifications = notifyWrapper.querySelectorAll('.hero-notify__item');
 
-  currentIndex = 0;
+function showNotification(nextIndex) {
+  notifications.forEach((item) => {
+    item.classList.remove('active');
+    item.classList.remove('animate');
+  });
 
-  intervalId = setInterval(() => {
+  const el = notifications[nextIndex];
 
-    notifications.forEach(item => item.classList.remove('active'));
+  void el.offsetWidth;
 
-    notifications[currentIndex].classList.add('active');
-
-    currentIndex = (currentIndex + 1) % notifications.length;
-
-  }, 7000);
-
+  el.classList.add('active');
+  el.classList.add('animate');
 }
 
-setTimeout(startNotificationCycle, 5000);
+function startNotificationCycle() {
+  if (intervalId) clearInterval(intervalId);
+
+  currentIndex = 0;
+  showNotification(currentIndex);
+
+  intervalId = setInterval(() => {
+    currentIndex = (currentIndex + 1) % notifications.length;
+    showNotification(currentIndex);
+  }, 7000);
+}
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    startNotificationCycle();
+  }, 5000);
+});
+
+window.addEventListener('pageshow', (e) => {
+  if (e.persisted) {
+    startNotificationCycle();
+  }
+});

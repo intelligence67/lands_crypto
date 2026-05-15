@@ -354,16 +354,17 @@ h6 {
       opacity: 0;
       visibility: hidden;
       transform: translateY(-140%);
-      transition:
-        transform .7s ease,
-        opacity .7s ease,
-        visibility .7s ease;
+      transition: opacity 0.25s ease;
+      will-change: transform, opacity;
 
       &.active {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
-        animation: notifyDrop .7s ease;
+      }
+
+      &.animate {
+        animation: notifyDrop 0.6s ease forwards;
       }
 
       &::before {
@@ -420,14 +421,17 @@ h6 {
   @keyframes notifyDrop {
     0% {
       transform: translateY(-140%);
+      opacity: 0;
     }
 
     70% {
       transform: translateY(8px);
+      opacity: 1;
     }
 
     100% {
       transform: translateY(0);
+      opacity: 1;
     }
   }
 
