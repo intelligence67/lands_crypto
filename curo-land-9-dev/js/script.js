@@ -874,8 +874,6 @@ const notifyData = [
 
 const notifyWrapper = document.querySelector('.hero-notify');
 
-let currentIndex = 0;
-
 notifyWrapper.innerHTML = notifyData
   .map(
     (item) => `
@@ -907,14 +905,13 @@ function showNotification(nextIndex) {
   el.classList.add('animate');
 }
 
+let currentIndex = 0;
 let intervalId = null;
 let isStarted = false;
 
 function startNotificationCycle() {
   if (isStarted) return;
   isStarted = true;
-
-  console.log('START CYCLE');
 
   if (intervalId) clearInterval(intervalId);
 
