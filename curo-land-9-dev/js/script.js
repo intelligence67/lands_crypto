@@ -21,6 +21,8 @@ const TRACKING_QUERY_KEYS = [
   'utm_term',
   'gclid',
   'fbclid',
+  'x_pm_click',
+  'redirect_creative_id',
 ];
 
 const readEnv = (key, fallback) => {
@@ -844,29 +846,35 @@ if (document.readyState === 'loading') {
   initRegistrationForm();
 }
 
+const notifyImage1 = new URL('../img/notify-1.webp', import.meta.url).href;
+const notifyImage2 = new URL('../img/notify-2.webp', import.meta.url).href;
+const notifyImage3 = new URL('../img/notify-3.webp', import.meta.url).href;
+const notifyImage4 = new URL('../img/notify-4.webp', import.meta.url).href;
+const notifyImage5 = new URL('../img/notify-5.webp', import.meta.url).href;
+
 const notifyData = [
   {
-    image: './img/notify-1.webp',
+    image: notifyImage1,
     title: '¡Hasta ahora, 200 jugadores han ganado!',
     text: 'Sé el próximo ganador'
   },
   {
-    image: './img/notify-2.webp',
+    image: notifyImage2,
     title: 'Ku***ro hizo su primer giro y ganó 1,025,430 ARS en Sun of Egypt 5',
     text: '¡Haz tu primer giro tú también!'
   },
   {
-    image: './img/notify-3.webp',
+    image: notifyImage3,
     title: '¡Da***ia ganó hoy 7,530,432 ARS en 3 Hot Chillies!',
     text: 'Prueba tu suerte'
   },
   {
-    image: './img/notify-4.webp',
+    image: notifyImage4,
     title: '¡An***ta ganó 3,560,341 ARS en Fortune Gems 2 nada más registrarse!',
     text: 'Regístrate en CuatroBet'
   },
   {
-    image: './img/notify-5.webp',
+    image: notifyImage5,
     title: '¡Ma****10 se ganó el Jackpot de 5,000,000,000 ARS en Voltage Blitz Zeus Up!',
     text: '¡Probá, divertite y ganá vos!'
   }
