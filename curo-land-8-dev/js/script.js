@@ -47,11 +47,11 @@ const ensureMtfeFShim = () => {
   }
 
   if (typeof window.MTFEF.registerCallback !== 'function') {
-    window.MTFEF.registerCallback = () => {};
+    window.MTFEF.registerCallback = () => { };
   }
 
   if (typeof window.MTFEF.loginCallback !== 'function') {
-    window.MTFEF.loginCallback = () => {};
+    window.MTFEF.loginCallback = () => { };
   }
 };
 
@@ -991,55 +991,63 @@ const notifyData = [
 
 const notifyWrapper = document.querySelector('.hero-notify');
 
-let currentIndex = 0;
-let isFirstRun = true;
-
-notifyData.forEach((item, index) => {
-  const notification = document.createElement('div');
-
-  notification.className = 'hero-notify__item';
-
-  notification.innerHTML = `
-    <img src="${item.image}" alt="Winner" width="72" height="72">
-
-    <div class="hero-notify__content">
-      <h3>${item.title}</h3>
-      <p>${item.text}</p>
+notifyWrapper.innerHTML = notifyData
+  .map(
+    (item) => `
+    <div class="hero-notify__item">
+      <img src="${item.image}" alt="Winner" width="72" height="72">
+      <div class="hero-notify__content">
+        <h3>${item.title}</h3>
+        <p>${item.text}</p>
+      </div>
     </div>
-  `;
+  `
+  )
+  .join('');
 
-  notifyWrapper.append(notification);
-});
+const notifications = notifyWrapper.querySelectorAll('.hero-notify__item');
 
-const notifications = document.querySelectorAll('.hero-notify__item');
-
-function showNotification(index) {
-  notifications.forEach(item => {
-    item.classList.remove('active');
+function showNotification(nextIndex) {
+  notifications.forEach((item) => {
+    item.classList.remove('active', 'animate');
   });
 
-  notifications[index].classList.add('active');
+  const el = notifications[nextIndex];
+
+  el.style.animation = 'none';
+  void el.offsetWidth;
+  el.style.animation = '';
+
+  el.classList.add('active');
+  el.classList.add('animate');
 }
 
+let currentIndex = 0;
+let intervalId = null;
+let isStarted = false;
+
 function startNotificationCycle() {
-  showNotification(0);
+  if (isStarted) return;
+  isStarted = true;
 
-  setInterval(() => {
-    notifications[currentIndex].classList.remove('active');
+  if (intervalId) clearInterval(intervalId);
 
-    currentIndex++;
+  currentIndex = 0;
+  showNotification(currentIndex);
 
-    if (currentIndex >= notifications.length) {
-      currentIndex = 0;
-    }
-
-    setTimeout(() => {
-      notifications[currentIndex].classList.add('active');
-    }, 400);
-
+  intervalId = setInterval(() => {
+    currentIndex = (currentIndex + 1) % notifications.length;
+    showNotification(currentIndex);
   }, 7000);
 }
 
-setTimeout(() => {
-  startNotificationCycle();
-}, 5000);
+window.addEventListener('load', () => {
+  setTimeout(startNotificationCycle, 5000);
+});
+
+window.addEventListener('pageshow', (e) => {
+  if (e.persisted) {
+    isStarted = false;
+    startNotificationCycle();
+  }
+});
