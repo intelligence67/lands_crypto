@@ -160,7 +160,7 @@ h6 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(0deg);
-    background: url('../img/roll-icons.webp') top center / cover no-repeat;
+    background: url('../img/roll-icons.webp') top center / contain no-repeat;
     position: absolute;
     animation: iconsRollRotate 300s linear infinite;
     transform-origin: center center;
