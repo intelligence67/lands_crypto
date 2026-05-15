@@ -900,28 +900,18 @@ notifyData.forEach((item, index) => {
 
 const notifications = document.querySelectorAll('.hero-notify__item');
 
-function showNotification(index) {
-  notifications.forEach(item => {
-    item.classList.remove('active');
-  });
-
-  notifications[index].classList.add('active');
-}
+let notificationCurrentIndex = 0;
 
 function startNotificationCycle() {
-  showNotification(0);
+  notifications[notificationCurrentIndex].classList.add('active');
 
   setInterval(() => {
-    notifications[currentIndex].classList.remove('active');
+    notifications[notificationCurrentIndex].classList.remove('active');
 
-    currentIndex++;
-
-    if (currentIndex >= notifications.length) {
-      currentIndex = 0;
-    }
+    notificationCurrentIndex = (notificationCurrentIndex + 1) % notifications.length;
 
     setTimeout(() => {
-      notifications[currentIndex].classList.add('active');
+      notifications[notificationCurrentIndex].classList.add('active');
     }, 400);
 
   }, 7000);
