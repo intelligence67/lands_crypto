@@ -879,7 +879,6 @@ const notifyData = [
 const notifyWrapper = document.querySelector('.hero-notify');
 
 let currentIndex = 0;
-let isFirstRun = true;
 
 notifyData.forEach((item, index) => {
   const notification = document.createElement('div');
@@ -908,10 +907,16 @@ function showNotification(index) {
   notifications[index].classList.add('active');
 }
 
+let intervalId = null;
+
 function startNotificationCycle() {
+
+  if (intervalId) clearInterval(intervalId); // защита Safari
+
   currentIndex = 0;
 
-  const interval = setInterval(() => {
+  intervalId = setInterval(() => {
+
     notifications.forEach(item => item.classList.remove('active'));
 
     notifications[currentIndex].classList.add('active');
@@ -919,6 +924,7 @@ function startNotificationCycle() {
     currentIndex = (currentIndex + 1) % notifications.length;
 
   }, 7000);
+
 }
 
 setTimeout(startNotificationCycle, 5000);
