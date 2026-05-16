@@ -308,7 +308,7 @@ h6 {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin: 0 auto 40px;
+  margin: 0 auto 15px;
   padding: 0;
 }
 .hero .hero-points__item {
@@ -345,6 +345,17 @@ h6 {
   right: 0;
   position: absolute;
   z-index: -1;
+}
+.hero__note {
+  margin: 0 auto 40px;
+}
+.hero__note p {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 130%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  opacity: 0.66;
 }
 .hero .hero-steps {
   padding: 12px;
@@ -596,10 +607,12 @@ h6 {
   .hero .hero-points {
     flex-direction: row;
     padding: 0;
-    margin-bottom: 0;
   }
   .hero .hero-points__text br {
     display: inline-block;
+  }
+  .hero__note {
+    margin: 0 auto;
   }
   .hero .hero-notify {
     width: calc(100% - 80px);
