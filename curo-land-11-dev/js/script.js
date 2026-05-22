@@ -876,6 +876,7 @@ if (document.readyState === 'loading') {
 
 const wheel = document.querySelector('.wheel');
 const wheelCenterBtn = document.querySelector('.wheel-btn');
+const wheelWrapper = document.querySelector('.wheel-wrapper');
 
 const bonusOneModal = document.getElementById('bonusOneModal');
 const bonusTwoModal = document.getElementById('bonusTwoModal');
@@ -920,6 +921,9 @@ function spinWheel(targetDeg, callback) {
 
   isSpinning = true;
 
+  wheelWrapper.classList.add('is-spinning');
+  wheelCenterBtn.classList.add('is-spinning');
+
   const extraSpins = 360 * 5;
 
   currentRotation += extraSpins + targetDeg;
@@ -931,6 +935,9 @@ function spinWheel(targetDeg, callback) {
 
   setTimeout(() => {
     isSpinning = false;
+
+    wheelWrapper.classList.remove('is-spinning');
+    wheelCenterBtn.classList.remove('is-spinning');
 
     callback?.();
   }, 4000);
