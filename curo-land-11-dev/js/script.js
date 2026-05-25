@@ -888,8 +888,8 @@ let spinStep = 1;
 let isSpinning = false;
 let currentRotation = 0;
 
-const firstPrizeDeg = 0;
-const secondPrizeDeg = 225;
+const firstPrizeDeg = 90;
+const secondPrizeDeg = 135;
 
 function openWheelModal(modal) {
   if (!modal) return;
