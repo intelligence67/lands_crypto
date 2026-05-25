@@ -882,7 +882,7 @@ const bonusOneModal = document.getElementById('bonusOneModal');
 const bonusTwoModal = document.getElementById('bonusTwoModal');
 
 const rollBonusBtn = document.getElementById('roll-bonus-btn');
-const rollBonusBtnTwo = document.getElementById('roll-sbonus-btn-two');
+const rollBonusBtnTwo = document.getElementById('roll-bonus-btn-two');
 
 let spinStep = 1;
 let isSpinning = false;
