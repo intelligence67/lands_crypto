@@ -642,7 +642,7 @@ const initRegistrationForm = () => {
     const phoneDigits = phoneInput ? getPhoneDigits(phoneInput.value) : '';
     const emailValue = emailInput ? emailInput.value.trim() : '';
     const passwordValue = passwordInput ? passwordInput.value : '';
-    const hasActiveBonus = Boolean(getActiveBonusCard());
+    const hasActiveBonus = true;
     const isAgreementChecked = agreementInput ? agreementInput.checked : false;
 
     const isPhoneValid = phoneDigits.length === AR_LOCAL_PHONE_LENGTH;
