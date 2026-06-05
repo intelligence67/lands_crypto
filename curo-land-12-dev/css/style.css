@@ -230,7 +230,7 @@ h6 {
 }
 
 .hero {
-  padding: 80px 0;
+  padding: 80px 0 0 0;
   display: flex;
   overflow: hidden;
   flex: 1 0 auto;
@@ -321,7 +321,7 @@ h6 {
   color: #000;
 }
 .hero .achievement {
-  max-height: calc(100vh - 380px);
+  max-height: calc(100vh - 250px);
   overflow-y: auto;
   display: flex;
   flex-direction: column;
