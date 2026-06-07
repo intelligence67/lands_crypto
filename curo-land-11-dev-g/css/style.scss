@@ -774,7 +774,7 @@ h6 {
 }
 
 .register {
-
+ --form-scale: 1;
   position: fixed;
   inset: 0;
   z-index: 999;
@@ -797,7 +797,7 @@ h6 {
     width: calc(100% - 24px);
     max-width: 500px;
     max-height: calc(100dvh - 24px);
-    // overflow: auto;
+    overflow: auto;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -807,6 +807,8 @@ h6 {
     background: #0c0c19;
     color: #fff;
     z-index: 1;
+   transform: translate(-50%, -50%) scale(var(--form-scale));
+  transform-origin: center;
   }
 
   &__close {
