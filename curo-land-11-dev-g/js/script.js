@@ -876,96 +876,232 @@ if (document.readyState === 'loading') {
   initRegistrationForm();
 }
 
-const wheel = document.querySelector('.wheel');
-const wheelCenterBtn = document.querySelector('.wheel-btn');
-const wheelWrapper = document.querySelector('.wheel-wrapper');
+// const wheel = document.querySelector('.wheel');
+// const wheelCenterBtn = document.querySelector('.wheel-btn');
+// const wheelWrapper = document.querySelector('.wheel-wrapper');
 
-const bonusOneModal = document.getElementById('bonusOneModal');
-const bonusTwoModal = document.getElementById('bonusTwoModal');
+// const bonusOneModal = document.getElementById('bonusOneModal');
+// const bonusTwoModal = document.getElementById('bonusTwoModal');
 
-const rollBonusBtn = document.getElementById('roll-bonus-btn');
-const rollBonusBtnTwo = document.getElementById('roll-bonus-btn-two');
+// const rollBonusBtn = document.getElementById('roll-bonus-btn');
+// const rollBonusBtnTwo = document.getElementById('roll-bonus-btn-two');
 
-let spinStep = 1;
-let isSpinning = false;
-let currentRotation = 0;
+// let spinStep = 1;
+// let isSpinning = false;
+// let currentRotation = 0;
 
-const firstPrizeDeg = 90;
-const secondPrizeDeg = 135;
+// const firstPrizeDeg = 90;
+// const secondPrizeDeg = 135;
 
-function openWheelModal(modal) {
-  if (!modal) return;
+// function openWheelModal(modal) {
+//   if (!modal) return;
 
-  modal.hidden = false;
-  document.body.style.overflow = 'hidden';
-}
+//   modal.hidden = false;
+//   document.body.style.overflow = 'hidden';
+// }
 
-function closeWheelModal(modal) {
-  if (!modal) return;
+// function closeWheelModal(modal) {
+//   if (!modal) return;
 
-  modal.hidden = true;
-  document.body.style.overflow = '';
-}
+//   modal.hidden = true;
+//   document.body.style.overflow = '';
+// }
 
-if (localStorage.getItem('wheelFinished') === 'true') {
-  const registerModal = document.getElementById('registerModal');
-  if (registerModal) {
-    registerModal.hidden = false;
-    document.body.style.overflow = 'hidden';
+// if (localStorage.getItem('wheelFinished') === 'true') {
+//   const registerModal = document.getElementById('registerModal');
+//   if (registerModal) {
+//     registerModal.hidden = false;
+//     document.body.style.overflow = 'hidden';
+//   }
+
+//   wheelCenterBtn.textContent = '(02)';
+//   spinStep = 2;
+// }
+
+// function spinWheel(targetDeg, callback) {
+//   if (isSpinning) return;
+
+//   isSpinning = true;
+
+//   wheelWrapper.classList.add('is-spinning');
+//   wheelCenterBtn.classList.add('is-spinning');
+
+//   const extraSpins = 360 * 5;
+
+//   currentRotation += extraSpins + targetDeg;
+
+//   wheel.style.transition =
+//     'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
+
+//   wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+//   setTimeout(() => {
+//     isSpinning = false;
+
+//     wheelWrapper.classList.remove('is-spinning');
+//     wheelCenterBtn.classList.remove('is-spinning');
+
+//     callback?.();
+//   }, 4000);
+// }
+
+// wheelCenterBtn?.addEventListener('click', () => {
+//   if (isSpinning) return;
+
+//   if (spinStep === 1) {
+//     spinWheel(firstPrizeDeg, () => {
+//       openWheelModal(bonusOneModal);
+
+//       wheelCenterBtn.textContent = '(02)';
+//       spinStep = 2;
+//     });
+//   }
+
+//   else if (spinStep === 2) {
+//     spinWheel(secondPrizeDeg, () => {
+//       openWheelModal(bonusTwoModal);
+
+//       spinStep = 3;
+//     });
+//   }
+// });
+const wheel = document.querySelector(".wheel")
+const wheelCenterBtn = document.querySelector(".wheel-btn")
+const wheelWrapper = document.querySelector(".wheel-wrapper")
+
+const bonusOneModal = document.getElementById("bonusOneModal")
+const bonusTwoModal = document.getElementById("bonusTwoModal")
+const registerModal = document.getElementById("registerModal")
+
+const rollBonusBtn = document.getElementById("roll-bonus-btn")
+const rollBonusBtnTwo = document.getElementById("roll-bonus-btn-two")
+
+let spinStep = 1
+let isSpinning = false
+let currentRotation = 0
+
+const firstPrizeDeg = 90
+const secondPrizeDeg = 135
+
+const setWheelStepText = () => {
+  if (!wheelCenterBtn) return
+
+  if (spinStep === 1) {
+    wheelCenterBtn.textContent = "(01)"
   }
 
-  wheelCenterBtn.textContent = '(02)';
-  spinStep = 2;
+  if (spinStep === 2) {
+    wheelCenterBtn.textContent = "(02)"
+  }
+}
+
+const lockPage = () => {
+  document.body.style.overflow = "hidden"
+}
+
+const unlockPage = () => {
+  document.body.style.overflow = ""
+}
+
+const openWheelModal = (modal) => {
+  if (!modal) return
+
+  modal.hidden = false
+  lockPage()
+}
+
+const closeWheelModal = (modal) => {
+  if (!modal) return
+
+  modal.hidden = true
+  unlockPage()
+}
+
+const openRegisterModal = () => {
+  if (!registerModal) return
+
+  registerModal.hidden = false
+  lockPage()
+}
+
+const closeAllWheelModals = () => {
+  if (bonusOneModal) bonusOneModal.hidden = true
+  if (bonusTwoModal) bonusTwoModal.hidden = true
+}
+
+// стартовое состояние при каждой перезагрузке
+closeAllWheelModals()
+
+if (registerModal) {
+  registerModal.hidden = true
+}
+
+spinStep = 1
+currentRotation = 0
+setWheelStepText()
+
+if (wheel) {
+  wheel.style.transition = "none"
+  wheel.style.transform = "rotate(0deg)"
 }
 
 function spinWheel(targetDeg, callback) {
-  if (isSpinning) return;
+  if (!wheel || !wheelCenterBtn || !wheelWrapper || isSpinning) return
 
-  isSpinning = true;
+  isSpinning = true
 
-  wheelWrapper.classList.add('is-spinning');
-  wheelCenterBtn.classList.add('is-spinning');
+  wheelWrapper.classList.add("is-spinning")
+  wheelCenterBtn.classList.add("is-spinning")
 
-  const extraSpins = 360 * 5;
+  const extraSpins = 360 * 5
 
-  currentRotation += extraSpins + targetDeg;
+  currentRotation += extraSpins + targetDeg
 
-  wheel.style.transition =
-    'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
+  wheel.style.transition = "transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)"
+  wheel.style.transform = `rotate(${currentRotation}deg)`
 
-  wheel.style.transform = `rotate(${currentRotation}deg)`;
+  window.setTimeout(() => {
+    isSpinning = false
 
-  setTimeout(() => {
-    isSpinning = false;
+    wheelWrapper.classList.remove("is-spinning")
+    wheelCenterBtn.classList.remove("is-spinning")
 
-    wheelWrapper.classList.remove('is-spinning');
-    wheelCenterBtn.classList.remove('is-spinning');
-
-    callback?.();
-  }, 4000);
+    callback?.()
+  }, 4000)
 }
 
-wheelCenterBtn?.addEventListener('click', () => {
-  if (isSpinning) return;
+wheelCenterBtn?.addEventListener("click", () => {
+  if (isSpinning) return
 
   if (spinStep === 1) {
     spinWheel(firstPrizeDeg, () => {
-      openWheelModal(bonusOneModal);
+      openWheelModal(bonusOneModal)
+    })
 
-      wheelCenterBtn.textContent = '(02)';
-      spinStep = 2;
-    });
+    return
   }
 
-  else if (spinStep === 2) {
+  if (spinStep === 2) {
     spinWheel(secondPrizeDeg, () => {
-      openWheelModal(bonusTwoModal);
-
-      spinStep = 3;
-    });
+      openWheelModal(bonusTwoModal)
+    })
   }
-});
+})
 
+rollBonusBtn?.addEventListener("click", () => {
+  closeWheelModal(bonusOneModal)
+
+  spinStep = 2
+  setWheelStepText()
+})
+
+rollBonusBtnTwo?.addEventListener("click", () => {
+  closeWheelModal(bonusTwoModal)
+  openRegisterModal()
+
+  spinStep = 3
+})
+// =====================================================
 rollBonusBtn?.addEventListener('click', () => {
   closeWheelModal(bonusOneModal);
 });
