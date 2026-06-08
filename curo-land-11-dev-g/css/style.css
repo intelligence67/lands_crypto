@@ -256,7 +256,7 @@ h6 {
   width: 100%;
   height: 100%;
   inset: 0;
-  background: url("../img/hero-object-one.webp") calc(50% - 410px) bottom/430px auto no-repeat, url("../img/hero-object-two.webp") bottom center/966px auto no-repeat;
+  background: url("../img/hero-object-one.webp") calc(50% - 410px) bottom/540px auto no-repeat, url("../img/hero-object-two.webp") bottom center/966px auto no-repeat;
 	/* background-position-x: calc(50% - 320px), center; */
   z-index: 2;
   pointer-events: none;
@@ -426,7 +426,7 @@ h6 {
 }
 @media (min-width: 992px) and (max-width: 1200px){
   .hero::before {
-    background-position-x: calc(50% - 360px), center;
+    background-position-x: calc(50% - 320px), center;
 		
   }
 } 
@@ -754,10 +754,7 @@ h6 {
 }
 
 .register {
-  --form-height: 850px; /* ставим с запасом, не 840 */
-  --form-gap:24px;
-  --form-scale: 1;
-  --form-y: -51%;
+ 
   position: fixed;
   inset: 0;
   z-index: 999;
@@ -766,13 +763,7 @@ h6 {
   justify-content: center;
   padding: 20px;
 }
-@media (max-height: 790px)  and (min-width: 992px) {
-	.register{
-		--form-scale: min(1, calc((100dvh - var(--form-gap)) / var(--form-height)));
-		--form-y: -57%;
-	}
-	
-}
+ 
  
 .register[hidden] {
   display: none !important;
@@ -789,7 +780,8 @@ h6 {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, var(--form-y)) scale(var(--form-scale));
+	transform: translate(-50%, -50%);
+  /* transform: translate(-50%, var(--form-y)) scale(var(--form-scale)); */
   border: 1px solid #16162f;
   border-radius: 20px;
   background: #0c0c19;
@@ -817,7 +809,6 @@ h6 {
 }
 .register__btns {
   display: flex;
-	padding-block: 14px;
   padding-inline: 24px;
    background: #0d0d19;
 	justify-content:space-between;
@@ -830,20 +821,19 @@ h6 {
 }
 .register__header {
   text-align: center;
+	  padding: 24px 24px 0px 24px;
   border-bottom: 1px solid #16162f;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
-	overflow: hidden;
   position: relative;
   z-index: 2;
 }
 .register__image img{
-	/* position: absolute; */
 	display: block;
 	width: 100%;
 	height: auto;
 }
-/* .register__header::after {
+.register__header::after {
   content: "";
   width: 175px;
   height: 175px;
@@ -852,8 +842,8 @@ h6 {
   background: url("../img/appeal_coin-1.webp") top center/contain no-repeat;
   position: absolute;
   z-index: -1;
-} */
-/* .register__header::before {
+}
+.register__header::before {
   content: "";
   width: 79px;
   height: 79px;
@@ -862,7 +852,7 @@ h6 {
   background: url("../img/appeal_coin-2.webp") top center/contain no-repeat;
   position: absolute;
   z-index: -1;
-} */
+}
 .register__support {
   display: flex;
   justify-content: center;
@@ -891,7 +881,7 @@ h6 {
   width: 100%;
   display: flex;
   gap: 8px;
-  margin: 20px auto 0;
+  margin: 20px auto 30px;
 }
 .register .register-points__item {
   padding: 12px 20px;
@@ -930,7 +920,7 @@ h6 {
     font-size: 7.8vw;
   }
   .register__header {
-    /* padding: 20px; */
+    padding: 20px 20px 0 20px;
   }
   .register__header::after {
     display: none;
@@ -939,6 +929,7 @@ h6 {
     display: none;
   }
   .register .register-points {
+		/* margin-bottom: 20px; */
     flex-direction: column;
   }
 }
@@ -988,8 +979,13 @@ h6 {
   .register-form {
     padding: 14px 20px 20px;
   }
+	.register__dialog {
+		 overflow-y: auto;
+		height: 100dvh;
+		max-height: 100dvh;
+	}
 }
-@media (max-width: 575.98px), (max-height: 680px) {
+/* @media (max-width: 575.98px){
   .register {
     --form-scale: 1;
     --form-y: 0%;
@@ -1006,6 +1002,7 @@ h6 {
     position: relative;
     top: auto;
     left: auto;
+    overflow-y: auto;
 
     width: 100%;
     max-width: 500px;
@@ -1028,12 +1025,11 @@ h6 {
     flex: 1 1 auto;
     min-height: 0;
 
-    overflow-y: auto;
     overflow-x: hidden;
 
     -webkit-overflow-scrolling: touch;
   }
-}
+} */
 .bonus-select {
   width: 100%;
   margin-bottom: 8px;

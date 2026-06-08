@@ -876,95 +876,7 @@ if (document.readyState === 'loading') {
   initRegistrationForm();
 }
 
-// const wheel = document.querySelector('.wheel');
-// const wheelCenterBtn = document.querySelector('.wheel-btn');
-// const wheelWrapper = document.querySelector('.wheel-wrapper');
-
-// const bonusOneModal = document.getElementById('bonusOneModal');
-// const bonusTwoModal = document.getElementById('bonusTwoModal');
-
-// const rollBonusBtn = document.getElementById('roll-bonus-btn');
-// const rollBonusBtnTwo = document.getElementById('roll-bonus-btn-two');
-
-// let spinStep = 1;
-// let isSpinning = false;
-// let currentRotation = 0;
-
-// const firstPrizeDeg = 90;
-// const secondPrizeDeg = 135;
-
-// function openWheelModal(modal) {
-//   if (!modal) return;
-
-//   modal.hidden = false;
-//   document.body.style.overflow = 'hidden';
-// }
-
-// function closeWheelModal(modal) {
-//   if (!modal) return;
-
-//   modal.hidden = true;
-//   document.body.style.overflow = '';
-// }
-
-// if (localStorage.getItem('wheelFinished') === 'true') {
-//   const registerModal = document.getElementById('registerModal');
-//   if (registerModal) {
-//     registerModal.hidden = false;
-//     document.body.style.overflow = 'hidden';
-//   }
-
-//   wheelCenterBtn.textContent = '(02)';
-//   spinStep = 2;
-// }
-
-// function spinWheel(targetDeg, callback) {
-//   if (isSpinning) return;
-
-//   isSpinning = true;
-
-//   wheelWrapper.classList.add('is-spinning');
-//   wheelCenterBtn.classList.add('is-spinning');
-
-//   const extraSpins = 360 * 5;
-
-//   currentRotation += extraSpins + targetDeg;
-
-//   wheel.style.transition =
-//     'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
-
-//   wheel.style.transform = `rotate(${currentRotation}deg)`;
-
-//   setTimeout(() => {
-//     isSpinning = false;
-
-//     wheelWrapper.classList.remove('is-spinning');
-//     wheelCenterBtn.classList.remove('is-spinning');
-
-//     callback?.();
-//   }, 4000);
-// }
-
-// wheelCenterBtn?.addEventListener('click', () => {
-//   if (isSpinning) return;
-
-//   if (spinStep === 1) {
-//     spinWheel(firstPrizeDeg, () => {
-//       openWheelModal(bonusOneModal);
-
-//       wheelCenterBtn.textContent = '(02)';
-//       spinStep = 2;
-//     });
-//   }
-
-//   else if (spinStep === 2) {
-//     spinWheel(secondPrizeDeg, () => {
-//       openWheelModal(bonusTwoModal);
-
-//       spinStep = 3;
-//     });
-//   }
-// });
+ 
 const wheel = document.querySelector(".wheel")
 const wheelCenterBtn = document.querySelector(".wheel-btn")
 const wheelWrapper = document.querySelector(".wheel-wrapper")
@@ -979,7 +891,8 @@ const rollBonusBtnTwo = document.getElementById("roll-bonus-btn-two")
 let spinStep = 1
 let isSpinning = false
 let currentRotation = 0
-
+const WHEEL_STATE_KEY = "wheelState"
+const WHEEL_STATE_REGISTER_REQUIRED = "registration-required"
 const firstPrizeDeg = 90
 const secondPrizeDeg = 135
 
@@ -1030,19 +943,33 @@ const closeAllWheelModals = () => {
 }
 
 // стартовое состояние при каждой перезагрузке
+const savedWheelState = localStorage.getItem(WHEEL_STATE_KEY)
+
 closeAllWheelModals()
 
-if (registerModal) {
-  registerModal.hidden = true
-}
-
-spinStep = 1
 currentRotation = 0
-setWheelStepText()
 
 if (wheel) {
   wheel.style.transition = "none"
   wheel.style.transform = "rotate(0deg)"
+}
+
+if (savedWheelState === WHEEL_STATE_REGISTER_REQUIRED) {
+  spinStep = 3
+
+  if (wheelCenterBtn) {
+    wheelCenterBtn.textContent = "(02)"
+  }
+
+  openRegisterModal()
+} else {
+  spinStep = 1
+
+  if (registerModal) {
+    registerModal.hidden = true
+  }
+
+  setWheelStepText()
 }
 
 function spinWheel(targetDeg, callback) {
@@ -1097,20 +1024,12 @@ rollBonusBtn?.addEventListener("click", () => {
 
 rollBonusBtnTwo?.addEventListener("click", () => {
   closeWheelModal(bonusTwoModal)
+
+  localStorage.setItem(WHEEL_STATE_KEY, WHEEL_STATE_REGISTER_REQUIRED)
+
   openRegisterModal()
 
   spinStep = 3
 })
-// =====================================================
-rollBonusBtn?.addEventListener('click', () => {
-  closeWheelModal(bonusOneModal);
-});
 
-rollBonusBtnTwo?.addEventListener('click', () => {
-  closeWheelModal(bonusTwoModal);
 
-  registerModal.hidden = false;
-  document.body.style.overflow = 'hidden';
-
-  localStorage.setItem('wheelFinished', 'true');
-});
