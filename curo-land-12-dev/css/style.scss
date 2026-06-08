@@ -26,12 +26,14 @@ body {
   position: relative;
   outline: none;
   -webkit-text-size-adjust: none;
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100%;
   margin: 0;
 }
 
@@ -137,8 +139,8 @@ h6 {
   flex: 1 0 auto;
   z-index: 0;
   position: relative;
-  height: 100svh;
-  max-height: 100svh;
+  height: 100dvh;
+  max-height: 100dvh;
   box-sizing: border-box;
 
   &::after {
@@ -270,6 +272,10 @@ h6 {
     padding-left: 5px;
     padding-right: 5px;
     padding-bottom: 30px;
+
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
 
     &__item {
       width: 100%;
