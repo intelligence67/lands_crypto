@@ -5,7 +5,7 @@
 
 // Брейки
 
-$bp-xxl: 1439.98px;
+$bp-xxl: 1599.98px;
 $bp-xl: 1199.98px;
 $bp-lg: 991.98px;
 $bp-md: 767.98px;
@@ -36,30 +36,16 @@ body {
 }
 
 .container {
-  max-width: 1440px;
-  padding: 0 40px;
+  max-width: 1650px;
+  padding: 0 25px;
   margin: 0 auto;
 
   @include breakpoint($bp-xxl) {
-    max-width: 1200px;
-  }
-
-  @include breakpoint($bp-xl) {
-    max-width: 992px;
-    padding: 0 40px;
-  }
-
-  @include breakpoint($bp-lg) {
-    max-width: 708px;
-  }
-
-  @include breakpoint($bp-md) {
-    max-width: 556px;
+    max-width: 100%;
   }
 
   @include breakpoint($bp-sm) {
-    max-width: 100%;
-    padding: 0 10px;
+    padding: 0 20px;
   }
 }
 
@@ -151,6 +137,9 @@ h6 {
   flex: 1 0 auto;
   z-index: 0;
   position: relative;
+  height: 100svh;
+  max-height: 100svh;
+  box-sizing: border-box;
 
   &::after {
     content: "";
@@ -158,39 +147,22 @@ h6 {
     width: 100%;
     height: 100%;
     inset: 0;
-    left: calc(-340px - ((100vw - 1920px) * 0.15));
-    background: url('../img/bg_main.png') left top / contain no-repeat;
+    left: calc(-150px + ((100vw - 1920px) * 0.15));
+    background: url('../img/bg_main.webp') left top / contain no-repeat;
     z-index: 1;
     pointer-events: none;
   }
 
-  //  &::after {
-  //   content: "";
-  //   position: absolute;
-  //   width: 100%;
-  //   height: 100%;
-  //   inset: 0;
-  //   background: url('../img/hero-gold.webp') top center / cover no-repeat;
-  //   animation: pulse 4s ease-in-out infinite;
-  //   z-index: 1;
-  //   pointer-events: none;
-  // }
+  &__image {
+    display: none;
+  }
 
+  .hero-logo {
 
-  // &::before {
-  //   content: "";
-  //   position: absolute;
-  //   width: 100%;
-  //   height: 100%;
-  //   inset: 0;
-
-  //   background:
-  //     url('../img/hero-object-one.webp') calc(50% - 320px) bottom / 520px auto no-repeat,
-  //     url('../img/hero-object-two.webp') bottom center / 966px auto no-repeat;
-
-  //   z-index: 2;
-  //   pointer-events: none;
-  // }
+    &__brand--black {
+      display: none;
+    }
+  }
 
   @keyframes pulse {
     0% {
@@ -211,7 +183,10 @@ h6 {
 
   .container {
     width: 100%;
+    height: 100%;
+    min-height: 0;
     position: relative;
+    display: flex;
   }
 
   &__content {
@@ -221,6 +196,8 @@ h6 {
     z-index: 2;
     text-align: center;
     height: 100%;
+    min-height: 0;
+    width: 100%;
   }
 
   &__right {
@@ -228,6 +205,7 @@ h6 {
     flex-basis: 780px;
     display: flex;
     flex-direction: column;
+    min-height: 0;
   }
 
   &__logo {
@@ -271,21 +249,35 @@ h6 {
   }
 
   .achievements-hero {
-    flex: 1;
+    flex: 1 1 auto;
     min-height: 0;
-    color: #000;
+
+    display: flex;
+    flex-direction: column;
   }
 
   .achievement {
-    max-height: calc(100vh - 250px);
+    flex: 1 1 auto;
+    height: 100%;
+    min-height: 0;
+    max-height: none;
     overflow-y: auto;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 32px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 30px;
 
     &__item {
-      width: clamp(320px, calc(593 / 1920 * 100vw), 593px);
+      width: 100%;
+      max-width: 596px;
+    }
+
+    &__wrapper {
+      width: 100%;
       background: url('../img/bg-card.svg') top center / cover no-repeat;
       border-radius: 16px;
       padding: 20px 110px 20px 95px;
@@ -294,20 +286,47 @@ h6 {
       display: flex;
       align-items: center;
       z-index: 1;
+
+      &:hover,
+      &:focus {
+        -webkit-filter: brightness(0.9);
+        filter: brightness(0.9);
+      }
+
+      &:hover,
+      &:not(:hover) {
+        transition: All 0.4s ease;
+      }
     }
 
     &__item--complete {
       position: relative;
+      pointer-events: none;
+      z-index: 1;
+
+      .achievement__wrapper {
+        opacity: 0.3;
+      }
 
       &::after {
-        content: "";
-        width: 100%;
-        height: 100%;
-        opacity: 0.3;
-
+        content: "Сompleted";
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 120%;
+        letter-spacing: -0.02em;
+        color: #fff;
         position: absolute;
+        width: 142px;
+        height: 48px;
+        left: -92px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        background: url('../img/complete-ico.svg') center left 12px no-repeat #FC6200;
+        border-radius: 26px;
+        padding: 12px 12px 12px 46px;
         z-index: 2;
-        inset: 0;
       }
     }
 
@@ -318,7 +337,7 @@ h6 {
       left: -95px;
     }
 
-    &__prize {
+    .prize {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -327,7 +346,7 @@ h6 {
       width: 100%;
       border-radius: 170px;
       background: #fff;
-      padding: 12px;
+      padding: 10px;
       min-height: 100px;
       max-width: 200px;
       text-align: left;
@@ -340,7 +359,7 @@ h6 {
         flex-shrink: 0;
       }
 
-      &-title {
+      &__title {
         font-family: "Zalando Sans Expanded", sans-serif;
         font-style: italic;
         font-weight: 800;
@@ -351,12 +370,16 @@ h6 {
         display: block;
       }
 
-      &-value {
+      &__value {
         font-weight: 500;
         font-size: 16px;
         line-height: 120%;
         letter-spacing: -0.02em;
         color: #0c0c18;
+      }
+
+      &__content {
+        line-height: 100%;
       }
     }
 
@@ -395,62 +418,302 @@ h6 {
     }
   }
 
-  @include breakpoint($bp-lg) {
+  .achievements-progress {
+    width: 100%;
+    margin-bottom: 30px;
+    flex: 0 0 auto;
 
-    .container {
-      flex-direction: column;
-      padding: 0;
-      max-width: 100%;
-      gap: 40px;
+    &__title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0c0c18;
+      text-align: left;
+      margin-bottom: 7px;
+
+      span {
+        font-weight: 700;
+      }
     }
 
-    &__content {
-      padding: 0 40px;
+    &__line {
       width: 100%;
+      height: 20px;
+      padding: 4px 5px;
+      border: 1px solid #FC6200;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    &__fill {
+      width: 0;
+      height: 100%;
+      border-radius: 20px;
+      background: #ff6b16;
+    }
+  }
+
+  @include breakpoint($bp-xxl) {
+    &::after {
+      left: 0;
+      background: url('../img/bg_xxl.webp') left top / contain no-repeat;
+    }
+
+    &__right {
+      flex-basis: calc(596px + (100vw - 1280px) * 164 / 320);
+    }
+
+    .achievement {
+      gap: 20px;
+
+      &__item {
+        min-height: 384px;
+        display: flex;
+        align-items: center;
+        max-width: 100%;
+      }
+
+      &__wrapper {
+        min-height: 239px;
+        padding: 95px 20px 54px 20px;
+      }
+
+      &__icon {
+        top: -85px;
+        transform: translateX(-50%);
+        left: 50%;
+      }
+
+      &__content {
+        width: 100%;
+      }
+
+      &__description {
+        text-align: center;
+      }
+
+      &__title {
+        text-align: center;
+      }
+
+      &__text {
+        text-align: center;
+      }
+
+      &__item--complete {
+        &::after {
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      .prize {
+        top: initial;
+        bottom: -62px;
+        transform: translateX(50%);
+        right: 50%;
+      }
     }
 
   }
 
-  @include breakpoint($bp-lg) {
-    padding: 40px 0 400px 0;
-    // background: url('../img/bg_tablet.webp') top center / cover no-repeat;
+  @include breakpoint($bp-xl) {
+    padding: 40px 0 0 0;
 
-    // &::after {
-    //   background: url('../img/hero-gold_tablet.webp') top center / cover no-repeat;
-    // }
+    &::after {
+      display: none;
+    }
 
-    // &::before {
-    //   background: url('../img/hero-object-three.webp') bottom center / 688px auto no-repeat;
-    // }
-  }
-
-  @include breakpoint($bp-sm) {
-    padding: 20px 0 260px 0;
-
-    // &::before {
-    //   background: url('../img/hero-object-three.webp') bottom center / 447px auto no-repeat;
-    // }
+    &__image {
+      display: block;
+      margin-bottom: 50px;
+    }
 
     &__content {
-      padding: 0 20px;
+      flex-direction: column;
+    }
+
+    &__right {
+      flex-basis: 100%;
     }
 
     &__title {
-      font-size: 8.75vw;
+      max-width: 675px;
+      margin: 0 auto;
     }
 
     .hero-logo {
-      &__jocker {
-        width: 64px;
-        height: 36px;
-      }
+      position: absolute;
+      top: 0;
 
       &__brand {
-        width: 130px;
-        height: 24px;
+        display: none;
+      }
+
+      &__brand--black {
+        display: block;
       }
     }
 
+    .achievement {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @include breakpoint($bp-lg) {
+    padding: 45px 0 0 0;
+
+    .hero-logo {
+      top: -20px;
+    }
+
+    &__title {
+      max-width: 100%;
+    }
+
+    .achievement {
+      gap: 32px;
+      grid-template-columns: 1fr;
+
+      &__item {
+        min-height: auto;
+        display: block;
+        max-width: calc(100% - 176px);
+        margin: 0 auto;
+      }
+
+      &__wrapper {
+        min-height: 172px;
+        padding: 20px 110px 20px 95px;
+      }
+
+      &__icon {
+        top: 50%;
+        transform: translateY(-50%);
+        left: -95px;
+      }
+
+      &__description {
+        text-align: left;
+      }
+
+      &__title {
+        text-align: left;
+      }
+
+      &__text {
+        text-align: left;
+      }
+
+      &__item--complete {
+        &::after {
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      .prize {
+        top: 50%;
+        transform: translateY(-50%);
+        right: -90px;
+        bottom: initial;
+      }
+    }
+
+  }
+
+  @include breakpoint($bp-md) {
+
+    .hero-logo {
+      &__brand--black {
+        max-width: 205px;
+      }
+    }
+
+    &__title {
+      font-size: 8.54vw;
+    }
+
+    .achievement {
+      gap: 20px;
+      padding-top: 20px;
+
+      &__item {
+        min-height: 384px;
+        display: flex;
+        align-items: center;
+        max-width: 100%;
+      }
+
+      &__wrapper {
+        min-height: 239px;
+        padding: 95px 20px 54px 20px;
+      }
+
+      &__icon {
+        top: -85px;
+        transform: translateX(-50%);
+        left: 50%;
+      }
+
+      &__content {
+        width: 100%;
+      }
+
+      &__description {
+        text-align: center;
+      }
+
+      &__title {
+        text-align: center;
+      }
+
+      &__text {
+        text-align: center;
+      }
+
+      &__item--complete {
+        &::after {
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      .prize {
+        top: initial;
+        bottom: -62px;
+        transform: translateX(50%);
+        right: 50%;
+      }
+    }
+  }
+
+  @include breakpoint($bp-sm) {
+    padding: 30px 0 0 0;
+
+    .hero-logo {
+      top: initial;
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    &__title {
+      margin-bottom: 20px;
+    }
+
+    &__image {
+      margin-bottom: 17px;
+    }
+
+    .achievements {
+      &-progress {
+        margin-bottom: 20px;
+      }
+    }
 
   }
 }
