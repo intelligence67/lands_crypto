@@ -1,0 +1,25 @@
+image: node:22-bookworm
+
+options:
+  max-time: 20
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Build and deploy j.cuatrobet.com
+          caches:
+            - node
+          script:
+            - apt-get update
+            - apt-get install -y --no-install-recommends openssh-client rsync
+            - npm ci
+            - npm run build
+            - chmod +x .ops/deploy-standalone.sh
+            - export DEPLOY_SOURCE_DIR="${DEPLOY_SOURCE_DIR:-dist}"
+            - export DEPLOY_PATH="${DEPLOY_PATH:-/var/www/landings/j.cuatrobet.com}"
+            - ./.ops/deploy-standalone.sh
+
+definitions:
+  caches:
+    node: ~/.npm
