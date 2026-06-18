@@ -1159,12 +1159,40 @@ h6 {
     color 9999s ease-in-out 0s !important;
 }
 
+.field-box input:-webkit-autofill::first-line,
+.field-box input:-webkit-autofill:hover::first-line,
+.field-box input:-webkit-autofill:focus::first-line,
+.field-box input:-webkit-autofill:active::first-line {
+  color: #ffffff !important;
+  font-family: Manrope, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+}
+
+.field-box input:-webkit-autofill+label,
+.field-box input:-webkit-autofill:hover+label,
+.field-box input:-webkit-autofill:focus+label,
+.field-box input:-webkit-autofill:active+label,
+.phone-box input:-webkit-autofill+label,
+.phone-box input:-webkit-autofill:hover+label,
+.phone-box input:-webkit-autofill:focus+label,
+.phone-box input:-webkit-autofill:active+label {
+  color: rgba(255, 255, 255, 0.70) !important;
+}
+
 .phone-box input:-webkit-autofill,
 .phone-box input:-webkit-autofill:hover,
 .phone-box input:-webkit-autofill:focus,
 .phone-box input:-webkit-autofill:active {
   -webkit-text-fill-color: transparent !important;
   caret-color: transparent !important;
+}
+
+.phone-box input:-webkit-autofill::first-line,
+.phone-box input:-webkit-autofill:hover::first-line,
+.phone-box input:-webkit-autofill:focus::first-line,
+.phone-box input:-webkit-autofill:active::first-line {
+  color: transparent !important;
 }
 
 .phone-box {
