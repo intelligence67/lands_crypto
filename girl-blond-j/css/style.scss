@@ -1118,6 +1118,7 @@ h6 {
     position: absolute;
     left: 16px;
     top: 50%;
+    z-index: 4;
     transform: translateY(-50%);
     margin: 0;
     font-size: 15px;
@@ -1157,6 +1158,8 @@ h6 {
   transition:
     background-color 9999s ease-in-out 0s,
     color 9999s ease-in-out 0s !important;
+  animation-name: field-autofill;
+  animation-duration: 0.01s;
 }
 
 .field-box input:-webkit-autofill::first-line,
@@ -1195,6 +1198,51 @@ h6 {
   color: transparent !important;
 }
 
+.field-box {
+  input {
+    position: relative;
+    z-index: 2;
+  }
+
+  &.is-mirrored {
+    input {
+      color: transparent !important;
+      -webkit-text-fill-color: transparent !important;
+      caret-color: #ffffff !important;
+
+      &::first-line {
+        color: transparent !important;
+      }
+
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        -webkit-text-fill-color: transparent !important;
+      }
+    }
+  }
+
+  &__display {
+    position: absolute;
+    left: 16px;
+    top: 31px;
+    right: 16px;
+    z-index: 3;
+    pointer-events: none;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.password-wrap .field-box__display {
+  right: 54px;
+}
+
 .phone-box {
   cursor: text;
 
@@ -1217,7 +1265,7 @@ h6 {
     left: 16px;
     top: 26px;
     right: 16px;
-    z-index: 1;
+    z-index: 3;
     pointer-events: none;
     font-size: 16px;
     line-height: 1;
@@ -1247,6 +1295,16 @@ h6 {
   &:focus-within &__filled::after {
     display: inline-block;
     animation: phone-caret-blink 1s steps(2, start) infinite;
+  }
+}
+
+@keyframes field-autofill {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 1;
   }
 }
 

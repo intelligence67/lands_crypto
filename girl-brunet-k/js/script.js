@@ -443,6 +443,7 @@ const initRegistrationForm = () => {
 
   let hasAttemptedSubmit = false;
   let phoneDisplay = null;
+  const mirroredFieldRenderers = [];
 
   const createErrorNode = (container, message) => {
     if (!container) {
@@ -624,6 +625,37 @@ const initRegistrationForm = () => {
     phoneDisplay.innerHTML = `<span class="phone-box__filled">${parts.filled}</span><span class="phone-box__rest">${parts.rest}</span>`;
   };
 
+  const renderMirroredFields = () => {
+    mirroredFieldRenderers.forEach((render) => render());
+  };
+
+  const setupMirroredField = (input, box, options = {}) => {
+    if (!input || !box) {
+      return null;
+    }
+
+    const display = document.createElement('div');
+    display.className = 'field-box__display';
+    display.setAttribute('aria-hidden', 'true');
+    box.appendChild(display);
+
+    const render = () => {
+      const value = input.value || '';
+      const isMasked = options.mask && input.type === 'password';
+
+      display.textContent = isMasked ? '•'.repeat(value.length) : value;
+      box.classList.toggle('is-mirrored', value.length > 0);
+    };
+
+    ['input', 'change', 'focus', 'blur', 'animationstart'].forEach((eventName) => {
+      input.addEventListener(eventName, render);
+    });
+
+    mirroredFieldRenderers.push(render);
+    render();
+    return render;
+  };
+
   const updatePhoneInput = (digits) => {
     if (!phoneInput) {
       return;
@@ -770,6 +802,16 @@ const initRegistrationForm = () => {
     });
   }
 
+  const renderEmailMirror = setupMirroredField(emailInput, emailBox);
+  const renderPasswordMirror = setupMirroredField(passwordInput, passwordBox, { mask: true });
+
+  [0, 80, 250, 600, 1200, 2500].forEach((delay) => {
+    window.setTimeout(renderMirroredFields, delay);
+  });
+
+  window.addEventListener('pageshow', renderMirroredFields);
+  document.addEventListener('visibilitychange', renderMirroredFields);
+
   openBonusModal?.addEventListener('click', () => {
     touched.bonus = true;
     openModal();
@@ -806,12 +848,14 @@ const initRegistrationForm = () => {
   emailInput?.addEventListener('input', () => {
     touched.email = true;
     setServerError('');
+    renderEmailMirror?.();
     validateForm(hasAttemptedSubmit);
   });
 
   passwordInput?.addEventListener('input', () => {
     touched.password = true;
     setServerError('');
+    renderPasswordMirror?.();
     updatePasswordHint();
     validateForm(hasAttemptedSubmit);
   });
@@ -828,6 +872,7 @@ const initRegistrationForm = () => {
     }
 
     passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    renderPasswordMirror?.();
   });
 
   form.addEventListener(
@@ -1031,5 +1076,4 @@ rollBonusBtnTwo?.addEventListener("click", () => {
 
   spinStep = 3
 })
-
 

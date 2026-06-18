@@ -1123,6 +1123,7 @@ h6 {
   position: absolute;
   left: 16px;
   top: 50%;
+  z-index: 4;
   transform: translateY(-50%);
   margin: 0;
   font-size: 15px;
@@ -1167,6 +1168,10 @@ h6 {
           box-shadow: 0 0 0 1000px #0d0d19 inset !important;
   -webkit-transition: background-color 9999s ease-in-out 0s, color 9999s ease-in-out 0s !important;
   transition: background-color 9999s ease-in-out 0s, color 9999s ease-in-out 0s !important;
+  -webkit-animation-name: field-autofill;
+          animation-name: field-autofill;
+  -webkit-animation-duration: 0.01s;
+          animation-duration: 0.01s;
 }
 
 .field-box input:-webkit-autofill::first-line,
@@ -1205,6 +1210,42 @@ h6 {
   color: transparent !important;
 }
 
+.field-box input {
+  position: relative;
+  z-index: 2;
+}
+.field-box.is-mirrored input {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  caret-color: #ffffff !important;
+}
+.field-box.is-mirrored input::first-line {
+  color: transparent !important;
+}
+.field-box.is-mirrored input:-webkit-autofill,
+.field-box.is-mirrored input:-webkit-autofill:hover,
+.field-box.is-mirrored input:-webkit-autofill:focus,
+.field-box.is-mirrored input:-webkit-autofill:active {
+  -webkit-text-fill-color: transparent !important;
+}
+.field-box__display {
+  position: absolute;
+  left: 16px;
+  top: 31px;
+  right: 16px;
+  z-index: 3;
+  pointer-events: none;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.password-wrap .field-box__display {
+  right: 54px;
+}
+
 .phone-box {
   cursor: text;
 }
@@ -1230,7 +1271,7 @@ h6 {
   left: 16px;
   top: 26px;
   right: 16px;
-  z-index: 1;
+  z-index: 3;
   pointer-events: none;
   font-size: 16px;
   line-height: 1;
@@ -1256,6 +1297,24 @@ h6 {
 .phone-box:focus-within .phone-box__filled::after {
   display: inline-block;
   animation: phone-caret-blink 1s steps(2, start) infinite;
+}
+
+@-webkit-keyframes field-autofill {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes field-autofill {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes phone-caret-blink {
