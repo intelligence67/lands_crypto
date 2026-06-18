@@ -1151,6 +1151,32 @@ h6 {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.field-box input:-webkit-autofill,
+.field-box input:-webkit-autofill:hover,
+.field-box input:-webkit-autofill:focus,
+.field-box input:-webkit-autofill:active,
+.phone-box input:-webkit-autofill,
+.phone-box input:-webkit-autofill:hover,
+.phone-box input:-webkit-autofill:focus,
+.phone-box input:-webkit-autofill:active {
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff !important;
+  background-color: #0d0d19 !important;
+  background-image: none !important;
+  -webkit-box-shadow: 0 0 0 1000px #0d0d19 inset !important;
+          box-shadow: 0 0 0 1000px #0d0d19 inset !important;
+  -webkit-transition: background-color 9999s ease-in-out 0s, color 9999s ease-in-out 0s !important;
+  transition: background-color 9999s ease-in-out 0s, color 9999s ease-in-out 0s !important;
+}
+
+.phone-box input:-webkit-autofill,
+.phone-box input:-webkit-autofill:hover,
+.phone-box input:-webkit-autofill:focus,
+.phone-box input:-webkit-autofill:active {
+  -webkit-text-fill-color: transparent !important;
+  caret-color: transparent !important;
+}
+
 .phone-box {
   cursor: text;
 }
