@@ -869,6 +869,10 @@ h6 {
     margin: 0;
   }
 
+  &__logo {
+    display: none;
+  }
+
   @include breakpoint($bp-xxl) {
     max-width: 360px;
   }

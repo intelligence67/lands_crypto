@@ -828,6 +828,9 @@ h6 {
   text-transform: uppercase;
   margin: 0;
 }
+.register__logo {
+  display: none;
+}
 @media screen and (max-width: 1439.98px) {
   .register {
     max-width: 360px;
