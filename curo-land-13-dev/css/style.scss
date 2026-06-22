@@ -880,16 +880,25 @@ h6 {
   @include breakpoint($bp-lg) {
     order: 1;
     max-width: 480px;
+    margin-top: 40px;
 
     &__logo {
       margin-bottom: 20px;
       display: flex;
       justify-content: center;
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 
   @include breakpoint($bp-sm) {
+    margin-top: 30px;
+
     &__logo {
+      top: -50px;
+
       img {
         max-width: 153px;
       }

@@ -840,14 +840,25 @@ h6 {
   .register {
     order: 1;
     max-width: 480px;
+    margin-top: 40px;
   }
   .register__logo {
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 @media screen and (max-width: 575.98px) {
+  .register {
+    margin-top: 30px;
+  }
+  .register__logo {
+    top: -50px;
+  }
   .register__logo img {
     max-width: 153px;
   }
