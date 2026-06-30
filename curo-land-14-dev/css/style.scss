@@ -488,7 +488,7 @@ h6 {
     }
 
     &__game-iframe {
-      width: calc(280px + (100vw - 375px) * 0.7);
+      width: calc(280px + (100vw - 320px) * 0.7);
       aspect-ratio: 320 / 620;
 
       &--mob {
