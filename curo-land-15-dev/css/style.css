@@ -256,7 +256,7 @@ h6 {
   height: 196px;
   left: calc(50% - 224px);
   bottom: -62px;
-  background: url("./../img/hero-object-2.png") top center/contain no-repeat;
+  background: url("./../img/hero-object-2.webp") top center/contain no-repeat;
   position: absolute;
   animation: pulseObject 4s ease-in-out infinite;
 }
@@ -266,7 +266,7 @@ h6 {
   height: 140px;
   right: calc(50% - 207px);
   top: -38px;
-  background: url("./../img/hero-object-1.png") top center/contain no-repeat;
+  background: url("./../img/hero-object-1.webp") top center/contain no-repeat;
   position: absolute;
   animation: pulseObject 4s ease-in-out infinite;
 }
@@ -605,7 +605,7 @@ h6 {
   overflow: hidden;
   padding: 20px 12px 12px;
   border-radius: 16px;
-  background: url("./../img/vip-banner-bg.jpg") center/cover no-repeat;
+  background: url("./../img/vip-banner-bg.webp") center/cover no-repeat;
 }
 .vip-banner__content {
   margin: 0 auto 16px;
