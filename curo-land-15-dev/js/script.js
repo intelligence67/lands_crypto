@@ -1,25 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const faqItems = document.querySelectorAll('.faq__item');
-
-  faqItems.forEach(item => {
-    const button = item.querySelector('.faq__question');
-    const answer = item.querySelector('.faq__answer');
-
-    if (!button || !answer) return;
-
-    const setAnswerHeight = () => {
-      item.style.setProperty('--answer-height', `${answer.scrollHeight + 18}px`);
-    };
-
-    setAnswerHeight();
-
-    button.addEventListener('click', () => {
+  document.querySelectorAll('.faq__item').forEach(item => {
+    item.querySelector('.faq__question').addEventListener('click', () => {
       item.classList.toggle('is-active');
-      setAnswerHeight();
     });
   });
-
+  
   new Swiper('.vip-parlays__slider', {
     slidesPerView: 'auto',
     spaceBetween: 20,

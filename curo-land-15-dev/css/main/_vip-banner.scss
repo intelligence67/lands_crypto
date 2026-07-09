@@ -108,6 +108,8 @@
 
     object-fit: contain;
     object-position: center;
+    pointer-events: none;
+    user-select: none;
   }
 
   h3 {
