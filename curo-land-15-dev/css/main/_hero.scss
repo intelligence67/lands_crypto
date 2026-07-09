@@ -6,6 +6,8 @@
     height: 280px;
     margin-bottom: 24px;
     position: relative;
+    pointer-events: none;
+    user-select: none;
 
     &::after {
       content: '';

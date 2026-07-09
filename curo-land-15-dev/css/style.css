@@ -245,6 +245,10 @@ h6 {
   height: 280px;
   margin-bottom: 24px;
   position: relative;
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .hero__image::after {
   content: "";
