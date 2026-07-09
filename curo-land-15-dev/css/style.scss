@@ -1,0 +1,189 @@
+@use './normalize' as *;
+@use './vars' as *;
+@use './mixins' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
+
+// Брейки
+
+$bp-xxl: 1439.98px;
+$bp-xl: 1279.98px;
+$bp-lg: 991.98px;
+$bp-md: 767.98px;
+$bp-sm: 575.98px;
+
+html,
+body {
+  font-family: "Manrope", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: left;
+  line-height: 120%;
+  width: 100%;
+  min-width: 320px;
+  margin: 0 auto;
+  color: $color-text-white;
+  background: $background-main;
+  position: relative;
+  outline: none;
+  -webkit-text-size-adjust: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  max-width: 800px;
+  padding: 0 40px;
+  margin: 0 auto;
+
+  @include breakpoint($bp-md) {
+    max-width: 100%;
+  }
+
+  @include breakpoint($bp-sm) {
+    padding: 0 12px;
+  }
+}
+
+a:hover,
+a:not(:hover),
+button:hover,
+button:not(:hover) {
+  transition: all ease-out 0.4s;
+}
+
+input[type=text],
+input[type=submit],
+textarea {
+  -webkit-appearance: none;
+}
+
+a,
+label,
+button,
+div {
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+input {
+  background: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Zalando Sans Expanded", sans-serif;
+}
+
+.btn {
+  font-weight: 600;
+  font-size: 16px;
+  color: $color-text-white;
+  line-height: 120%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 190px;
+  min-height: 50px;
+  padding: 14px 24px 16px;
+  border: none;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  background: $background-btn;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px 0 rgba(255, 89, 0, 0.66);
+  text-decoration: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(115deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(255, 255, 255, .5) 50%,
+        rgba(255, 255, 255, .8) 55%,
+        transparent 60%,
+        transparent 100%);
+    transform: translateX(-50%) rotate(25deg);
+    filter: blur(8px);
+    pointer-events: none;
+    animation: shine-btn 6s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+}
+
+.btn:hover,
+.btn:focus {
+  -webkit-filter: brightness(0.90);
+  filter: brightness(0.90);
+}
+
+.btn:hover,
+.btn:not(:hover) {
+  transition: All 0.4s ease;
+}
+
+@keyframes shine-btn {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  25% {
+    left: 150%;
+    opacity: 1;
+  }
+
+  26% {
+    opacity: 0;
+  }
+
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
+}
+
+// Новые блоки
+
+// @import "./header";
+@import "./main/hero";
+@import "./main/_vip-levels";
+@import "./main/_vip-benefits";
+@import "./main/_vip-banner";
+@import "./main/_faq";
+@import "./main/_vip-wins";
+@import "./main/_vip-parlays";
+
+// @import "./about";
+// @import "./advantage";
+// @import "./team";
+// @import "./partners";
+// @import "./reviews";
+// @import "./relations";
+@import "./main/footer";

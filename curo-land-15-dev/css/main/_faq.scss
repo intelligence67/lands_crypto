@@ -1,0 +1,117 @@
+.faq {
+  padding: 12px 0;
+
+  &__title {
+    font-family: "Manrope", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 122%;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 12px;
+  }
+
+  &__item {
+    margin-bottom: 8px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.is-active {
+      .faq__answer {
+        max-height: var(--answer-height);
+        opacity: 1;
+        border-top: 1px solid $color-text-white-20;
+        padding: 18px 16px;
+        background: #0c0c18;
+        border-bottom-right-radius: 16px;
+        border-bottom-left-radius: 16px;
+      }
+
+      .faq__question {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      .faq__question span {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &__question {
+    width: 100%;
+    padding: 18px 16px;
+    border: 0;
+    background: $background-black;
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    text-align: left;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 125%;
+
+    color: $color-text-white;
+    cursor: pointer;
+
+    span {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+
+      background: url("./../img/chevron-down.svg") top center / contain no-repeat;
+
+      transition: transform .3s ease;
+    }
+
+    &:hover {
+      background: $background-faq-hover;
+    }
+  }
+
+  &__answer {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0 16px;
+
+    transition:
+      max-height .35s ease,
+      opacity .25s ease,
+      padding-top .35s ease;
+
+    p,
+    ul,
+    ol {
+      font-size: 16px;
+      line-height: 150%;
+      margin: 0;
+    }
+
+    ul {
+      padding-left: 24px;
+    }
+
+    li {
+      list-style-type: initial;
+    }
+
+    a {
+      color: $color-text-orange;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+}

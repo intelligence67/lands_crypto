@@ -1,0 +1,360 @@
+.vip-wins {
+  padding: 60px 0;
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 122%;
+    text-transform: uppercase;
+    color: $color-text-white;
+    margin-bottom: 8px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 392px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    min-width: 0;
+    align-items: end;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  @include breakpoint($bp-md) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+
+    &__cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @include breakpoint($bp-sm) {
+    &__cards {
+      grid-template-columns: 1fr;
+    }
+
+    .vip-win-card {
+      min-height: auto;
+      text-align: center;
+
+      &--gold {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      &__id {
+        margin-top: initial;
+      }
+    }
+  }
+}
+
+.vip-win-card {
+  position: relative;
+  padding: 10px 8px;
+  border-radius: 16px;
+  background: $background-black;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 168px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 150%;
+    height: 150%;
+    transform: translate(-50%, -50%);
+    opacity: .5;
+  }
+
+  >* {
+    position: relative;
+    z-index: 2;
+  }
+
+  &--metallic {
+    &::after {
+      background: radial-gradient(50% 50% at 50% 50%, #b1b1b1 0%, rgba(177, 177, 177, 0) 100%);
+    }
+
+    .vip-win-card__place::before {
+      background: #B1B1B1;
+    }
+  }
+
+  &--gold {
+    min-height: 184px;
+
+    &::after {
+      background: radial-gradient(50% 50% at 50% 50%, #ebc156 0%, rgba(235, 193, 86, 0) 100%);
+    }
+  }
+
+  &--peach {
+    &::after {
+      background: radial-gradient(50% 50% at 50% 50%, #b66b4f 0%, rgba(182, 107, 79, 0) 100%);
+    }
+
+    .vip-win-card__place::before {
+      background: #B66B4F;
+    }
+  }
+
+  &__top {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 10px;
+  }
+
+  &__image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+    border-radius: 12px;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .35s ease, filter .35s ease;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      z-index: 2;
+
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #ff6b00;
+
+      opacity: 0;
+      transform: scale(.7);
+      transition: opacity .3s ease, transform .3s ease;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 3;
+
+      transform: translate(-40%, -50%) scale(.7);
+
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 13px solid #fff;
+
+      opacity: 0;
+      transition: opacity .3s ease, transform .3s ease;
+    }
+
+    &:hover {
+      img {
+        transform: scale(1.08);
+        filter: blur(3px) brightness(.7);
+      }
+
+      &::before {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      &::after {
+        opacity: 1;
+        transform: translate(-40%, -50%) scale(1);
+      }
+    }
+  }
+
+  &__place {
+    position: absolute;
+    right: -13px;
+    top: 55px;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 800;
+    line-height: 120%;
+    z-index: 4;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+
+      background: #EBC156;
+
+      mask: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 38'%3E%3Cpath d='M19 3.16699L15.5167 7.12533L10.2917 5.70033L9.49999 10.9253L4.43332 12.5087L6.64999 17.2587L3.16666 21.217L7.59999 24.067L6.80832 29.292H12.1917L14.4083 34.042L19 31.192L23.5917 34.042L25.8083 29.292H31.1917L30.4 24.067L34.8333 21.217L31.35 17.2587L33.5667 12.5087L28.5 10.9253L27.7083 5.70033L22.6417 7.12533L19 3.16699Z'/%3E%3C/svg%3E");
+      -webkit-mask: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 38'%3E%3Cpath d='M19 3.16699L15.5167 7.12533L10.2917 5.70033L9.49999 10.9253L4.43332 12.5087L6.64999 17.2587L3.16666 21.217L7.59999 24.067L6.80832 29.292H12.1917L14.4083 34.042L19 31.192L23.5917 34.042L25.8083 29.292H31.1917L30.4 24.067L34.8333 21.217L31.35 17.2587L33.5667 12.5087L28.5 10.9253L27.7083 5.70033L22.6417 7.12533L19 3.16699Z'/%3E%3C/svg%3E");
+    }
+  }
+
+  &__id {
+    margin-top: auto;
+    margin-bottom: 2px;
+    font-size: 10px;
+    line-height: 140%;
+  }
+
+  &__amount {
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 112%;
+  }
+}
+
+.vip-win-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 8px 8px;
+  border-radius: 12px;
+  background: $background-black;
+
+  &__image {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform .35s ease, filter .35s ease;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      z-index: 2;
+
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #ff6b00;
+
+      opacity: 0;
+      transform: scale(.7);
+      transition: opacity .3s ease, transform .3s ease;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 3;
+
+      transform: translate(-40%, -50%) scale(.7);
+
+      width: 0;
+      height: 0;
+      border-top: 6.3px solid transparent;
+      border-bottom: 6.3px solid transparent;
+      border-left: 12.6px solid #fff;
+
+      opacity: 0;
+      transition: opacity .3s ease, transform .3s ease;
+    }
+
+    &:hover {
+      img {
+        transform: scale(1.05);
+        filter: blur(2px) brightness(.7);
+      }
+
+      &::before {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      &::after {
+        opacity: 1;
+        transform: translate(-40%, -50%) scale(1);
+      }
+    }
+  }
+
+  &__info {
+    flex: 0 1 96px;
+    max-width: 96px;
+    min-width: 0;
+
+    h3 {
+      font-family: "Manrope", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 125%;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    p {
+      font-size: 10px;
+      line-height: 180%;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &__amount {
+    flex: 0 0 auto;
+    margin-left: auto;
+
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    white-space: nowrap;
+    color: $color-text-white;
+  }
+}

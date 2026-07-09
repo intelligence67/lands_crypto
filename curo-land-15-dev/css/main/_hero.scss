@@ -1,0 +1,79 @@
+.hero {
+  padding: 12px 0 24px;
+  overflow: hidden;
+
+  &__image {
+    height: 280px;
+    margin-bottom: 24px;
+    position: relative;
+
+    &::after {
+      content: '';
+      width: 196px;
+      height: 196px;
+      left: calc(50% - 224px);
+      bottom: -62px;
+      background: url('./../img/hero-object-2.png') top center / contain no-repeat;
+      position: absolute;
+      animation: pulseObject 4s ease-in-out infinite;
+    }
+
+    &::before {
+      content: '';
+      width: 140px;
+      height: 140px;
+      right: calc(50% - 207px);
+      top: -38px;
+      background: url('./../img/hero-object-1.png') top center / contain no-repeat;
+      position: absolute;
+      animation: pulseObject 4s ease-in-out infinite;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    @keyframes pulseObject {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+  }
+
+  &__content {
+    text-align: center;
+  }
+
+  &__title {
+    font-weight: 900;
+    font-size: clamp(32px, 6vw, 48px);
+    font-style: italic;
+    line-height: 100%;
+    text-transform: uppercase;
+    color: $color-text-white;
+    margin-bottom: 12px;
+
+    span {
+      display: block;
+      color: $color-text-orange;
+    }
+  }
+
+  &__text {
+    color: $color-text-white-65;
+    margin-bottom: 12px;
+  }
+}

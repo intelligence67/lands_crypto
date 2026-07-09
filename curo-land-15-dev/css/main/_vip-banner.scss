@@ -1,0 +1,154 @@
+.vip-banner {
+  padding: 12px 0;
+
+  &__box {
+    position: relative;
+    overflow: hidden;
+    padding: 20px 12px 12px;
+    border-radius: 16px;
+    background: url("./../img/vip-banner-bg.jpg") center / cover no-repeat;
+  }
+
+  &__content {
+    margin: 0 auto 16px;
+    text-align: center;
+  }
+
+  &__badge {
+    width: fit-content;
+    margin: 0 auto 16px;
+    padding: 8px 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+
+    &::after {
+      content: '';
+      width: 100%;
+      height: 100%;
+      inset: 0;
+      backdrop-filter: blur(12px);
+      background: rgba(5, 5, 10, 0.8);
+      border-radius: 18px;
+      position: absolute;
+      z-index: -1;
+    }
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+
+    span {
+      font-weight: 600;
+    }
+  }
+
+  &__title {
+    font-weight: 900;
+    font-size: clamp(32px, 4vw, 36px);
+    font-style: italic;
+    line-height: 100%;
+    text-transform: uppercase;
+    color: $color-text-white;
+    margin-bottom: 8px;
+
+    span {
+      color: $color-text-orange;
+    }
+  }
+
+  &__text {
+    font-size: 16px;
+    line-height: 120%;
+    color: $color-text-white-65;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  &__btn {
+    margin-top: 16px;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+}
+
+.vip-banner-card {
+  min-height: 199px;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+
+  &::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    backdrop-filter: blur(12px);
+    background: rgba(5, 5, 10, 0.8);
+    border-radius: 16px;
+    position: absolute;
+    z-index: -1;
+  }
+
+  &__icon {
+    width: 90px;
+    height: 90px;
+
+    margin: 0;
+    margin-bottom: 12px;
+
+    object-fit: contain;
+    object-position: center;
+  }
+
+  h3 {
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    line-height: 120%;
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 120%;
+    color: $color-text-white-65;
+  }
+}
+
+@include breakpoint($bp-md) {
+
+  .vip-banner {
+    &__title {
+      br {
+        display: none;
+      }
+    }
+
+    &__cards {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  .vip-banner-card {
+    flex: 0 0 151px;
+    scroll-snap-align: start;
+  }
+}
