@@ -113,6 +113,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
+  overflow-x: hidden;
 }
 
 .container {
@@ -237,9 +238,77 @@ h6 {
     opacity: 0;
   }
 }
+.slider {
+  position: relative;
+}
+.slider:hover .slider__next,
+.slider:hover .slider__prev {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+.slider:hover .swiper-button-disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+.slider .swiper {
+  overflow: hidden;
+}
+
+.slider__next,
+.slider__prev {
+  position: absolute;
+  top: 50%;
+  z-index: 20;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.slider__next::before,
+.slider__prev::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border-radius: 50%;
+  background: #0C0C18;
+  transition: background 0.4s ease;
+}
+.slider__next svg,
+.slider__prev svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+.slider__next:hover::before,
+.slider__prev:hover::before {
+  background: #1f1f36;
+}
+.slider__next.swiper-button-disabled,
+.slider__prev.swiper-button-disabled {
+  pointer-events: none;
+}
+
+.slider__next {
+  right: -9px;
+  transform: translateY(-50%) translateX(10px);
+}
+
+.slider__prev {
+  left: -9px;
+  transform: translateY(-50%) translateX(-10px);
+}
+
 .hero {
   padding: 12px 0 24px;
-  overflow: hidden;
 }
 .hero__image {
   height: 280px;
@@ -859,7 +928,7 @@ h6 {
 }
 
 .vip-wins {
-  padding: 60px 0;
+  padding: 12px 0;
 }
 .vip-wins__title {
   font-size: 18px;
@@ -1156,79 +1225,22 @@ h6 {
   padding: 12px 0;
 }
 .vip-parlays__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-left: 12px;
   font-family: "Manrope", sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 122%;
   text-transform: uppercase;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding-left: 12px;
 }
 .vip-parlays__slider {
   position: relative;
 }
-.vip-parlays__slider:hover .vip-parlays__next,
-.vip-parlays__slider:hover .vip-parlays__left {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(-50%);
-}
-.vip-parlays__slider:hover .swiper-button-disabled {
-  opacity: 0;
-  pointer-events: none;
-}
-.vip-parlays .swiper {
-  overflow: hidden;
-}
 .vip-parlays .swiper-slide {
   width: 350px;
-}
-.vip-parlays__next, .vip-parlays__left {
-  position: absolute;
-  top: 50%;
-  z-index: 20;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-.vip-parlays__next::before, .vip-parlays__left::before {
-  content: "";
-  position: absolute;
-  inset: 10px;
-  border-radius: 50%;
-  background: #0C0C18;
-  transition: background 0.4s ease;
-}
-.vip-parlays__next svg, .vip-parlays__left svg {
-  position: relative;
-  z-index: 1;
-  display: block;
-}
-.vip-parlays__next:hover::before, .vip-parlays__left:hover::before {
-  background: #1f1f36;
-}
-.vip-parlays__next.swiper-button-disabled, .vip-parlays__left.swiper-button-disabled {
-  pointer-events: none;
-}
-.vip-parlays__next {
-  right: -9px;
-  transform: translateY(-50%) translateX(10px);
-}
-.vip-parlays__left {
-  left: -9px;
-  transform: translateY(-50%) translateX(-10px);
 }
 @media screen and (max-width: 767.98px) {
   .vip-parlays .swiper-slide {
@@ -1237,12 +1249,12 @@ h6 {
 }
 
 .parlay-card {
-  padding: 48px 12px 12px;
-  border-radius: 20px;
-  background: #0C0C18;
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding: 48px 12px 12px;
+  border-radius: 20px;
+  background: #0C0C18;
 }
 .parlay-card__items {
   display: flex;
@@ -1251,9 +1263,9 @@ h6 {
   margin-bottom: 10px;
 }
 .parlay-card__last {
+  margin-bottom: 5px;
   font-size: 12px;
   line-height: 133%;
-  margin-bottom: 5px;
 }
 .parlay-card__footer {
   display: flex;
@@ -1267,13 +1279,13 @@ h6 {
   line-height: 133%;
 }
 .parlay-card__btn {
-  font-size: 14px;
   min-width: 127px;
   min-height: 32px;
-  padding: 7px 12px;
   margin: 0;
-  box-shadow: none;
+  padding: 7px 12px;
   border-radius: 10px;
+  box-shadow: none;
+  font-size: 14px;
 }
 
 .parlay-item {
@@ -1313,6 +1325,136 @@ h6 {
   flex-shrink: 0;
   font-size: 16px;
   font-weight: 500;
+}
+
+.vip-withdrawals {
+  padding: 12px 0;
+}
+.vip-withdrawals__inner {
+  background: #0C0C18;
+  border-radius: 16px;
+}
+.vip-withdrawals__head {
+  padding: 12px 12px 0;
+  margin-bottom: 18px;
+}
+.vip-withdrawals__title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 6px;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 125%;
+  color: rgba(255, 255, 255, 0.8);
+}
+.vip-withdrawals__title svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.vip-withdrawals__amount {
+  font-family: "Zalando Sans Expanded", sans-serif;
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 112%;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vip-withdrawals .swiper {
+  padding: 0 12px 12px;
+}
+.vip-withdrawals .swiper-slide {
+  width: auto;
+  height: auto;
+}
+
+.withdraw-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.withdraw-card__badge {
+  flex: 0 0 52px;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-family: "Zalando Sans Expanded", sans-serif;
+  font-size: 16px;
+  line-height: 113%;
+  font-style: italic;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+.withdraw-card__badge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  mask: center/contain no-repeat;
+  -webkit-mask: center/contain no-repeat;
+}
+.withdraw-card__badge--green::before {
+  background: #0B3B2F;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath d='M30.7004 4.0869L47.9134 21.2999C49.1712 22.624 49.8333 24.2791 49.8333 26.0003C49.8333 27.7215 49.1712 29.3766 47.9134 30.7007L30.7004 47.9138C29.3763 49.1715 27.7212 49.8337 26 49.8337C24.2788 49.8337 22.6237 49.1715 21.2995 47.9138L4.08656 30.7007C2.8287 29.3766 2.16666 27.7215 2.16666 26.0003C2.16666 24.2791 2.8287 22.624 4.08656 21.2999L21.2995 4.0869C22.6237 2.82904 24.2788 2.16699 26 2.16699C27.7212 2.16699 29.3763 2.82904 30.7004 4.0869Z'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath d='M30.7004 4.0869L47.9134 21.2999C49.1712 22.624 49.8333 24.2791 49.8333 26.0003C49.8333 27.7215 49.1712 29.3766 47.9134 30.7007L30.7004 47.9138C29.3763 49.1715 27.7212 49.8337 26 49.8337C24.2788 49.8337 22.6237 49.1715 21.2995 47.9138L4.08656 30.7007C2.8287 29.3766 2.16666 27.7215 2.16666 26.0003C2.16666 24.2791 2.8287 22.624 4.08656 21.2999L21.2995 4.0869C22.6237 2.82904 24.2788 2.16699 26 2.16699C27.7212 2.16699 29.3763 2.82904 30.7004 4.0869Z'/%3E%3C/svg%3E");
+}
+.withdraw-card__badge--brown::before {
+  background: #492B13;
+}
+.withdraw-card__badge--darkgreen::before {
+  background: #254818;
+}
+.withdraw-card__badge--blue::before {
+  background: #132F49;
+}
+.withdraw-card__badge--brown::before, .withdraw-card__badge--darkgreen::before, .withdraw-card__badge--blue::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath d='M26 0L20.1307 10.4338L9.02971 6.27196L11.1384 18.0957L0 22.1531L9.1 29.8344L3.13599 40.2125L14.9693 40.157L16.9703 52L26 44.2338L35.0298 52L37.0307 40.157L48.864 40.2125L42.9 29.8344L52 22.1531L40.8616 18.0957L42.9702 6.27196L31.8693 10.4338L26 0Z'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath d='M26 0L20.1307 10.4338L9.02971 6.27196L11.1384 18.0957L0 22.1531L9.1 29.8344L3.13599 40.2125L14.9693 40.157L16.9703 52L26 44.2338L35.0298 52L37.0307 40.157L48.864 40.2125L42.9 29.8344L52 22.1531L40.8616 18.0957L42.9702 6.27196L31.8693 10.4338L26 0Z'/%3E%3C/svg%3E");
+}
+.withdraw-card__content {
+  min-width: 0;
+}
+.withdraw-card__id {
+  font-size: 10px;
+  line-height: 140%;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  white-space: nowrap;
+  margin-bottom: 2px;
+}
+.withdraw-card__amount {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 2px;
+  font-family: "Zalando Sans Expanded", sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 125%;
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+.withdraw-card__amount img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.withdraw-card__deposit {
+  font-size: 12px;
+  line-height: 133%;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
 }
 
 .footer {

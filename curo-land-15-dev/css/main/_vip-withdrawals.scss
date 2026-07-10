@@ -1,0 +1,163 @@
+.vip-withdrawals {
+  padding: 12px 0;
+
+  &__inner {
+    background: $background-black;
+    border-radius: 16px;
+  }
+
+  &__head {
+    padding: 12px 12px 0;
+    margin-bottom: 18px;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    margin-bottom: 6px;
+
+    font-family: "Manrope", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 125%;
+    color: $color-text-white-80;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+  }
+
+  &__amount {
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-size: 26px;
+    font-style: italic;
+    font-weight: 800;
+    line-height: 112%;
+    text-transform: uppercase;
+    color: $color-text-white;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .swiper {
+    padding: 0 12px 12px;
+  }
+
+  .swiper-slide {
+    width: auto;
+    height: auto;
+  }
+}
+
+.withdraw-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__badge {
+    flex: 0 0 52px;
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-size: 16px;
+    line-height: 113%;
+    font-style: italic;
+    font-weight: 800;
+    color: $color-text-white;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+
+      mask: center / contain no-repeat;
+      -webkit-mask: center / contain no-repeat;
+    }
+
+    &--green::before {
+      background: #0B3B2F;
+
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath d='M30.7004 4.0869L47.9134 21.2999C49.1712 22.624 49.8333 24.2791 49.8333 26.0003C49.8333 27.7215 49.1712 29.3766 47.9134 30.7007L30.7004 47.9138C29.3763 49.1715 27.7212 49.8337 26 49.8337C24.2788 49.8337 22.6237 49.1715 21.2995 47.9138L4.08656 30.7007C2.8287 29.3766 2.16666 27.7215 2.16666 26.0003C2.16666 24.2791 2.8287 22.624 4.08656 21.2999L21.2995 4.0869C22.6237 2.82904 24.2788 2.16699 26 2.16699C27.7212 2.16699 29.3763 2.82904 30.7004 4.0869Z'/%3E%3C/svg%3E");
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath d='M30.7004 4.0869L47.9134 21.2999C49.1712 22.624 49.8333 24.2791 49.8333 26.0003C49.8333 27.7215 49.1712 29.3766 47.9134 30.7007L30.7004 47.9138C29.3763 49.1715 27.7212 49.8337 26 49.8337C24.2788 49.8337 22.6237 49.1715 21.2995 47.9138L4.08656 30.7007C2.8287 29.3766 2.16666 27.7215 2.16666 26.0003C2.16666 24.2791 2.8287 22.624 4.08656 21.2999L21.2995 4.0869C22.6237 2.82904 24.2788 2.16699 26 2.16699C27.7212 2.16699 29.3763 2.82904 30.7004 4.0869Z'/%3E%3C/svg%3E");
+    }
+
+    &--brown::before {
+      background: #492B13;
+    }
+
+    &--darkgreen::before {
+      background: #254818;
+    }
+
+    &--blue::before {
+      background: #132F49;
+    }
+
+    &--brown::before,
+    &--darkgreen::before,
+    &--blue::before {
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath d='M26 0L20.1307 10.4338L9.02971 6.27196L11.1384 18.0957L0 22.1531L9.1 29.8344L3.13599 40.2125L14.9693 40.157L16.9703 52L26 44.2338L35.0298 52L37.0307 40.157L48.864 40.2125L42.9 29.8344L52 22.1531L40.8616 18.0957L42.9702 6.27196L31.8693 10.4338L26 0Z'/%3E%3C/svg%3E");
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath d='M26 0L20.1307 10.4338L9.02971 6.27196L11.1384 18.0957L0 22.1531L9.1 29.8344L3.13599 40.2125L14.9693 40.157L16.9703 52L26 44.2338L35.0298 52L37.0307 40.157L48.864 40.2125L42.9 29.8344L52 22.1531L40.8616 18.0957L42.9702 6.27196L31.8693 10.4338L26 0Z'/%3E%3C/svg%3E");
+    }
+  }
+
+  &__content {
+    min-width: 0;
+  }
+
+  &__id {
+    font-size: 10px;
+    line-height: 140%;
+    text-transform: uppercase;
+    color: $color-text-white;
+
+    white-space: nowrap;
+
+    margin-bottom: 2px;
+  }
+
+  &__amount {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    margin-bottom: 2px;
+
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 125%;
+    color: $color-text-white;
+    white-space: nowrap;
+
+    img {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+  }
+
+  &__deposit {
+    font-size: 12px;
+    line-height: 133%;
+    color: $color-text-white-80;
+
+    white-space: nowrap;
+  }
+}

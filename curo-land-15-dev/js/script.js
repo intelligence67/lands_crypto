@@ -5,16 +5,18 @@ document.addEventListener('DOMContentLoaded', () => {
       item.classList.toggle('is-active');
     });
   });
-  
-  new Swiper('.vip-parlays__slider', {
-    slidesPerView: 'auto',
-    spaceBetween: 20,
-    speed: 600,
-    grabCursor: true,
 
-    navigation: {
-      nextEl: '.vip-parlays__next',
-      prevEl: '.vip-parlays__left',
-    },
+  document.querySelectorAll('.js-slider').forEach(slider => {
+    new Swiper(slider.querySelector('.swiper'), {
+      slidesPerView: 'auto',
+      spaceBetween: 20,
+      speed: 600,
+      grabCursor: true,
+
+      navigation: {
+        nextEl: slider.querySelector('.slider__next'),
+        prevEl: slider.querySelector('.slider__prev'),
+      },
+    });
   });
 });
