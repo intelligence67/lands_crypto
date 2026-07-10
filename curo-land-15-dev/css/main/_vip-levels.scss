@@ -20,8 +20,8 @@
 .vip-card {
 
   &__head {
-    height: 54px;
-    margin-bottom: 14px;
+    height: 28px;
+    margin-bottom: 20px;
 
     display: flex;
     justify-content: center;
@@ -45,19 +45,10 @@
     position: relative;
     z-index: 2;
 
-    width: 34px;
-    height: 34px;
+    width: 28px;
+    height: 28px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-    background: #ff6700;
-
-    font-weight: 700;
-    font-style: italic;
-    color: #fff;
+    object-fit: contain;
   }
 
   &__inner {
