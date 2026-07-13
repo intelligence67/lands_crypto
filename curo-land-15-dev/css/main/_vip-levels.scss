@@ -6,7 +6,7 @@
   }
 
   .swiper-slide {
-    width: 320px;
+    width: 291px;
     height: auto;
   }
 
@@ -32,12 +32,15 @@
     &::before {
       content: "";
       position: absolute;
-      left: 40px;
-      right: 40px;
       top: 50%;
+      left: calc(50% + 25px);
+      right: -30px;
 
       height: 1px;
       background: rgba(#fff, .12);
+
+      transform: translateY(-50%);
+      width: 86%;
     }
   }
 
@@ -65,14 +68,14 @@
 
   &__cup {
     position: absolute;
-    top: -40px;
+    top: -50px;
     right: -15px;
     width: 180px;
     pointer-events: none;
   }
 
   &__title {
-    font-family: "Manrope", sans-serif;
+    font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
     font-size: 24px;
     line-height: 120%;
     font-weight: 600;
@@ -96,7 +99,7 @@
     padding: 16px 16px 16px 12px;
     border-radius: 16px;
     position: relative;
-    z-index: 1;    
+    z-index: 1;
 
     &::after {
       content: '';
@@ -127,9 +130,14 @@
       font-size: 14px;
       line-height: 120%;
       color: $color-text-white-65;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 180px;
+      display: block;
     }
   }
-
 
   &__info {
     display: flex;
@@ -173,41 +181,25 @@
 
   &--1 {
     .vip-card__inner {
-      background: #181818;
-    }
-
-    .vip-card__item {
-     
+      background: url('./../img/vip-card-bg-1.webp') top center / cover no-repeat;
     }
   }
 
   &--2 {
     .vip-card__inner {
-      background: #342708;
-    }
-
-    .vip-card__item {
-      
+      background: url('./../img/vip-card-bg-2.webp') top center / cover no-repeat;
     }
   }
 
   &--3 {
     .vip-card__inner {
-      background: #5d0839;
-    }
-
-    .vip-card__item {
-      
+      background: url('./../img/vip-card-bg-3.webp') top center / cover no-repeat;
     }
   }
 
   &--4 {
     .vip-card__inner {
-      background: #4d1f02;
-    }
-
-    .vip-card__item {
-      
+      background: url('./../img/vip-card-bg-4.webp') top center / cover no-repeat;
     }
   }
 }

@@ -93,7 +93,7 @@ button:focus-visible {
 
 html,
 body {
-  font-family: "Manrope", sans-serif;
+  font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-size: 18px;
   font-weight: 400;
   text-align: left;
@@ -117,9 +117,14 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1280px;
   padding: 0 40px;
   margin: 0 auto;
+}
+@media screen and (max-width: 1279.98px) {
+  .container {
+    max-width: 800px;
+  }
 }
 @media screen and (max-width: 767.98px) {
   .container {
@@ -169,7 +174,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Zalando Sans Expanded", sans-serif;
+  font-family: "Zalando Sans Expanded", "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
 }
 
 .btn {
@@ -307,6 +312,372 @@ h6 {
   transform: translateY(-50%) translateX(-10px);
 }
 
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: #05050A;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.header .container {
+  max-width: 1920px;
+  padding: 0 16px;
+}
+.header__inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+  height: 56px;
+}
+.header__logo {
+  flex-shrink: 0;
+}
+.header__logo img {
+  display: block;
+  height: 28px;
+}
+.header__nav {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  max-width: 960px;
+}
+.header__menu-wrap {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+.header__menu {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 1 auto;
+  min-width: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.header__item {
+  flex-shrink: 0;
+}
+.header__item a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #9caac4;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  transition: 0.25s;
+  padding: 12px 10px;
+}
+.header__item a img,
+.header__item a svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.header__item a:hover {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.031372549);
+}
+.header__item.active a {
+  color: #FF5900 !important;
+}
+.header__item.active svg path {
+  fill: #FF5900 !important;
+}
+.header__more {
+  position: relative;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+.header__more.is-open .header__more-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.header__more-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 40px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  background: transparent;
+  color: #9caac4;
+  font-size: 14px;
+}
+.header__more-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 50;
+  width: 230px;
+  background: #05050A;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: 0.25s;
+}
+.header__more-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.header__more-list li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.header__more-list li:last-child {
+  border-bottom: none;
+}
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.header__search {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.header__search img,
+.header__search svg {
+  width: 20px;
+  height: 20px;
+}
+.header__lang {
+  position: relative;
+}
+.header__lang.is-open .header__lang-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.header__lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 40px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  background: none;
+  color: #9caac4;
+  font-size: 14px;
+}
+.header__lang-btn:hover {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.031372549);
+}
+.header__lang-flag {
+  width: 20px;
+  border-radius: 3px;
+}
+.header__lang-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 230px;
+  background: #05050A;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: 0.25s;
+}
+.header__lang-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #9caac4;
+  text-decoration: none;
+  transition: 0.25s;
+}
+.header__lang-item img {
+  width: 20px;
+}
+.header__lang-item span {
+  flex: 1;
+  font-size: 14px;
+}
+.header__lang-item i {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+.header__lang-item.active span {
+  color: #9caac4 !important;
+}
+.header__lang-item.active i {
+  border-color: #FF5900;
+}
+.header__lang-item.active i::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: #FF5900;
+}
+.header__lang-item:hover {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.031372549);
+}
+.header__login, .header__register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 5px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.25s;
+}
+.header__login {
+  background: #16162c;
+  color: #FFFFFF;
+}
+.header__login:hover {
+  background: #1f1f36;
+}
+.header__register {
+  margin-left: 4px;
+  background: #fc6200;
+  color: #FFFFFF;
+}
+.header__register:hover {
+  background: #cb4f00;
+}
+
+.mobile-header {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: 56px;
+  background: #05050A;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  align-items: center;
+  justify-content: center;
+}
+.mobile-header div {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #9caac4;
+}
+.mobile-header__back {
+  position: absolute;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.mobile-header__back img,
+.mobile-header__back svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.bottom-nav {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 300;
+  height: 54px;
+  background: #05050A;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.bottom-nav__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-decoration: none;
+  color: #9caac4;
+  transition: 0.25s;
+}
+.bottom-nav__item span:last-child {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.bottom-nav__item:hover {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background: rgba(255, 255, 255, 0.031372549);
+}
+.bottom-nav__item.active {
+  color: #FF5900 !important;
+}
+.bottom-nav__item.active svg path {
+  fill: #FF5900 !important;
+}
+.bottom-nav__icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bottom-nav__icon svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.bottom-nav__icon svg path {
+  transition: 0.25s;
+}
+
+@media screen and (max-width: 991.98px) {
+  .header {
+    display: none;
+  }
+  .mobile-header {
+    display: flex;
+  }
+  .bottom-nav {
+    display: flex;
+  }
+  body {
+    padding-bottom: 54px;
+  }
+}
 .hero {
   padding: 12px 0 24px;
 }
@@ -386,7 +757,7 @@ h6 {
   overflow: hidden;
 }
 .vip-levels .swiper-slide {
-  width: 320px;
+  width: 291px;
   height: auto;
 }
 @media screen and (max-width: 767.98px) {
@@ -406,11 +777,13 @@ h6 {
 .vip-card__head::before {
   content: "";
   position: absolute;
-  left: 40px;
-  right: 40px;
   top: 50%;
+  left: calc(50% + 25px);
+  right: -30px;
   height: 1px;
   background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-50%);
+  width: 86%;
 }
 .vip-card__level {
   position: relative;
@@ -430,13 +803,13 @@ h6 {
 }
 .vip-card__cup {
   position: absolute;
-  top: -40px;
+  top: -50px;
   right: -15px;
   width: 180px;
   pointer-events: none;
 }
 .vip-card__title {
-  font-family: "Manrope", sans-serif;
+  font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-size: 24px;
   line-height: 120%;
   font-weight: 600;
@@ -483,6 +856,11 @@ h6 {
   font-size: 14px;
   line-height: 120%;
   color: rgba(255, 255, 255, 0.65);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+  display: block;
 }
 .vip-card__info {
   display: flex;
@@ -519,27 +897,28 @@ h6 {
   margin-top: auto;
 }
 .vip-card--1 .vip-card__inner {
-  background: #181818;
+  background: url("./../img/vip-card-bg-1.webp") top center/cover no-repeat;
 }
 .vip-card--2 .vip-card__inner {
-  background: #342708;
+  background: url("./../img/vip-card-bg-2.webp") top center/cover no-repeat;
 }
 .vip-card--3 .vip-card__inner {
-  background: #5d0839;
+  background: url("./../img/vip-card-bg-3.webp") top center/cover no-repeat;
 }
 .vip-card--4 .vip-card__inner {
-  background: #4d1f02;
+  background: url("./../img/vip-card-bg-4.webp") top center/cover no-repeat;
 }
+
 .vip-benefits {
   padding: 12px 0;
 }
 .vip-benefits__inner {
-  padding: 20px 12px;
+  padding: 12px 12px;
   border-radius: 16px;
   background: #0C0C18;
 }
 .vip-benefits__title {
-  font-family: "Manrope", sans-serif;
+  font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-size: 24px;
   font-weight: 600;
   line-height: 120%;
@@ -547,7 +926,7 @@ h6 {
 }
 .vip-benefits__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 8px;
 }
 
@@ -558,9 +937,6 @@ h6 {
   border-radius: 16px;
   background: #05050A;
   display: flex;
-}
-.vip-benefit-card--wide {
-  grid-column: 1/-1;
 }
 .vip-benefit-card--small p {
   margin-top: auto;
@@ -578,6 +954,7 @@ h6 {
 .vip-benefit-card--banner a {
   width: 100%;
   height: 100%;
+  max-height: 382px;
   display: block;
   position: relative;
 }
@@ -590,6 +967,7 @@ h6 {
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
+  position: relative;
 }
 .vip-benefit-card--banner a::before {
   content: "";
@@ -611,8 +989,29 @@ h6 {
   opacity: 1;
   transform: scale(1);
 }
-.vip-benefit-card--banner .vip-benefit-card__image {
-  position: relative;
+.vip-benefit-card:nth-child(1) {
+  grid-column: 1/3;
+  grid-row: 1;
+}
+.vip-benefit-card:nth-child(2) {
+  grid-column: 3/5;
+  grid-row: 1;
+}
+.vip-benefit-card:nth-child(4) {
+  grid-column: 5/7;
+  grid-row: 1;
+}
+.vip-benefit-card:nth-child(3) {
+  grid-column: 1/7;
+  grid-row: 2;
+}
+.vip-benefit-card:nth-child(5) {
+  grid-column: 1/4;
+  grid-row: 3;
+}
+.vip-benefit-card:nth-child(6) {
+  grid-column: 4/7;
+  grid-row: 3;
 }
 .vip-benefit-card__content {
   position: relative;
@@ -624,7 +1023,7 @@ h6 {
   background: linear-gradient(270deg, rgba(5, 5, 10, 0) 0%, #05050a 50%);
 }
 .vip-benefit-card h3 {
-  font-family: "Manrope", sans-serif;
+  font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 120%;
@@ -660,6 +1059,23 @@ h6 {
   display: none;
 }
 
+@media screen and (max-width: 1279.98px) {
+  .vip-benefits__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .vip-benefit-card:nth-child(1), .vip-benefit-card:nth-child(2), .vip-benefit-card:nth-child(4), .vip-benefit-card:nth-child(5), .vip-benefit-card:nth-child(6) {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .vip-benefit-card:nth-child(3) {
+    grid-column: 1/-1;
+    grid-row: auto;
+    min-height: auto;
+  }
+  .vip-benefit-card:nth-child(6) {
+    grid-column: 1/-1;
+  }
+}
 @media screen and (max-width: 575.98px) {
   .vip-benefits__grid {
     grid-template-columns: 1fr;
@@ -753,7 +1169,7 @@ h6 {
 }
 
 .vip-banner-card {
-  min-height: 199px;
+  min-height: 172px;
   padding: 16px 12px;
   display: flex;
   flex-direction: column;
@@ -786,7 +1202,7 @@ h6 {
           user-select: none;
 }
 .vip-banner-card h3 {
-  font-family: "Manrope", sans-serif;
+  font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-weight: 600;
   line-height: 120%;
   font-size: 18px;
@@ -826,7 +1242,7 @@ h6 {
   gap: 8px;
   margin-bottom: 8px;
   padding-left: 12px;
-  font-family: "Manrope", sans-serif;
+  font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 122%;
@@ -1113,7 +1529,7 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Zalando Sans Expanded", sans-serif;
+  font-family: "Zalando Sans Expanded", "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-size: 16px;
   font-style: italic;
   font-weight: 800;
@@ -1136,7 +1552,7 @@ h6 {
   line-height: 140%;
 }
 .vip-win-card__amount {
-  font-family: "Zalando Sans Expanded", sans-serif;
+  font-family: "Zalando Sans Expanded", "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-size: 16px;
   font-weight: 800;
   line-height: 112%;
@@ -1206,12 +1622,12 @@ h6 {
   transform: translate(-40%, -50%) scale(1);
 }
 .vip-win-item__info {
-  flex: 0 1 96px;
-  max-width: 96px;
+  flex: 0 1 563px;
+  max-width: 563px;
   min-width: 0;
 }
 .vip-win-item__info h3 {
-  font-family: "Manrope", sans-serif;
+  font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 125%;
@@ -1229,7 +1645,7 @@ h6 {
 .vip-win-item__amount {
   flex: 0 0 auto;
   margin-left: auto;
-  font-family: "Zalando Sans Expanded", sans-serif;
+  font-family: "Zalando Sans Expanded", "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-size: 16px;
   font-weight: 800;
   white-space: nowrap;
@@ -1245,7 +1661,7 @@ h6 {
   gap: 8px;
   margin-bottom: 8px;
   padding-left: 12px;
-  font-family: "Manrope", sans-serif;
+  font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 122%;
@@ -1358,7 +1774,7 @@ h6 {
   align-items: center;
   gap: 5px;
   margin-bottom: 6px;
-  font-family: "Manrope", sans-serif;
+  font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 125%;
@@ -1370,7 +1786,7 @@ h6 {
   flex-shrink: 0;
 }
 .vip-withdrawals__amount {
-  font-family: "Zalando Sans Expanded", sans-serif;
+  font-family: "Zalando Sans Expanded", "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-size: 26px;
   font-style: italic;
   font-weight: 800;
@@ -1402,7 +1818,7 @@ h6 {
   align-items: center;
   justify-content: center;
   position: relative;
-  font-family: "Zalando Sans Expanded", sans-serif;
+  font-family: "Zalando Sans Expanded", "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-size: 16px;
   line-height: 113%;
   font-style: italic;
@@ -1451,7 +1867,7 @@ h6 {
   align-items: center;
   gap: 4px;
   margin-bottom: 2px;
-  font-family: "Zalando Sans Expanded", sans-serif;
+  font-family: "Zalando Sans Expanded", "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-size: 16px;
   font-style: italic;
   font-weight: 600;

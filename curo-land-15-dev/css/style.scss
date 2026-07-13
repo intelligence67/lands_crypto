@@ -14,7 +14,7 @@ $bp-sm: 575.98px;
 
 html,
 body {
-  font-family: "Manrope", sans-serif;
+  font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
   font-size: 18px;
   font-weight: 400;
   text-align: left;
@@ -38,9 +38,13 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1280px;
   padding: 0 40px;
   margin: 0 auto;
+
+  @include breakpoint($bp-xl) {
+    max-width: 800px;
+  }
 
   @include breakpoint($bp-md) {
     max-width: 100%;
@@ -88,7 +92,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Zalando Sans Expanded", sans-serif;
+  font-family: "Zalando Sans Expanded", "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
 }
 
 .btn {
@@ -254,9 +258,7 @@ h6 {
   transform: translateY(-50%) translateX(-10px);
 }
 
-// Новые блоки
-
-// @import "./header";
+@import "./main/header";
 @import "./main/hero";
 @import "./main/_vip-levels";
 @import "./main/_vip-benefits";
@@ -265,11 +267,4 @@ h6 {
 @import "./main/_vip-wins";
 @import "./main/_vip-parlays";
 @import "./main/_vip-withdrawals";
-
-// @import "./about";
-// @import "./advantage";
-// @import "./team";
-// @import "./partners";
-// @import "./reviews";
-// @import "./relations";
 @import "./main/footer";
