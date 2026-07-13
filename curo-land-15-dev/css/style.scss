@@ -43,7 +43,7 @@ body {
   margin: 0 auto;
 
   @include breakpoint($bp-xl) {
-    max-width: 800px;
+    max-width: 100%;
   }
 
   @include breakpoint($bp-md) {
