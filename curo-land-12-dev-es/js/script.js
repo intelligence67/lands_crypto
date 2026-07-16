@@ -57,6 +57,27 @@ function updateAchievements(cards) {
       item.rel = "noopener noreferrer";
     }
   });
+
+  sortAchievements();
+}
+
+function sortAchievements() {
+  const list = document.querySelector(".achievement");
+
+  if (!list) return;
+
+  const items = Array.from(list.querySelectorAll(".achievement__item"));
+
+  items.sort((a, b) => {
+    const aDone = a.classList.contains("achievement__item--complete");
+    const bDone = b.classList.contains("achievement__item--complete");
+
+    if (aDone === bDone) return 0;
+
+    return aDone ? 1 : -1;
+  });
+
+  items.forEach((item) => list.appendChild(item));
 }
 
 function animateProgress(cards) {
