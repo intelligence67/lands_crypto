@@ -805,7 +805,7 @@ h6 {
     transform: translate(-50%, -50%);
   }
   .hero .achievement__item--complete::before {
-    width: calc(100% - 10px);
+    width: 100%;
     left: 0;
     right: 0;
     transform: translateY(-50%);
