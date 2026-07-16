@@ -1,47 +1,81 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  console.log("========== SCRIPT START ==========");
+
   initTopBanner();
 
   try {
     const cards = await loadQuests();
 
+    console.log("Cards:", cards);
+
     updateAchievements(cards);
     animateProgress(cards);
   } catch (error) {
-    console.error("Quests API:", error);
+    console.error("ERROR:", error);
   }
 });
 
 async function loadQuests() {
+  console.log("Current URL:", window.location.href);
+
   const params = new URLSearchParams(window.location.search);
+
+  console.log("Search params:", window.location.search);
+
   const PLAYER_ID = params.get("playerId");
 
+  console.log("PLAYER_ID:", PLAYER_ID);
+
   if (!PLAYER_ID) {
-    throw new Error("Missing playerId query parameter");
+    throw new Error("playerId not found");
   }
 
-  const response = await fetch(
-    `https://cbaiendpnt.site/apg/players/${encodeURIComponent(PLAYER_ID)}/quests-layout?accept_language=es&currency=ARS`,
-    {
-      headers: {
-        Authorization:
-          "Bearer cba_qiOzuJ4_BXUNQh4v_jpp4JPSFBudVgIgruA51rJla-M",
-      },
-    }
-  );
+  const url = `https://cbaiendpnt.site/apg/players/${encodeURIComponent(
+    PLAYER_ID
+  )}/quests-layout?accept_language=es&currency=ARS`;
+
+  console.log("Request URL:", url);
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization:
+        "Bearer cba_qiOzuJ4_BXUNQh4v_jpp4JPSFBudVgIgruA51rJla-M",
+    },
+  });
+
+  console.log("Status:", response.status);
+  console.log("Response:", response);
+
+  const text = await response.text();
+
+  console.log("Raw response:");
+  console.log(text);
 
   if (!response.ok) {
     throw new Error(`HTTP ${response.status}`);
   }
 
-  const data = await response.json();
+  const data = JSON.parse(text);
+
+  console.log("Parsed JSON:", data);
 
   return data.cards || [];
 }
 
 function updateAchievements(cards) {
+  console.log("Updating achievements...");
+
   cards.forEach((card) => {
+    console.log("Card:", card);
+
     const item = document.querySelector(
       `.achievement__item[data-position="${card.position}"]`
+    );
+
+    console.log(
+      `Position ${card.position}:`,
+      item ? "FOUND" : "NOT FOUND"
     );
 
     if (!item) return;
@@ -59,10 +93,18 @@ function updateAchievements(cards) {
 function animateProgress(cards) {
   const progress = document.querySelector(".achievements-progress");
 
-  if (!progress) return;
+  if (!progress) {
+    console.log("Progress block not found");
+    return;
+  }
 
   const completed = cards.filter((card) => card.done).length;
+
   const percent = Math.round((completed / cards.length) * 100);
+
+  console.log(
+    `Completed: ${completed}/${cards.length} (${percent}%)`
+  );
 
   const fill = progress.querySelector(".achievements-progress__fill");
   const text = progress.querySelector(".achievements-progress__title span");
@@ -90,7 +132,10 @@ function animateProgress(cards) {
 function initTopBanner() {
   const topBanner = document.getElementById("topBanner");
 
-  if (!topBanner) return;
+  if (!topBanner) {
+    console.log("Top banner not found");
+    return;
+  }
 
   const backBtn = topBanner.querySelector(".top-banner__back");
   const closeBtn = topBanner.querySelector(".top-banner__close");
