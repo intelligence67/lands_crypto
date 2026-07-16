@@ -118,6 +118,16 @@ body {
   margin: 0;
 }
 
+@media screen and (max-width: 1599.98px) {
+  html,
+  body {
+    height: auto;
+    overflow-y: auto;
+  }
+  body {
+    display: block;
+  }
+}
 .container {
   max-width: 1650px;
   padding: 0 25px;
@@ -215,6 +225,56 @@ h6 {
   transition: All 0.4s ease;
 }
 
+.top-banner {
+  position: sticky;
+  top: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  background: #16162c;
+}
+.top-banner__back {
+  border: 0;
+  background: none;
+  color: #FC6200;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: 0.25s;
+  width: 100%;
+  height: 100%;
+}
+.top-banner__back:hover, .top-banner__back:focus {
+  filter: brightness(0.9);
+  text-decoration: none;
+  color: #ff8533;
+}
+.top-banner__close {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border: 0;
+  background: none;
+  color: #FC6200;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s;
+}
+.top-banner__close:hover {
+  transform: translateY(-50%) rotate(90deg);
+  color: #ff8533;
+}
+.top-banner.is-hidden {
+  display: none;
+}
+
 .hero {
   padding: 80px 0 0 0;
   display: flex;
@@ -238,6 +298,9 @@ h6 {
   pointer-events: none;
 }
 .hero__image {
+  display: none;
+}
+.hero .hero-logo__brand {
   display: none;
 }
 .hero .hero-logo__brand--black {
@@ -280,6 +343,7 @@ h6 {
   display: flex;
   flex-direction: column;
   min-height: 0;
+  min-width: 0;
 }
 .hero__logo {
   display: flex;
@@ -322,12 +386,18 @@ h6 {
   display: flex;
   flex-direction: column;
 }
+.hero .achievement-wrap {
+  flex: 1;
+  min-height: 0;
+  margin-right: -20px;
+  padding-right: 20px;
+  overflow: hidden;
+}
 .hero .achievement {
   flex: 1 1 auto;
   height: 100%;
   min-height: 0;
   max-height: none;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -335,6 +405,8 @@ h6 {
   padding-left: 5px;
   padding-right: 5px;
   padding-bottom: 30px;
+  overflow-y: auto;
+  overflow-x: visible;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
   touch-action: pan-y;
@@ -342,9 +414,10 @@ h6 {
 .hero .achievement__item {
   width: 100%;
   max-width: 596px;
+  min-width: 0;
 }
 .hero .achievement__wrapper {
-  width: 100%;
+  width: calc(100% - 20px);
   background: url("../img/bg-card.svg") top center/cover no-repeat;
   border-radius: 16px;
   padding: 20px 110px 20px 95px;
@@ -386,7 +459,20 @@ h6 {
   background: url("../img/complete-ico.svg") center left 12px no-repeat #FC6200;
   border-radius: 26px;
   padding: 12px 12px 12px 46px;
-  z-index: 2;
+  z-index: 4;
+}
+.hero .achievement__item--complete::before {
+  content: "";
+  position: absolute;
+  left: -95px;
+  right: -70px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 2px;
+  background: #FC6200;
+  border-radius: 3px;
+  z-index: 3;
+  pointer-events: none;
 }
 .hero .achievement__icon {
   position: absolute;
@@ -494,7 +580,15 @@ h6 {
   border-radius: 20px;
   background: #ff6b16;
 }
+@media screen and (max-width: 1919.98px) {
+  .hero::after {
+    left: calc(-100px + (100vw - 1920px) * 0.15);
+  }
+}
 @media screen and (max-width: 1599.98px) {
+  .hero {
+    padding: 40px 0 0 0;
+  }
   .hero::after {
     left: 0;
     background: url("../img/bg_xxl.webp") left top/contain no-repeat;
@@ -505,6 +599,10 @@ h6 {
   .hero .achievement {
     gap: 20px;
   }
+  .hero .achievement-wrap {
+    margin-right: -10px;
+    padding-right: 10px;
+  }
   .hero .achievement__item {
     min-height: 384px;
     display: flex;
@@ -514,6 +612,7 @@ h6 {
   .hero .achievement__wrapper {
     min-height: 239px;
     padding: 95px 20px 54px 20px;
+    width: calc(100% - 10px);
   }
   .hero .achievement__icon {
     top: -85px;
@@ -537,6 +636,11 @@ h6 {
     top: 50%;
     transform: translate(-50%, -50%);
   }
+  .hero .achievement__item--complete::before {
+    width: calc(100% - 10px);
+    left: 0;
+    right: 0;
+  }
   .hero .achievement .prize {
     top: initial;
     bottom: -62px;
@@ -546,7 +650,17 @@ h6 {
 }
 @media screen and (max-width: 1199.98px) {
   .hero {
-    padding: 40px 0 0 0;
+    height: auto;
+    max-height: initial;
+    overflow: visible;
+  }
+  .hero .container, .hero__content, .hero__right,
+  .hero .achievements-hero,
+  .hero .achievement-wrap,
+  .hero .achievement {
+    height: auto;
+    min-height: auto;
+    overflow: visible;
   }
   .hero::after {
     display: none;
@@ -601,7 +715,12 @@ h6 {
     max-width: calc(100% - 176px);
     margin: 0 auto;
   }
+  .hero .achievement-wrap {
+    margin-right: -20px;
+    padding-right: 20px;
+  }
   .hero .achievement__wrapper {
+    width: calc(100% - 20px);
     min-height: 172px;
     padding: 20px 110px 20px 95px;
   }
@@ -622,6 +741,12 @@ h6 {
   .hero .achievement__item--complete::after {
     left: 50%;
     top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .hero .achievement__item--complete::before {
+    width: 120%;
+    left: 50%;
+    right: initial;
     transform: translate(-50%, -50%);
   }
   .hero .achievement .prize {
@@ -648,7 +773,12 @@ h6 {
     align-items: center;
     max-width: 100%;
   }
+  .hero .achievement-wrap {
+    margin-right: -10px;
+    padding-right: 10px;
+  }
   .hero .achievement__wrapper {
+    width: calc(100% - 10px);
     min-height: 239px;
     padding: 95px 20px 54px 20px;
   }
@@ -674,6 +804,12 @@ h6 {
     top: 50%;
     transform: translate(-50%, -50%);
   }
+  .hero .achievement__item--complete::before {
+    width: calc(100% - 10px);
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+  }
   .hero .achievement .prize {
     top: initial;
     bottom: -62px;
@@ -696,7 +832,16 @@ h6 {
   .hero__image {
     margin-bottom: 17px;
   }
+  .hero .achievements {
+    gap: 30px;
+  }
   .hero .achievements-progress {
     margin-bottom: 20px;
+  }
+  .hero .achievement {
+    padding-top: 0;
+  }
+  .hero .achievement__icon {
+    top: min(-50px, max(-85px, -50px - (100vw - 320px) * 60 / 255));
   }
 }/*# sourceMappingURL=style.css.map */
