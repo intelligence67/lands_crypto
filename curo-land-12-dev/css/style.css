@@ -406,7 +406,7 @@ h6 {
   padding-right: 5px;
   padding-bottom: 30px;
   overflow-y: auto;
-  overflow-x: visible;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
   touch-action: pan-y;
