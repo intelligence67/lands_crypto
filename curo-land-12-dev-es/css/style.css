@@ -562,6 +562,7 @@ h6 {
   color: #0c0c18;
   text-align: left;
   margin-bottom: 7px;
+  line-height: 120%;
 }
 .hero .achievements-progress__title span {
   font-weight: 700;
