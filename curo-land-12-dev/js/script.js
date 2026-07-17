@@ -117,11 +117,11 @@ function initTopBanner() {
   if (!topBanner) return;
 
   const backBtn = topBanner.querySelector(".top-banner__back");
-  const closeBtn = topBanner.querySelector(".top-banner__close");
+  // const closeBtn = topBanner.querySelector(".top-banner__close");
 
   backBtn?.addEventListener("click", () => history.back());
 
-  closeBtn?.addEventListener("click", () => {
-    topBanner.classList.add("is-hidden");
-  });
+  // closeBtn?.addEventListener("click", () => {
+  //   topBanner.classList.add("is-hidden");
+  // });
 }
