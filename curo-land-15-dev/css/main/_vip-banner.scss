@@ -131,10 +131,19 @@
 @include breakpoint($bp-md) {
 
   .vip-banner {
+
     &__title {
       br {
         display: none;
       }
+    }
+
+    &__box {
+      padding: 20px 0 12px 12px;
+    }
+
+    &__content {
+      padding: 0 12px 0 0;
     }
 
     &__cards {
@@ -152,5 +161,9 @@
   .vip-banner-card {
     flex: 0 0 151px;
     scroll-snap-align: start;
+
+    &:last-child {
+      margin-right: 12px;
+    }
   }
 }
