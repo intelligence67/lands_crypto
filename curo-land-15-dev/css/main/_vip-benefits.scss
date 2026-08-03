@@ -171,6 +171,12 @@
     user-select: none;
   }
 
+  &__btns {
+    display: flex;
+    gap: 4px;
+    margin-top: auto;
+  }
+
   &__btn {
     gap: 4px;
     margin: 0;
@@ -187,6 +193,11 @@
 
     &::before {
       display: none;
+    }
+
+    &-dop {
+      min-width: auto;
+      padding: 8px;
     }
   }
 }
