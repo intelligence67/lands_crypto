@@ -1,0 +1,145 @@
+.support-help {
+  padding: 12px 0;
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 384px 1fr;
+    gap: 16px;
+
+    padding: 12px;
+
+    border-radius: 16px;
+    background: #0c0c18;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 120%;
+    text-align: center;
+  }
+}
+
+.support-card {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 195px;
+
+  border-radius: 16px;
+  background: #05050a;
+
+  display: flex;
+
+  &__content {
+    position: relative;
+    z-index: 2;
+
+    padding: 16px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    background: linear-gradient(270deg,
+        rgba(5, 5, 10, 0) 0%,
+        #05050a 55%);
+  }
+
+  h3 {
+    font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 120%;
+    margin-bottom: 4px;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 120%;
+    color: $color-text-white-65;
+    margin-bottom: auto;
+  }
+
+  &__btns {
+    display: flex;
+    gap: 4px;
+    margin-top: auto;
+  }
+
+  &__btn {
+    gap: 4px;
+    margin: 0;
+    margin-top: auto;
+
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 4px 12px 4px 8px;
+
+    min-width: 133px;
+    min-height: 32px;
+
+    box-shadow: none;
+
+    &::before {
+      display: none;
+    }
+
+    &-dop {
+      min-width: auto;
+      padding: 8px;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+@include breakpoint($bp-xl) {
+  .support-help {
+
+    &__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@include breakpoint($bp-md) {
+
+  .support-card {
+    flex-direction: column;
+    min-height: auto;
+
+    &__content {
+      align-items: center;
+      text-align: center;
+      background: none;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    &__image {
+      position: relative;
+
+      width: 100%;
+      height: auto;
+
+      display: block;
+      object-fit: contain;
+    }
+  }
+
+}

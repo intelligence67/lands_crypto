@@ -1,0 +1,100 @@
+.guides {
+  padding: 12px 0 24px;
+
+  &__title {
+    font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 120%;
+    text-align: center;
+    color: #fff;
+
+    margin-bottom: 12px;
+  }
+
+  &__section {
+    padding-top: 12px;
+
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+  }
+
+  &__category {
+    font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 120%;
+
+    color: #fff;
+
+    margin-bottom: 12px;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+}
+
+.guides-card {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 58px;
+  padding: 16px 50px 16px 22px;
+
+  background: #0c0c18;
+  border: 1px solid rgba(#fff, 0.03);
+  border-radius: 6px;
+
+  font-size: 16px;
+  line-height: 125%;
+  color: #fff;
+  text-decoration: none;
+
+  transition: .3s;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #FF5500;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    transform: translateY(-50%);
+    transition: transform .3s;
+
+    background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M8.11006 3.59941C7.79681 3.2624 7.26964 3.24319 6.93247 3.55628C6.59547 3.86948 6.57622 4.39668 6.88931 4.73386L11.7795 10L6.88931 15.2661C6.57622 15.6032 6.59547 16.1304 6.93247 16.4437C7.26964 16.7567 7.79681 16.7376 8.11006 16.4005L14.0532 10L8.11006 3.59941Z' fill='%23FC6200'/%3E%3C/svg%3E");
+  }
+
+  &:hover {
+    background: #1a1a28;
+
+    &::after {
+      transform: translateY(-50%) translateX(4px);
+    }
+  }
+}
+
+@include breakpoint($bp-md) {
+
+  .guides {
+    &__list {
+      grid-template-columns: 1fr;
+    }
+  }
+}
