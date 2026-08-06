@@ -610,6 +610,65 @@ h6 {
     padding-bottom: 54px;
   }
 }
+.page-header {
+  padding: 24px 0 12px;
+}
+.page-header__title {
+  font-weight: 900;
+  font-size: 32px;
+  font-style: italic;
+  line-height: 100%;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin: 16px 0 0;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 120%;
+}
+.breadcrumbs a, .breadcrumbs__current {
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+}
+.breadcrumbs a:hover {
+  color: #fff;
+}
+.breadcrumbs__separator {
+  color: rgba(255, 255, 255, 0.65);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+@media screen and (max-width: 991.98px) {
+  .breadcrumbs a:first-child,
+  .breadcrumbs .breadcrumbs__current {
+    display: none;
+  }
+  .breadcrumbs__separator {
+    display: none;
+  }
+  .breadcrumbs a:nth-of-type(2) {
+    position: relative;
+    padding-left: 20px;
+  }
+  .breadcrumbs a:nth-of-type(2)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.65);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M9.42104 2.87948C9.67164 2.60987 10.0934 2.5945 10.3631 2.84498C10.6327 3.09554 10.6481 3.5173 10.3976 3.78704L6.48552 7.99995L10.3976 12.2128C10.6481 12.4825 10.6327 12.9043 10.3631 13.1549C10.0934 13.4053 9.67164 13.39 9.42104 13.1203L4.6665 7.99995L9.42104 2.87948Z'/%3E%3C/svg%3E") center/contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M9.42104 2.87948C9.67164 2.60987 10.0934 2.5945 10.3631 2.84498C10.6327 3.09554 10.6481 3.5173 10.3976 3.78704L6.48552 7.99995L10.3976 12.2128C10.6481 12.4825 10.6327 12.9043 10.3631 13.1549C10.0934 13.4053 9.67164 13.39 9.42104 13.1203L4.6665 7.99995L9.42104 2.87948Z'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+}
 .hero {
   padding: 12px 0 24px;
 }
@@ -734,7 +793,7 @@ h6 {
   }
 }
 .guides {
-  padding: 12px 0 24px;
+  padding: 12px 0 12px;
 }
 .guides__title {
   font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
