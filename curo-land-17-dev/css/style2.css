@@ -368,7 +368,7 @@ h6 {
   text-align: center;
 }
 .hero__title {
-  font-weight: 900;
+  font-weight: 700;
   font-size: clamp(32px, 6vw, 48px);
   font-style: italic;
   line-height: 100%;
@@ -414,7 +414,7 @@ h6 {
   margin: 0;
   font-family: "Zalando Sans Expanded", "Manrope", sans-serif;
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 700;
   font-style: italic;
   line-height: 100%;
   text-transform: uppercase;
@@ -635,7 +635,7 @@ h6 {
   font-family: "Zalando Sans Expanded", "Manrope", sans-serif;
   font-size: 36px;
   font-style: italic;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 100%;
   text-transform: uppercase;
   overflow-wrap: anywhere;
@@ -1223,7 +1223,7 @@ body.vip-status--unavallable .vip-progress__unavailable-bar {
   font-size: 36px;
   line-height: 120%;
   font-style: italic;
-  font-weight: 900;
+  font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 8px;
 }
@@ -1302,7 +1302,7 @@ body.vip-status--unavallable .vip-progress__unavailable-bar {
   font-size: 28px;
   line-height: 34px;
   font-style: italic;
-  font-weight: 900;
+  font-weight: 700;
   color: #53596f;
 }
 .vip-next-card__heading {
@@ -1479,7 +1479,7 @@ body.vip-status--unavallable .vip-next__btn {
   font-size: 36px;
   line-height: 120%;
   font-style: italic;
-  font-weight: 900;
+  font-weight: 700;
   text-transform: uppercase;
   margin: 12px 0 8px;
 }
@@ -2087,7 +2087,7 @@ body.vip-status--unavallable .vip-next__btn {
   gap: 12px;
   font-family: "Zalando Sans Expanded", "Manrope", sans-serif;
   font-size: 36px;
-  font-weight: 900;
+  font-weight: 700;
   font-style: italic;
   line-height: 120%;
   white-space: nowrap;
@@ -2763,7 +2763,7 @@ body.vip-status--unavallable .vip-perks .perk-ribbon {
   font-weight: 600;
 }
 .vip-banner__title {
-  font-weight: 900;
+  font-weight: 700;
   font-size: clamp(32px, 4vw, 36px);
   font-style: italic;
   line-height: 100%;

@@ -733,7 +733,7 @@ h6 {
   text-align: center;
 }
 .hero__title {
-  font-weight: 900;
+  font-weight: 700;
   font-size: clamp(32px, 6vw, 48px);
   font-style: italic;
   line-height: 100%;
@@ -1167,7 +1167,7 @@ h6 {
   font-weight: 600;
 }
 .vip-banner__title {
-  font-weight: 900;
+  font-weight: 700;
   font-size: clamp(32px, 4vw, 36px);
   font-style: italic;
   line-height: 100%;
