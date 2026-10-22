@@ -222,6 +222,8 @@ h6 {
     opacity .4s ease,
     transform .4s ease;
 
+  display: none;
+
   &::before {
     content: "";
     position: absolute;
