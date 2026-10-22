@@ -51,7 +51,7 @@ function renderVipAccount(status) {
     .querySelector(".vip-account__badge use")
     .setAttribute(
       "href",
-      `./img/vip-account-${unavailable ? "alert" : "check"}.svg`,
+      `./img/vip-account-${unavailable ? "alert" : "check"}.svg#icon`,
     );
   banner.querySelector(".vip-account__expiry span").textContent = topLevel
     ? "VIP de por vida"
@@ -70,7 +70,7 @@ function renderVipAccount(status) {
     .querySelector("use")
     .setAttribute(
       "href",
-      `./img/vip-account-${unavailable || topLevel ? "chat" : "trend"}.svg`,
+      `./img/vip-account-${unavailable || topLevel ? "chat" : "trend"}.svg#icon`,
     );
 
   // Демонстрационные данные до подключения API.
@@ -210,7 +210,7 @@ function renderVipPerks(status) {
   if (block) {
     const errorIcon = `
       <svg class="vip-account__icon perk-error-icon" width="18" height="18" aria-hidden="true">
-        <use href="./img/vip-icon-info.svg"></use>
+        <use href="./img/vip-icon-info.svg#icon"></use>
       </svg>
     `;
 
@@ -498,8 +498,8 @@ function updatePerkBadge(card, available, label) {
     use.setAttribute(
       "href",
       available
-        ? "./img/vip-account-check.svg"
-        : "./img/vip-next-lock.svg"
+        ? "./img/vip-account-check.svg#icon"
+        : "./img/vip-next-lock.svg#icon"
     );
   } else {
     const icon = badge.querySelector('span[aria-hidden="true"]');
