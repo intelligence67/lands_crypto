@@ -1,5 +1,6 @@
 .hero {
   padding: 12px 0 24px;
+  overflow-x: clip;
 
   &__image {
     height: 280px;

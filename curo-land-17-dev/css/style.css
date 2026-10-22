@@ -680,6 +680,7 @@ h6 {
 }
 .hero {
   padding: 12px 0 24px;
+  overflow-x: clip;
 }
 .hero__image {
   height: 280px;
