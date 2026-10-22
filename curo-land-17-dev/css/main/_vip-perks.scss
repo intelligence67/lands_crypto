@@ -586,6 +586,7 @@
   &.is-locked .perk-badge {
     background: $background-item;
     color: $color-text-gray;
+    border: none;
   }
 
   @include breakpoint($bp-md) {

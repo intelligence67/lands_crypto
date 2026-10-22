@@ -1938,6 +1938,7 @@ body.vip-status--unavallable .vip-next__btn {
 .perk-card.is-locked .perk-badge {
   background: #16162c;
   color: #9caac4;
+  border: none;
 }
 @media screen and (max-width: 767.98px) {
   .perk-card h3 {
