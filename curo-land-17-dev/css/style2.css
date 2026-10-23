@@ -1271,6 +1271,7 @@ body.vip-status--unavallable .vip-progress__unavailable-bar {
   width: calc((100% - 30px) / 4);
   min-width: 291px;
   height: auto;
+  cursor: auto;
 }
 .vip-next .swiper-slide:last-child .vip-next-card__head::before {
   display: none;
