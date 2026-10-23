@@ -1605,7 +1605,7 @@
       <div class="vip-modal__head"><h2 class="vip-new-level__title"></h2><button class="vip-modal__close" type="button" data-popup-close aria-label="Cerrar"></button></div>
       <p class="vip-new-level__description"></p>
       <ul class="vip-new-level__benefits"></ul>
-      <button class="vip-modal__primary vip-new-level__button" type="button" data-new-level-benefits>Ver mis beneficios</button>
+      <a class="vip-modal__primary vip-new-level__button" href="#vip-perks">Ver mis beneficios</a>
     </div>
   </div>
 </dialog>
@@ -1715,6 +1715,19 @@
 <div class="vip-modal__error vip-support-popup__error" hidden><span aria-hidden="true">ⓘ</span><div><p>No se pudieron cargar los datos de acceso</p><small>Actualizaremos automáticamente, normalmente en 15 minutos</small></div></div>
 <div class="vip-modal__actions"><a class="vip-modal__primary" href="#" data-support-link="deposit">Depositar</a><button class="vip-modal__primary" type="button" data-support-refresh hidden>Actualizar</button><a class="vip-modal__secondary" href="#" data-support-link="support" hidden>Contactar al soporte</a></div>
 </div></div></dialog>
+
+<dialog class="vip-modal vip-timer-popup" aria-label="Estado de tu nivel VIP">
+<a href="#vip-perks" class="vip-timer-popup__cashback" hidden><img src="./img/vip-icons-table/vip-icon-3_13.webp" alt="" width="100" height="56"><span>Reclamá tu cashback antes de que venza ›</span></a>
+<div class="vip-timer-popup__body">
+<div class="vip-modal__head"><div><p class="vip-timer-popup__label"></p><h2 class="vip-timer-popup__title"></h2></div><button class="vip-modal__close" type="button" data-popup-close aria-label="Cerrar"></button></div>
+<small class="vip-timer-popup__dates"></small>
+<div class="vip-timer-popup__progress"><small>1 sep – 7 sep</small><div class="vip-timer-popup__amounts"><strong></strong><span></span></div><progress class="vip-progress-popup__bar" max="100" value="0" aria-label="Progreso del nivel"></progress><div class="vip-timer-popup__offers"></div></div>
+<div class="vip-modal__note vip-timer-popup__note"><span aria-hidden="true">ⓘ</span><p>La fecha de vencimiento se fija al alcanzar el nivel y no cambia. Horario de Argentina (ART).</p></div>
+<div class="vip-modal__error vip-timer-popup__error" hidden><span aria-hidden="true">ⓘ</span><div><p>No se pudieron cargar los datos</p><small>Actualizaremos automáticamente en unos 15 minutos</small></div></div>
+<div class="vip-timer-popup__success" hidden><span aria-hidden="true">♛</span><div>¡Felicitaciones!<small>Alcanzaste el nivel máximo</small></div></div>
+<div class="vip-modal__note vip-timer-popup__updated"><span aria-hidden="true">ⓘ</span><p>Última actualización: 7 de septiembre, 11:24 (ART)</p></div>
+<div class="vip-modal__actions"><a href="#" class="vip-modal__primary" data-timer-link="deposit">Depositar</a><a href="#vip-perks" class="vip-modal__primary" data-timer-link="benefits" hidden>Ir a mis beneficios</a><button type="button" class="vip-modal__secondary" data-popup-view="support" hidden>Contactar al soporte</button><button type="button" class="vip-modal__secondary" data-popup-view="progress">Cómo se calcula el progreso</button></div>
+</div></dialog>
 
 </body>
 

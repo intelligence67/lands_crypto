@@ -143,14 +143,15 @@ function renderVipPopupDetail(id) {
   return true;
 }
 function openVipPopup(view, id, opener = document.activeElement) {
-  if (!["progress", "deposits", "detail", "new-level", "limits", "methods", "processing", "odds", "support"].includes(view)) return;
-  const modal = document.querySelector(view === "support" ? ".vip-support-popup" : view === "odds" ? ".vip-odds-popup" : view === "processing" ? ".vip-processing-popup" : view === "methods" ? ".vip-methods-popup" : view === "limits" ? ".vip-limits-popup" : view === "new-level" ? ".vip-new-level" : view === "progress" ? ".vip-progress-popup" : ".vip-deposits-popup");
+  if (!["progress", "deposits", "detail", "new-level", "limits", "methods", "processing", "odds", "support", "timer"].includes(view)) return;
+  const modal = document.querySelector(view === "timer" ? ".vip-timer-popup" : view === "support" ? ".vip-support-popup" : view === "odds" ? ".vip-odds-popup" : view === "processing" ? ".vip-processing-popup" : view === "methods" ? ".vip-methods-popup" : view === "limits" ? ".vip-limits-popup" : view === "new-level" ? ".vip-new-level" : view === "progress" ? ".vip-progress-popup" : ".vip-deposits-popup");
   if (!modal) return;
   if (view === "limits") renderVipLimits();
   if (view === "methods") renderVipMethods();
   if (view === "processing") renderVipProcessing();
   if (view === "odds") renderVipOdds();
   if (view === "support") renderVipSupport();
+  if (view === "timer") renderVipTimer();
   if (view === "new-level" && !renderVipNewLevel()) return;
   if (view === "detail" && !renderVipPopupDetail(id)) return;
   if (view === "progress") renderVipPopupProgress();
@@ -272,7 +273,7 @@ function initVipPopups() {
     timer.tabIndex = 0;
     timer.setAttribute("role", "button");
     timer.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openVipPopup("progress", null, timer); }
+      if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openVipPopup("timer", null, timer); }
     });
   });
   document.addEventListener("click", (event) => {
@@ -299,7 +300,7 @@ function initVipPopups() {
     if (all) { popupListScroll = 0; return openVipPopup("deposits", null, all); }
     const progress = event.target.closest(".vip-progress__help, .vip-account__expiry");
     if (progress) {
-      return openVipPopup("progress", null, progress);
+      return openVipPopup(progress.matches(".vip-account__expiry") ? "timer" : "progress", null, progress);
     }
   });
 }
@@ -567,3 +568,78 @@ document.addEventListener("click", (event) => {
   target.focus({ preventScroll: true });
   target.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" });
 });
+
+document.addEventListener("click", (event) => {
+  const control = event.target.closest("a, button");
+  const modal = control?.closest(".vip-modal");
+  if (!modal) return;
+  const action = control.dataset.popupAction;
+  const values = [...control.attributes].filter(a => /^data-.*-link$/.test(a.name)).map(a => a.value);
+  if ((action === "support" || action === "report" || values.includes("support")) && !modal.matches(".vip-support-popup")) {
+    event.preventDefault(); event.stopImmediatePropagation();
+    openVipPopup("support", null, control);
+    return;
+  }
+  if (action === "deposit" || values.includes("deposit")) {
+    // Ссылка выполняет обычный переход после снятия блокировки страницы.
+    closeVipPopup();
+    return;
+  }
+  if (control.matches('a[href="#vip-perks"]')) closeVipPopup();
+}, true);
+
+const timerMode = popupParams.get("timer") || (popupParams.get("deposits") === "empty" ? "empty" : "normal");
+let vipTimerData = {
+  unavailable: popupUnavailable || timerMode === "unavailable",
+  empty: timerMode === "empty",
+  renewed: timerMode === "reached",
+  amount: timerMode === "empty" ? 0 : timerMode === "reached" ? 1100000 : 500000,
+  target: popupLevel === 2 ? 10000000 : popupLevel === 3 ? 50000000 : timerMode === "reached" ? 5000000 : 1000000,
+  remaining: "2D:16H:23M",
+  received: "10 de agosto",
+  deadline: "10 de septiembre, 23:59",
+  cashback: popupLevel === 3 && timerMode !== "empty"
+};
+window.setVipTimerData = (data) => {
+  vipTimerData = { ...vipTimerData, ...data };
+  if (popupActive?.matches(".vip-timer-popup")) renderVipTimer();
+};
+function renderVipTimer() {
+  const m = document.querySelector(".vip-timer-popup");
+  if (!m) return;
+  const d = vipTimerData, level = Math.max(1, popupLevel), max = level === 4, error = d.unavailable;
+  const roman = ["I","II","III","IV"][level-1];
+  const money = n => "$" + Number(n).toLocaleString("es-AR");
+  const label = m.querySelector(".vip-timer-popup__label");
+  label.hidden = level !== 1 || error;
+  label.textContent = "Tu estado VIP I";
+  const title = m.querySelector("h2");
+  title.textContent = error ? "LOADING…" : level === 1 ? d.remaining : "VIP " + roman;
+  if (!error && level > 1) {
+    const badge = document.createElement("img"); badge.src = `./img/vip-account-lvl-${level}.webp`; badge.alt = ""; badge.width = 32; badge.height = 32; title.prepend(badge);
+  }
+  m.querySelector(".vip-timer-popup__dates").textContent = error ? "Tu estado es desconocido" : `Obtenido el ${d.received} · ${level === 1 ? "Hasta el " + d.deadline : "Válido de por vida"}`;
+  m.querySelector(".vip-timer-popup__progress").hidden = max || error;
+  m.querySelector(".vip-timer-popup__amounts strong").textContent = money(d.amount);
+  m.querySelector(".vip-timer-popup__amounts span").textContent = money(d.target);
+  m.querySelector("progress").value = d.target > 0 ? Math.min(100, Math.max(0, d.amount / d.target * 100)) : 0;
+  const offers = m.querySelector(".vip-timer-popup__offers");
+  const offer = (n, text, detail) => `<div class="vip-timer-popup__offer" data-level="${n}"><div><p>${popupEscape(text)}</p><small>${popupEscape(detail)}</small></div><img src="./img/vip-icon-cup-${n}.webp" width="90" height="74" alt=""></div>`;
+  offers.innerHTML = "";
+  if (level === 1 && d.renewed) {
+    offers.innerHTML = offer(1, "VIP I se renovará automáticamente", "Del 10 de septiembre al 10 de octubre, 23:59") + offer(2, `Depositá ${money(8900000)} antes del ${d.deadline}`, "No pierdas la oportunidad de alcanzar VIP II");
+  } else if (!max) {
+    const next = level === 1 ? 1 : level + 1;
+    offers.innerHTML = offer(next, `Depositá ${money(Math.max(0,d.target-d.amount))} antes del ${d.deadline}`, level === 1 ? "O tus beneficios dejarán de estar disponibles" : "No pierdas la oportunidad de alcanzar VIP " + ["I","II","III","IV"][next-1]);
+  }
+  m.querySelector(".vip-timer-popup__note").hidden = level !== 1 || error;
+  m.querySelector(".vip-timer-popup__error").hidden = !error;
+  m.querySelector(".vip-timer-popup__success").hidden = !max || error;
+  m.querySelector(".vip-timer-popup__updated").hidden = max && !error;
+  m.querySelector(".vip-timer-popup__cashback").hidden = !d.cashback || error || max;
+  const benefits = max || d.empty || d.renewed;
+  m.querySelector('[data-timer-link="deposit"]').hidden = error || benefits;
+  m.querySelector('[data-timer-link="benefits"]').hidden = error || !benefits;
+  m.querySelector('[data-popup-view="support"]').hidden = !error;
+  m.querySelector('[data-popup-view="progress"]').hidden = max && !error;
+}
