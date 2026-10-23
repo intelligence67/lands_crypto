@@ -133,7 +133,7 @@ function initVipPerks() {
       const button = event.target.closest(
         ".perk-card__action, .perk-event__action",
       );
-      if (!button || button.disabled) return;
+      if (!button || button.disabled || button.matches("a")) return;
       const card = button.closest("[data-benefit], [data-event]");
       block.dispatchEvent(
         new CustomEvent("vip:action", {
@@ -335,7 +335,9 @@ function renderVipPerks(status) {
           : `VIP ${key === "tournaments" ? "I" : currentName}`,
       );
       button.hidden = unavailable;
-      button.disabled = !locked && key === "cashback";
+      if (button.matches("button")) {
+        button.disabled = !locked && key === "cashback";
+      }
       const actions = {
         cashback: "scheduled",
         support: "support",
