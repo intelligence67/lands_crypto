@@ -797,3 +797,12 @@ body.vip-status--unavallable {
     display: block;
   }
 }
+
+// Ссылки верхнего блока сохраняют размеры и оформление кнопок.
+.vip-account {
+  a.vip-account__benefits, a.vip-account__secondary, a.vip-account__deposit-btn {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+#vip-perks, #vip-next { scroll-margin-top: 24px; }

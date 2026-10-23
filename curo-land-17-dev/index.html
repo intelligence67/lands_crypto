@@ -1515,6 +1515,207 @@
   <script type="module" src="./js/script.js"></script>
   <script type="module" src="./js/script-tech.js"></script>
 
+<dialog class="vip-modal vip-progress-popup" aria-label="Cómo se calcula el progreso">
+  <div class="vip-modal__head">
+    <h2>Cómo se calcula el progreso</h2>
+    <button class="vip-modal__close" type="button" aria-label="Cerrar" data-popup-close></button>
+  </div>
+  <p class="vip-modal__intro">El progreso depende de los depósitos confirmados durante los últimos 7 días.</p>
+  <div class="vip-modal__error" hidden>No se pudieron cargar los datos.</div>
+  <div class="vip-progress-popup__summary">
+    <div class="vip-progress-popup__totals">
+      <div><small>Confirmado</small><strong class="vip-progress-popup__confirmed">$0</strong></div>
+      <div><small class="vip-progress-popup__target-label">Falta para VIP I</small><span class="vip-progress-popup__remaining">$1.000.000</span></div>
+    </div>
+    <progress class="vip-progress-popup__bar" max="100" value="0" aria-label="Progreso al siguiente nivel"></progress>
+    <div class="vip-progress-popup__periods">
+      <div><small>Período actual</small><span class="vip-progress-popup__period">1 sep – 7 sep</span></div>
+      <div><small>Pendiente de confirmación</small><span class="vip-progress-popup__pending">$0</span></div>
+    </div>
+    <p class="vip-modal__updated">Actualizado hoy 7 sep · 02:34 (ART)</p>
+  </div>
+  <div class="vip-progress-popup__faq">
+    <details><summary>¿Cómo alcanzo un nuevo nivel?</summary><p>Los depósitos confirmados que cuentan en el período actual se suman al progreso. Al alcanzar el importe requerido, accedés al siguiente nivel VIP.</p></details>
+    <details><summary>¿Cómo se convierten los depósitos a USD?</summary><p>Se usa el tipo de cambio registrado al acreditarse el depósito. Podés consultar el importe y el tipo de cambio en el detalle de cada operación.</p></details>
+    <details open><summary>¿Qué depósitos no cuentan?</summary><p>No cuentan los depósitos cancelados o sin confirmar ni los fondos de bonos.</p></details>
+    <details><summary>Si un depósito se demora, ¿qué fecha se toma?</summary><p>Se toma la fecha de acreditación. Mientras el pago esté pendiente de confirmación, no se suma al progreso.</p></details>
+  </div>
+  <div class="vip-modal__actions">
+    <a class="btn vip-modal__primary" data-popup-action="deposit" href="#">Depositar</a>
+    <a class="vip-modal__secondary" data-popup-action="support" href="#" hidden>Contactar al soporte</a>
+    <button class="vip-modal__secondary" type="button" data-popup-view="deposits">Mis depósitos</button>
+  </div>
+</dialog>
+
+<dialog class="vip-modal vip-deposits-popup" aria-label="Todos los depósitos">
+  <div class="vip-deposits-popup__list-view">
+    <div class="vip-modal__head">
+      <h2>Todos los depósitos</h2>
+      <button class="vip-modal__close" type="button" aria-label="Cerrar" data-popup-close></button>
+    </div>
+    <div class="vip-modal__error" hidden>No se pudieron cargar los datos.</div>
+    <div class="vip-deposits-popup__summary">
+      <p class="vip-modal__updated">Actualizado hoy 7 sep · 02:34 (ART)</p>
+      <div class="vip-deposits-popup__totals">
+        <div><div class="vip-deposits-popup__credited"><strong>$0</strong><svg class="vip-modal__icon is-success" width="18" height="18"><use href="./img/vip-popup-icons.svg#check"></use></svg></div><small class="vip-deposits-popup__period">Acreditado · 1 sep – 7 sep</small></div>
+        <div class="vip-deposits-popup__pending"><span><svg class="vip-modal__icon is-pending" width="14" height="14"><use href="./img/vip-popup-icons.svg#hourglass"></use></svg><b>$0</b></span><small>Pendiente de confirmación</small></div>
+      </div>
+    </div>
+    <div class="vip-deposits-popup__list"></div>
+    <div class="vip-deposits-popup__empty" hidden>Todavía no hay depósitos realizados</div>
+    <div class="vip-modal__note vip-deposits-popup__note">
+      <svg class="vip-modal__icon" width="14" height="14"><use href="./img/vip-popup-icons.svg#info"></use></svg>
+      <p>«Pendiente»: el proveedor todavía no confirmó el pago. «Confirmado, vencido»: el depósito se acreditó, pero quedó fuera de los últimos 7 días. «Cancelado»: el pago no se completó y no cuenta para el progreso.</p>
+    </div>
+    <div class="vip-modal__actions">
+      <a class="btn vip-modal__primary" data-popup-action="deposit" href="#">Depositar</a>
+      <a class="vip-modal__secondary" data-popup-action="support" href="#">Contactar al soporte</a>
+    </div>
+  </div>
+  <div class="vip-deposits-popup__detail-view" hidden>
+    <div class="vip-deposit-detail__head">
+      <span class="vip-deposit-detail__icon"></span>
+      <div class="vip-deposit-detail__heading"><small class="vip-deposit-detail__status"></small><h2 class="vip-deposit-detail__amount"></h2><p class="vip-deposit-detail__date"></p></div>
+      <button class="vip-modal__close" type="button" aria-label="Cerrar" data-popup-close></button>
+    </div>
+    <dl class="vip-deposit-detail__fields">
+      <div><dt>Importe en ARS</dt><dd data-field="ars"></dd></div>
+      <div><dt>Tipo de cambio al acreditarse</dt><dd data-field="rate"></dd></div>
+      <div><dt>Acreditado en USD</dt><dd data-field="usd"></dd></div>
+      <div><dt>Método de pago</dt><dd data-field="method"></dd></div>
+      <div><dt>ID de transacción</dt><dd data-field="transaction"></dd></div>
+      <div><dt>Impacto en el progreso</dt><dd data-field="impact"></dd></div>
+    </dl>
+    <div class="vip-modal__note">
+      <svg class="vip-modal__icon" width="14" height="14"><use href="./img/vip-popup-icons.svg#info"></use></svg>
+      <p>El tipo de cambio se fija al acreditarse el pago y no se recalcula. Si los datos no coinciden con tu comprobante, enviá el ID de transacción al soporte VIP.</p>
+    </div>
+    <div class="vip-modal__actions vip-modal__actions--detail">
+      <button class="vip-modal__back" type="button" data-popup-view="deposits" aria-label="Volver a los depósitos"><svg class="vip-modal__icon" width="18" height="18"><use href="./img/vip-popup-icons.svg#back"></use></svg></button>
+      <a class="vip-modal__secondary" data-popup-action="report" href="#">Informar un problema</a>
+    </div>
+  </div>
+</dialog>
+
+  <script type="module" src="./js/vip-popups.js"></script>
+<dialog class="vip-modal vip-new-level" aria-label="Nuevo nivel VIP">
+  <div class="vip-new-level__surface">
+    <div class="vip-new-level__band">Nuevo nivel<span class="vip-new-level__cup" aria-hidden="true"></span></div>
+    <div class="vip-new-level__body">
+      <div class="vip-modal__head"><h2 class="vip-new-level__title"></h2><button class="vip-modal__close" type="button" data-popup-close aria-label="Cerrar"></button></div>
+      <p class="vip-new-level__description"></p>
+      <ul class="vip-new-level__benefits"></ul>
+      <button class="vip-modal__primary vip-new-level__button" type="button" data-new-level-benefits>Ver mis beneficios</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="vip-modal vip-limits-popup" aria-label="Límites de retiro">
+  <div class="vip-limits-popup__surface">
+    <div class="vip-limits-popup__band" hidden><span></span><img width="88" height="88" alt=""></div>
+    <div class="vip-limits-popup__body">
+      <div class="vip-modal__head"><h2>Límites de retiro</h2><button class="vip-modal__close" type="button" data-popup-close aria-label="Cerrar"></button></div>
+      <p class="vip-modal__intro">Cuánto podés retirar por operación y por día</p>
+      <ul class="vip-limits-popup__items">
+        <li><span class="vip-limits-popup__icon"><svg width="22" height="22" aria-hidden="true"><use href="./img/vip-popup-icons.svg#trend"></use></svg></span><div><p class="vip-limits-popup__amount">$500.000.000 por operación</p><small class="vip-limits-popup__previous">en lugar de $200.000.000</small></div></li>
+        <li><span class="vip-limits-popup__icon"><svg width="22" height="22" aria-hidden="true"><use href="./img/vip-popup-icons.svg#wallet"></use></svg></span><div><p>Sin límite de retiros por día</p><small>en lugar de 5 retiros por día</small></div></li>
+        <li class="vip-limits-popup__reset"><span class="vip-limits-popup__icon"><svg width="22" height="22" aria-hidden="true"><use href="./img/vip-popup-icons.svg#refresh"></use></svg></span><div><p>El límite se reinicia a las 00:00 (ART)</p><small>Y podés volver a retirar el mismo importe</small></div></li>
+      </ul>
+      <div class="vip-modal__note vip-limits-popup__note"><svg class="vip-modal__icon" width="14" height="14" aria-hidden="true"><use href="./img/vip-popup-icons.svg#info"></use></svg><p>El límite se calcula sobre el importe de los retiros completados durante el día. Siguen vigentes los límites del método de pago: tu banco puede limitar el importe y no podemos modificarlo.</p></div>
+      <div class="vip-limits-popup__upgrade"><div><p></p><small></small></div><img width="90" height="74" alt=""></div>
+      <div class="vip-modal__error vip-limits-popup__error" hidden><svg class="vip-modal__icon" width="18" height="18" aria-hidden="true"><use href="./img/vip-popup-icons.svg#info"></use></svg><div><p>No se pudieron cargar los datos de acceso</p><small>Actualizaremos automáticamente, normalmente en 15 minutos</small></div></div>
+      <div class="vip-modal__actions">
+        <a class="vip-modal__primary" href="#" data-limits-link="deposit">Depositar</a>
+        <a class="vip-modal__secondary" href="#" data-limits-link="support" hidden>Contactar al soporte</a>
+        <a class="vip-modal__secondary" href="#" data-limits-link="details">Más sobre los límites</a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="vip-modal vip-methods-popup" aria-label="Métodos de retiro">
+  <div class="vip-methods-popup__surface">
+    <div class="vip-methods-popup__band" hidden><span></span><img width="88" height="88" alt=""></div>
+    <div class="vip-methods-popup__body">
+      <div class="vip-modal__head"><h2>Métodos de retiro</h2><button class="vip-modal__close" type="button" data-popup-close aria-label="Cerrar"></button></div>
+      <p class="vip-modal__intro">Métodos de retiro adicionales para VIP</p>
+      <ul class="vip-methods-popup__items">
+        <li><span class="vip-methods-popup__icon"><svg width="22" height="22" aria-hidden="true"><use href="./img/vip-popup-icons.svg#wallet"></use></svg></span><div><p>Transferencia bancaria</p><small>1–3 horas · Comisión 0%</small></div></li>
+        <li><span class="vip-methods-popup__icon"><svg width="22" height="22" aria-hidden="true"><use href="./img/vip-popup-icons.svg#crypto"></use></svg></span><div><p>Billetera USDT</p><small>Hasta 30 minutos · Comisión 0%</small></div></li>
+        <li><span class="vip-methods-popup__icon"><svg width="22" height="22" aria-hidden="true"><use href="./img/vip-popup-icons.svg#refresh"></use></svg></span><div><p>Mercado Pago</p><small>Hasta 1 hora · Comisión 0%</small></div></li>
+      </ul>
+      <div class="vip-modal__note vip-methods-popup__note"><svg class="vip-modal__icon" width="14" height="14" aria-hidden="true"><use href="./img/vip-popup-icons.svg#info"></use></svg><p>Los métodos están disponibles después de verificar tu identidad. La plataforma no cobra comisión.</p></div>
+      <div class="vip-methods-popup__upgrade"><div><p></p><small></small></div><img width="90" height="74" alt=""></div>
+      <div class="vip-modal__error vip-methods-popup__error" hidden><svg class="vip-modal__icon" width="18" height="18" aria-hidden="true"><use href="./img/vip-popup-icons.svg#info"></use></svg><div><p>No se pudieron cargar los datos de acceso</p><small>Actualizaremos automáticamente, normalmente en 15 minutos</small></div></div>
+      <div class="vip-modal__actions">
+        <a class="vip-modal__primary" href="#" data-methods-link="deposit">Depositar</a>
+        <a class="vip-modal__primary" href="#" data-methods-link="withdraw" hidden>Retirar fondos</a>
+        <a class="vip-modal__secondary" href="#" data-methods-link="support" hidden>Contactar al soporte</a>
+        <a class="vip-modal__secondary" href="#" data-methods-link="details">Comisiones y plazos</a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="vip-modal vip-processing-popup" aria-label="Procesamiento de retiros">
+  <div class="vip-processing-popup__surface">
+    <div class="vip-processing-popup__band" hidden><span></span><img width="88" height="88" alt=""></div>
+    <div class="vip-processing-popup__body">
+      <div class="vip-modal__head"><h2>Procesamiento de retiros</h2><button class="vip-modal__close" type="button" data-popup-close aria-label="Cerrar"></button></div>
+      <p class="vip-modal__intro">Atención prioritaria para VIP</p>
+      <ul class="vip-processing-popup__items">
+        <li><span class="vip-processing-popup__icon"><svg width="22" height="22" aria-hidden="true"><use href="./img/vip-popup-icons.svg#hourglass"></use></svg></span><div><p>Retiro en 1 hora</p><small>en lugar de hasta 24 horas</small></div></li>
+        <li><span class="vip-processing-popup__icon"><svg width="22" height="22" aria-hidden="true"><use href="./img/vip-popup-icons.svg#gauge"></use></svg></span><div><p>Tu solicitud evita la cola general</p><small>Prioridad las 24 horas</small></div></li>
+        <li><span class="vip-processing-popup__icon"><svg width="22" height="22" aria-hidden="true"><use href="./img/vip-popup-icons.svg#history"></use></svg></span><div><p>Verificación automática</p><small>Manual solo a pedido del banco</small></div></li>
+      </ul>
+      <div class="vip-modal__note vip-processing-popup__note"><svg class="vip-modal__icon" width="14" height="14" aria-hidden="true"><use href="./img/vip-popup-icons.svg#info"></use></svg><p>El tiempo se cuenta desde la creación de la solicitud hasta el envío del dinero al sistema de pago.</p></div>
+      <div class="vip-processing-popup__upgrade"><div><p></p><small></small></div><img width="90" height="74" alt=""></div>
+      <div class="vip-modal__error vip-processing-popup__error" hidden><svg class="vip-modal__icon" width="18" height="18" aria-hidden="true"><use href="./img/vip-popup-icons.svg#info"></use></svg><div><p>No se pudieron cargar los datos de acceso</p><small>Actualizaremos automáticamente, normalmente en 15 minutos</small></div></div>
+      <div class="vip-modal__actions">
+        <a class="vip-modal__primary" href="#" data-processing-link="deposit">Depositar</a>
+        <a class="vip-modal__primary" href="#" data-processing-link="withdraw" hidden>Retirar fondos</a>
+        <a class="vip-modal__secondary" href="#" data-processing-link="support" hidden>Contactar al soporte</a>
+        <a class="vip-modal__secondary" href="#" data-processing-link="details">Estado de solicitudes</a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="vip-modal vip-odds-popup" aria-label="Mejores condiciones">
+  <div class="vip-odds-popup__surface">
+    <div class="vip-odds-popup__band" hidden><span></span><img width="88" height="88" alt=""></div>
+    <div class="vip-odds-popup__body">
+      <div class="vip-modal__head"><h2>Mejores condiciones</h2><button class="vip-modal__close" type="button" data-popup-close aria-label="Cerrar"></button></div>
+      <p class="vip-modal__intro">Para tragamonedas y casino en vivo</p>
+      <ul class="vip-odds-popup__items">
+        <li><span class="vip-odds-popup__icon"><svg width="22" height="22" aria-hidden="true"><use href="./img/vip-popup-icons.svg#percent"></use></svg></span><div><p>Cashback en tragamonedas ×1,5</p><small>En proveedores seleccionados</small></div></li>
+        <li><span class="vip-odds-popup__icon"><svg width="22" height="22" aria-hidden="true"><use href="./img/vip-popup-icons.svg#casino"></use></svg></span><div><p>Límites más altos en casino en vivo</p><small>Hasta $500.000.000 por mano</small></div></li>
+      </ul>
+      <div class="vip-modal__note vip-odds-popup__note"><svg class="vip-modal__icon" width="14" height="14" aria-hidden="true"><use href="./img/vip-popup-icons.svg#info"></use></svg><p>Las condiciones se activan automáticamente al alcanzar VIP II. No necesitás reclamar nada.</p></div>
+      <div class="vip-odds-popup__upgrade"><div><p></p><small></small></div><img width="90" height="74" alt=""></div>
+      <div class="vip-modal__error vip-odds-popup__error" hidden><svg class="vip-modal__icon" width="18" height="18" aria-hidden="true"><use href="./img/vip-popup-icons.svg#info"></use></svg><div><p>No se pudieron cargar los datos de acceso</p><small>Actualizaremos automáticamente, normalmente en 15 minutos</small></div></div>
+      <div class="vip-modal__actions">
+        <a class="vip-modal__primary" href="#" data-odds-link="deposit">Depositar</a>
+        <a class="vip-modal__secondary" href="#" data-odds-link="support" hidden>Contactar al soporte</a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="vip-modal vip-support-popup" aria-label="Soporte VIP">
+<div class="vip-support-popup__surface">
+<div class="vip-support-popup__band" hidden><span></span><img width="88" height="88" alt=""></div>
+<div class="vip-support-popup__body">
+<div class="vip-modal__head"><h2>Soporte VIP</h2><button class="vip-modal__close" type="button" data-popup-close aria-label="Cerrar"></button></div>
+<p class="vip-modal__intro"></p>
+<a class="vip-support-popup__owner" href="#" data-support-link="owner" hidden><div class="vip-support-popup__ribbon">Contacto directo con el dueño del casino ♛</div><div class="vip-support-popup__person"><span class="vip-support-popup__avatar">♛</span><div><p>Dueño del casino</p><small>Contacto personal</small></div><span>›</span></div></a>
+<div class="vip-support-popup__manager" hidden><div class="vip-support-popup__ribbon" hidden>El dueño supervisa personalmente tus consultas ♛</div><div class="vip-support-popup__person"><span class="vip-support-popup__avatar"></span><div><p data-manager-name></p><small data-manager-description></small></div></div></div>
+<div class="vip-support-popup__channels"></div>
+<div class="vip-support-popup__upgrade"><div><p></p><small></small></div><img width="90" height="74" alt=""></div>
+<div class="vip-modal__error vip-support-popup__error" hidden><span aria-hidden="true">ⓘ</span><div><p>No se pudieron cargar los datos de acceso</p><small>Actualizaremos automáticamente, normalmente en 15 minutos</small></div></div>
+<div class="vip-modal__actions"><a class="vip-modal__primary" href="#" data-support-link="deposit">Depositar</a><button class="vip-modal__primary" type="button" data-support-refresh hidden>Actualizar</button><a class="vip-modal__secondary" href="#" data-support-link="support" hidden>Contactar al soporte</a></div>
+</div></div></dialog>
+
 </body>
 
 </html>

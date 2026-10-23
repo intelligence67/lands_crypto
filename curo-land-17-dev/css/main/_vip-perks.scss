@@ -1063,3 +1063,17 @@ body.vip-status--unavallable .vip-perks .perk-ribbon {
   flex: 0 0 18px;
   color: #B3960C;
 }
+// Состояние назначения меняет подпись и стрелку сразу, open — после анимации.
+.benefit-level {
+  &.is-animating { overflow: hidden; }
+  &__toggle > span:last-child { transition: transform 260ms cubic-bezier(.2, 0, .2, 1); }
+  &[data-expanded="false"] &__less { display: none; }
+  &[data-expanded="false"] &__more { display: inline; }
+  &[data-expanded="false"] &__toggle > span:last-child { transform: rotate(180deg); }
+  &[data-expanded="true"] &__less { display: inline; }
+  &[data-expanded="true"] &__more { display: none; }
+  &[data-expanded="true"] &__toggle > span:last-child { transform: rotate(0); }
+  @media (prefers-reduced-motion: reduce) {
+    &__toggle > span:last-child { transition: none; }
+  }
+}
