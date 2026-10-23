@@ -2,6 +2,9 @@
   --vip-accent: #ff5900;
   --vip-glow: rgba(255, 89, 0, 0.45);
   --vip-banner: none;
+  --vip-banner-pot: none;
+  --vip-banner-pot-size: auto 100%;
+  --vip-banner-pot-position: center bottom;
   padding: 12px 0;
 
   [hidden] {
@@ -56,10 +59,11 @@
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    background-image: var(--vip-banner);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    // The transparent pot sits above the background, below all banner content.
+    background-image: var(--vip-banner-pot), var(--vip-banner);
+    background-position: var(--vip-banner-pot-position), center;
+    background-size: var(--vip-banner-pot-size), cover;
+    background-repeat: no-repeat, no-repeat;
     overflow: hidden;
   }
 
@@ -534,26 +538,31 @@ body.vip-status--vip-1 .vip-account {
   --vip-accent: #a88c79;
   --vip-glow: rgba(168, 140, 121, 0.4);
   --vip-banner: url("../img/vip-account-1.webp");
+  --vip-banner-pot: url("../img/vip-account-pot-1.webp");
 }
 
 body.vip-status--vip-2 .vip-account {
   --vip-accent: #e5c251;
   --vip-glow: rgba(229, 194, 81, 0.4);
   --vip-banner: url("../img/vip-account-2.webp");
+  --vip-banner-pot: url("../img/vip-account-pot-2.webp");
 }
 
 body.vip-status--vip-3 .vip-account {
   --vip-accent: #d52e9e;
   --vip-glow: rgba(213, 46, 158, 0.4);
   --vip-banner: url("../img/vip-account-3.webp");
+  --vip-banner-pot: url("../img/vip-account-pot-3.webp");
 }
 
 body.vip-status--vip-4 .vip-account {
   --vip-banner: url("../img/vip-account-4.webp");
+  --vip-banner-pot: url("../img/vip-account-pot-4.webp");
 }
 
 body.vip-status--unavallable .vip-account {
   --vip-banner: url("../img/vip-account-unavallable.webp");
+  --vip-banner-pot: url("../img/vip-account-pot-unavallable.webp");
 
   &__banner {
     min-height: 128px;
@@ -621,7 +630,7 @@ body.vip-status--unavallable .vip-account {
       justify-content: flex-start;
       gap: 24px;
       min-height: 292px;
-      background-position: center bottom;
+      background-position: var(--vip-banner-pot-position), center bottom;
     }
 
     &__identity {
