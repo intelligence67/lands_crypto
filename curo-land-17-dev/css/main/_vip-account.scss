@@ -537,31 +537,31 @@
 body.vip-status--vip-1 .vip-account {
   --vip-accent: #a88c79;
   --vip-glow: rgba(168, 140, 121, 0.4);
-  --vip-banner: url("../img/vip-account-1.webp");
+  --vip-banner: url("../img/vip-account-1-bg.webp");
   --vip-banner-pot: url("../img/vip-account-pot-1.webp");
 }
 
 body.vip-status--vip-2 .vip-account {
   --vip-accent: #e5c251;
   --vip-glow: rgba(229, 194, 81, 0.4);
-  --vip-banner: url("../img/vip-account-2.webp");
+  --vip-banner: url("../img/vip-account-2-bg.webp");
   --vip-banner-pot: url("../img/vip-account-pot-2.webp");
 }
 
 body.vip-status--vip-3 .vip-account {
   --vip-accent: #d52e9e;
   --vip-glow: rgba(213, 46, 158, 0.4);
-  --vip-banner: url("../img/vip-account-3.webp");
+  --vip-banner: url("../img/vip-account-3-bg.webp");
   --vip-banner-pot: url("../img/vip-account-pot-3.webp");
 }
 
 body.vip-status--vip-4 .vip-account {
-  --vip-banner: url("../img/vip-account-4.webp");
+  --vip-banner: url("../img/vip-account-4-bg.webp");
   --vip-banner-pot: url("../img/vip-account-pot-4.webp");
 }
 
 body.vip-status--unavallable .vip-account {
-  --vip-banner: url("../img/vip-account-unavallable.webp");
+  --vip-banner: url("../img/vip-account-unavallable-bg.webp");
   --vip-banner-pot: url("../img/vip-account-pot-unavallable.webp");
 
   &__banner {
@@ -631,6 +631,8 @@ body.vip-status--unavallable .vip-account {
       gap: 24px;
       min-height: 292px;
       background-position: var(--vip-banner-pot-position), center bottom;
+      --vip-banner-pot-size: auto 55%;
+      --vip-banner-pot-position: center bottom;
     }
 
     &__identity {
@@ -752,22 +754,6 @@ body.vip-status--unavallable .vip-account {
 
   body.vip-status--unavallable .vip-account__banner {
     min-height: 230px;
-  }
-
-  body.vip-status--vip-1 .vip-account {
-    --vip-banner: url("../img/vip-account-1-mob.webp");
-  }
-
-  body.vip-status--vip-2 .vip-account {
-    --vip-banner: url("../img/vip-account-2-mob.webp");
-  }
-
-  body.vip-status--vip-3 .vip-account {
-    --vip-banner: url("../img/vip-account-3-mob.webp");
-  }
-
-  body.vip-status--vip-4 .vip-account {
-    --vip-banner: url("../img/vip-account-4-mob.webp");
   }
 }
 
