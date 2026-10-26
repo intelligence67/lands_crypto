@@ -125,8 +125,10 @@
       line-height: 142%;
     }
 
-    ul {
-      padding-left: 24px;
+    ul,
+    ol {
+      padding: 0;
+      list-style-position: inside;
     }
 
     p+p {
@@ -140,8 +142,12 @@
     }
 
     li {
-      list-style: initial;
+      display: list-item;
+      list-style-position: inside;
     }
+
+    ol > li { list-style-type: decimal; }
+    ul > li { list-style-type: disc; }
 
     a {
       color: $color-text-orange;

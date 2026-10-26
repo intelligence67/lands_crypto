@@ -297,7 +297,7 @@ h2.responsible__title {
 
 .responsible-card {
   position: relative;
-  padding: 12px;
+  padding: 12px 80px 12px 12px;
   border-radius: 16px;
   background: #0C0C18;
 }
@@ -313,37 +313,32 @@ h2.responsible__title {
   right: 0;
   width: 80px;
   height: 80px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   pointer-events: none;
 }
 .responsible-card > h3 {
   margin-bottom: 10px;
-  padding-right: 80px;
   font-size: 22px;
 }
-.responsible-card > p {
-  max-width: 620px;
-}
-.responsible-card ol {
+.responsible-card ol,
+.responsible-card ul {
   display: grid;
   gap: 20px;
   margin: 0 0 20px;
-  padding-left: 14px;
+  padding: 0;
+  list-style-position: inside;
   color: #9caac4;
 }
-.responsible-card ol li {
-  list-style: decimal;
+.responsible-card ol li,
+.responsible-card ul li {
+  display: list-item;
+  list-style-position: inside;
 }
-@media screen and (max-width: 799.98px) {
-  .responsible-card > h3 {
-    padding-right: 75px;
-  }
+.responsible-card ol > li {
+  list-style-type: decimal;
 }
-@media screen and (max-width: 575.98px) {
-  .responsible-card > p {
-    max-width: 225px;
-  }
+.responsible-card ul > li {
+  list-style-type: disc;
 }
 
 .responsible-top {
@@ -395,10 +390,8 @@ h2.responsible__title {
   height: 250px;
   margin-bottom: 24px;
   border-radius: 16px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center;
-     object-position: center;
+  object-fit: cover;
+  object-position: center;
 }
 .responsible-hero__age {
   margin-bottom: 8px;
@@ -408,7 +401,6 @@ h2.responsible__title {
   font-size: 16px;
 }
 .responsible-hero .responsible-btn {
-  width: -moz-fit-content;
   width: fit-content;
   margin: 16px auto 0;
   padding-right: 23px;
@@ -434,14 +426,6 @@ h2.responsible__title {
 
 .responsible-assessment {
   padding: 38px 0;
-}
-.responsible-assessment .responsible-card > p {
-  max-width: 475px;
-}
-@media screen and (max-width: 575.98px) {
-  .responsible-assessment .responsible-card > p {
-    max-width: 205px;
-  }
 }
 
 .responsible-limits {
@@ -490,9 +474,6 @@ h2.responsible__title {
 .responsible-pause__intro > h3 span {
   display: block;
 }
-.responsible-pause__intro > p {
-  max-width: 150px;
-}
 .responsible-pause__card {
   display: flex;
   flex-direction: column;
@@ -517,14 +498,9 @@ h2.responsible__title {
   }
   .responsible-pause__intro > h3 {
     max-width: none;
-    padding-right: 80px;
   }
   .responsible-pause__intro > h3 span {
     display: inline;
-  }
-  .responsible-pause__intro > p {
-    max-width: none;
-    padding-right: 80px;
   }
 }
 @media screen and (max-width: 575.98px) {
@@ -541,10 +517,6 @@ h2.responsible__title {
   }
   .responsible-pause__intro > h3 span {
     display: block;
-  }
-  .responsible-pause__intro > p {
-    max-width: 205px;
-    padding-right: 0;
   }
 }
 
@@ -682,8 +654,10 @@ h2.responsible__title {
   font-size: 16px;
   line-height: 142%;
 }
-.faq__answer-inner ul {
-  padding-left: 24px;
+.faq__answer-inner ul,
+.faq__answer-inner ol {
+  padding: 0;
+  list-style-position: inside;
 }
 .faq__answer-inner p + p {
   margin-top: 12px;
@@ -693,7 +667,14 @@ h2.responsible__title {
   margin-top: 12px;
 }
 .faq__answer-inner li {
-  list-style: initial;
+  display: list-item;
+  list-style-position: inside;
+}
+.faq__answer-inner ol > li {
+  list-style-type: decimal;
+}
+.faq__answer-inner ul > li {
+  list-style-type: disc;
 }
 .faq__answer-inner a {
   color: #FF5900;
@@ -720,10 +701,8 @@ h2.responsible__title {
   left: 50%;
   width: 164px;
   height: 120px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center top;
-     object-position: center top;
+  object-fit: cover;
+  object-position: center top;
   transform: translateX(-50%);
 }
 .responsible-notice p {
@@ -731,4 +710,6 @@ h2.responsible__title {
   font-size: 12px;
   line-height: 1.42;
   text-align: center;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */
