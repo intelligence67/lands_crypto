@@ -706,6 +706,7 @@ function startVipCountdown(title, endsAt) {
       if (!slot) {
         slot = document.createElement("span");
         slot.className = /\d/.test(char) ? "vip-timer-popup__digit" : "vip-timer-popup__separator";
+        slot.classList.toggle("vip-timer-popup__separator--colon", char === ":");
         slot.setAttribute("aria-hidden", "true");
         title.append(slot);
       }

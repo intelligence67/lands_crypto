@@ -3584,9 +3584,11 @@ body.vip-status--vip-3 .vip-modal {
   line-height: 120%;
 }
 .vip-timer-popup h2.vip-timer-popup__countdown {
-  gap: 0;
+  gap: 0.025em;
   font-variant-numeric: tabular-nums;
-  font-size: clamp(22px, 6.8vw, 36px);
+  font-weight: 700;
+  line-height: 1;
+  font-size: clamp(20px, 6.4vw, 36px);
   white-space: nowrap;
 }
 .vip-timer-popup__digit, .vip-timer-popup__separator {
@@ -3597,10 +3599,13 @@ body.vip-status--vip-3 .vip-modal {
   overflow: hidden;
 }
 .vip-timer-popup__digit {
-  width: 0.72em;
+  width: calc(1ch + 0.14em);
 }
 .vip-timer-popup__separator {
-  padding-right: 0.04em;
+  padding-inline: 0.08em;
+}
+.vip-timer-popup__separator--colon {
+  padding-inline: 0.12em;
 }
 .vip-timer-popup__digit > span, .vip-timer-popup__separator > span {
   grid-area: 1/1;

@@ -66,8 +66,21 @@ function setSecondary(support) {
   current.replaceWith(node);
 }
 
+function renderLevelRequirements(nextTier, confirmed, target, currency) {
+  document.querySelectorAll('.benefit-level[data-level]').forEach(block => {
+    const requirement = block.querySelector('.benefit-level__requirement');
+    if (!requirement) return;
+    const available = Number(block.dataset.level) === nextTier && confirmed != null && target != null;
+    requirement.hidden = !available;
+    requirement.textContent = available
+      ? `Depositá ${money(Math.max(0, target - confirmed), currency)} para desbloquear el nivel`
+      : '';
+  });
+}
+
 export function showVipDataError() {
   window.setVipStatus?.('unavallable');
+  renderLevelRequirements(null, null, null, 'ARS');
   setSecondary(true);
   text('.vip-progress__head > p', 'Datos no disponibles');
   text('.vip-progress__period span', '—');
@@ -97,6 +110,7 @@ export function applyVipData(data) {
   const expiry = days == null ? 'Vencimiento no disponible' : days <= 0 ? 'Período finalizado' : `Vence en ${days} ${days === 1 ? 'día' : 'días'}`;
   window.setVipStatus?.(level ? `vip-${level}` : 'no-vip');
   setSecondary(level === 4);
+  renderLevelRequirements(nextTier, confirmed, target, currency);
   text('.vip-progress__amount', money(confirmed, currency, true));
   text('.vip-progress__target span', money(target, currency, true));
   text('.vip-progress__period span', period);
