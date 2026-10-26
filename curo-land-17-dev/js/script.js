@@ -1,4 +1,4 @@
-import { applyVipData, showVipDataError } from "./vip-integration.js";
+import { applyVipData, showVipDataError } from "./../js/vip-integration.js";
 // const API_TOKEN = window.VIP_API_TOKEN;
 const API_TOKEN = "cba_qiOzuJ4_BXUNQh4v_jpp4JPSFBudVgIgruA51rJla-M";
 
