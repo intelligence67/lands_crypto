@@ -1,4 +1,4 @@
-function initVipVisibility() {
+function initVipVisibility(apiStatus) {
   const statuses = [
     "guest",
     "no-vip",
@@ -9,7 +9,7 @@ function initVipVisibility() {
     "unavallable",
   ];
   const param = new URLSearchParams(location.search).get("vip");
-  const status = statuses.includes(param) ? param : "guest";
+  const status = statuses.includes(apiStatus) ? apiStatus : document.body.hasAttribute("data-vip-integration") ? "unavallable" : statuses.includes(param) ? param : "guest";
 
   statuses.forEach((item) => {
     document.body.classList.remove(`vip-status--${item}`);
@@ -523,3 +523,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   initVipVisibility();
   initVipPerks();
 });
+
+window.setVipStatus = initVipVisibility;

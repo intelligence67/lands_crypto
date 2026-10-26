@@ -476,8 +476,28 @@ body.vip-status--vip-3 .vip-modal { --popup-accent: #d52e9e; --popup-glow: rgba(
   width: 480px; padding: 0;
   &__body { padding: 24px; }
   .vip-modal__head { margin-bottom: 8px; }
-  &__label { font-size: 14px; margin-bottom: 6px !important; }
+  &__label { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 6px !important; }
+  &__label img { width: 16px; height: 16px; object-fit: contain; flex-shrink: 0; }
   h2 { display: flex; align-items: center; gap: 10px; font-family: "Zalando Sans Expanded", sans-serif; font-size: 36px; font-weight: 800; font-style: italic; line-height: 120%; }
+  h2.vip-timer-popup__countdown {
+    gap: 0;
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(22px, 6.8vw, 36px);
+    white-space: nowrap;
+  }
+  &__digit, &__separator {
+    position: relative;
+    display: inline-grid;
+    flex: 0 0 auto;
+    height: 1.2em;
+    overflow: hidden;
+  }
+  &__digit { width: 0.72em; }
+  &__separator { padding-right: 0.04em; }
+  &__digit > span, &__separator > span {
+    grid-area: 1 / 1;
+    text-align: center;
+  }
   &__dates { margin-bottom: 20px; }
   &__progress { padding: 12px; border: 1px solid $background-item; border-radius: 14px; }
   &__amounts { display: flex; align-items: baseline; gap: 12px; justify-content: space-between; margin-top: 4px; }

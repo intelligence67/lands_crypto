@@ -1,3 +1,4 @@
+import { applyVipData, showVipDataError } from "./vip-integration.js";
 // const API_TOKEN = window.VIP_API_TOKEN;
 const API_TOKEN = "cba_qiOzuJ4_BXUNQh4v_jpp4JPSFBudVgIgruA51rJla-M";
 
@@ -7,18 +8,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   initDropdowns();
   initAdaptiveMenu();
 
+  if (document.body.hasAttribute("data-vip-integration")) showVipDataError();
+
   try {
     const vipData = await loadVipStatus();
     const contentMap = Object.fromEntries(
       (vipData.content || []).map((item) => [item.type, item])
     );
 
+    if (document.body.hasAttribute("data-vip-integration")) applyVipData(vipData);
     renderVipLevel(vipData);
     renderBigWins(contentMap.bigWins);
     renderMonthlyWins(contentMap.monthlyWins);
     renderWithdrawals(contentMap.withdrawals);
   } catch (error) {
-    console.error(error);
+    if (document.body.hasAttribute("data-vip-integration")) showVipDataError();
+    console.error("VIP request failed:", error.message);
   }
 });
 
@@ -274,3 +279,8 @@ function renderWithdrawals(block) {
     card.querySelector(".withdraw-card__deposit").textContent = withdraw.depositLabel;
   });
 }
+
+document.addEventListener("vip:refresh", async () => {
+  if (!document.body.hasAttribute("data-vip-integration")) return;
+  try { applyVipData(await loadVipStatus()); } catch { showVipDataError(); }
+});

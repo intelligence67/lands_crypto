@@ -1,10 +1,10 @@
 // Демонстрационные данные. Для API передайте реальные значения через setVipPopupData().
 const popupParams = new URLSearchParams(location.search);
-const popupLevel = Number((popupParams.get("vip") || "").replace("vip-", "")) || 0;
+let popupLevel = Number((popupParams.get("vip") || "").replace("vip-", "")) || 0;
 const popupThresholds = [1520, 7600000, 15200000, 76250000];
 const popupTarget = popupThresholds[Math.min(popupLevel, 3)];
 const popupErrorMode = popupParams.get("error") || "all";
-const popupUnavailable = popupParams.get("vip") === "unavallable";
+let popupUnavailable = popupParams.get("vip") === "unavallable";
 const popupEmpty = popupParams.get("deposits") === "empty" || (!popupLevel && !popupUnavailable);
 const popupConfirmed = popupEmpty ? 0 : popupTarget / 2;
 const popupDemoDeposits = [
@@ -35,6 +35,7 @@ let vipPopupData = {
   deposits: popupEmpty ? [] : popupDemoDeposits.slice(0, popupParams.get("deposits") === "short" ? 3 : 6),
 };
 const popupStatuses = {
+  unknown: { label: "Depósito", mark: "info", color: "is-muted", icon: "history" },
   pending: { label: "En proceso", mark: "hourglass", color: "is-pending", icon: "history" },
   confirmed: { label: "Confirmado", mark: "check", color: "is-success", icon: "history" },
   expired: { label: "Confirmado, vencido", mark: "check", color: "is-muted", icon: "expired" },
@@ -47,8 +48,9 @@ let popupScroll = 0;
 let popupBodyStyle = "";
 let popupListScroll = 0;
 
-function popupMoney(value) {
-  return "$" + new Intl.NumberFormat("es-AR", { maximumFractionDigits: 2 }).format(value);
+function popupMoney(value, currency = vipPopupData.currency) {
+  if (value == null || !Number.isFinite(Number(value))) return "—";
+  return "$" + new Intl.NumberFormat("es-AR", { maximumFractionDigits: 2 }).format(value) + (currency ? " " + currency : "");
 }
 function popupEscape(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
@@ -67,13 +69,13 @@ function renderVipPopupProgress() {
   modal.querySelector('[data-popup-action="support"]').hidden = !data.unavailable;
   const set = (selector, text) => { modal.querySelector(selector).textContent = text; };
   set(".vip-progress-popup__confirmed", data.unavailable ? "—" : popupMoney(data.confirmed));
-  set(".vip-progress-popup__remaining", data.unavailable ? "—" : popupMoney(Math.max(0, data.target - data.confirmed)));
+  set(".vip-progress-popup__remaining", data.unavailable ? "—" : popupMoney(data.target == null || data.confirmed == null ? null : Math.max(0, data.target - data.confirmed)));
   set(".vip-progress-popup__pending", data.unavailable ? "—" : popupMoney(data.pending));
-  set(".vip-progress-popup__target-label", `Falta para VIP ${["I", "II", "III", "IV"][data.targetLevel - 1]}`);
+  set(".vip-progress-popup__target-label", data.integrated && data.level === 4 && data.target == null ? "Nivel máximo" : `Falta para VIP ${["I", "II", "III", "IV"][data.targetLevel - 1]}`);
   set(".vip-progress-popup__period", data.period);
   set(".vip-modal__updated", data.updated);
   modal.querySelector(".vip-modal__error").hidden = !data.unavailable;
-  modal.querySelector("progress").value = data.unavailable || !data.target ? 0 : Math.min(100, data.confirmed / data.target * 100);
+  modal.querySelector("progress").value = data.unavailable || !data.target ? 0 : Math.min(100, data.percent ?? data.confirmed / data.target * 100);
 }
 function renderVipPopupError(node) {
   node.innerHTML = `${popupIcon("info", "", 18)}<div><p>No se pudieron cargar los datos</p><small>Actualizaremos automáticamente en aproximadamente 15 minutos</small></div>`;
@@ -108,7 +110,7 @@ function renderVipPopupDeposits() {
     const state = popupStatuses[deposit.status];
     return `<button class="vip-popup-deposit ${state.color === "is-muted" ? "is-muted" : ""}" type="button" data-popup-deposit="${popupEscape(deposit.id)}">
       <span class="vip-popup-deposit__icon">${popupIcon(state.icon, "", 22)}</span>
-      <span><span class="vip-popup-deposit__status"><span>${state.label}</span>${popupIcon(state.mark, state.color, 12)}</span><span class="vip-popup-deposit__amount">${popupMoney(deposit.amount)}</span></span>
+      <span><span class="vip-popup-deposit__status"><span>${state.label}</span>${popupIcon(state.mark, state.color, 12)}</span><span class="vip-popup-deposit__amount">${popupEscape(popupMoney(deposit.amount, deposit.currency))}</span></span>
       <span class="vip-popup-deposit__date"><small>${popupEscape(deposit.time)}</small><span>${popupEscape(deposit.date)}</span></span>
       ${popupIcon("next", "", 16)}
     </button>`;
@@ -127,17 +129,25 @@ function renderVipPopupDetail(id) {
   modal.querySelector(".vip-deposits-popup__detail-view").hidden = false;
   modal.querySelector(".vip-deposit-detail__icon").innerHTML = popupIcon(state.icon, state.color === "is-muted" ? "is-muted" : "", 22);
   modal.querySelector(".vip-deposit-detail__status").innerHTML = state.label + popupIcon(state.mark, state.color, 12);
-  modal.querySelector(".vip-deposit-detail__amount").textContent = popupMoney(deposit.amount);
+  modal.querySelector(".vip-deposit-detail__amount").textContent = popupMoney(deposit.amount, deposit.currency);
   modal.querySelector(".vip-deposit-detail__date").textContent = `${deposit.date} · ${deposit.time} (ART)`;
   const credited = deposit.status === "confirmed" || deposit.status === "expired";
   const fields = {
     ars: new Intl.NumberFormat("es-AR", { minimumFractionDigits: 2 }).format(deposit.ars) + " ARS",
     rate: credited ? `1 USD = ${new Intl.NumberFormat("es-AR", { minimumFractionDigits: 2 }).format(deposit.rate)} ARS` : "—",
-    usd: credited ? popupMoney(deposit.amount) : "—",
+    usd: credited ? popupMoney(deposit.amount, deposit.currency) : "—",
     method: deposit.method,
     transaction: deposit.transaction,
     impact: deposit.status === "confirmed" ? "Cuenta para el progreso" : deposit.status === "pending" ? "Pendiente de confirmación" : "No cuenta para el progreso",
   };
+  if (vipPopupData.integrated) {
+    fields.ars = deposit.currency === "ARS" ? popupMoney(deposit.amount, "ARS") : "—";
+    fields.rate = deposit.rate == null ? "—" : `1 USD = ${deposit.rate} ARS`;
+    fields.usd = deposit.currency === "USD" ? popupMoney(deposit.amount, "USD") : "—";
+    fields.method = deposit.method || "—";
+    fields.transaction = deposit.transaction || "—";
+    if (deposit.status === "unknown") fields.impact = "Sin información";
+  }
   Object.entries(fields).forEach(([key, value]) => { modal.querySelector(`[data-field="${key}"]`).textContent = value; });
   modal.setAttribute("aria-label", "Detalle del depósito");
   return true;
@@ -146,6 +156,7 @@ function openVipPopup(view, id, opener = document.activeElement) {
   if (!["progress", "deposits", "detail", "new-level", "limits", "methods", "processing", "odds", "support", "timer"].includes(view)) return;
   const modal = document.querySelector(view === "timer" ? ".vip-timer-popup" : view === "support" ? ".vip-support-popup" : view === "odds" ? ".vip-odds-popup" : view === "processing" ? ".vip-processing-popup" : view === "methods" ? ".vip-methods-popup" : view === "limits" ? ".vip-limits-popup" : view === "new-level" ? ".vip-new-level" : view === "progress" ? ".vip-progress-popup" : ".vip-deposits-popup");
   if (!modal) return;
+  stopVipCountdown();
   if (view === "limits") renderVipLimits();
   if (view === "methods") renderVipMethods();
   if (view === "processing") renderVipProcessing();
@@ -175,6 +186,7 @@ function openVipPopup(view, id, opener = document.activeElement) {
   if (view === "deposits") popupDepositId = null;
 }
 function closeVipPopup() {
+  stopVipCountdown();
   if (!popupActive) return;
   const modal = popupActive;
   if (modal.matches(".vip-new-level")) {
@@ -312,6 +324,8 @@ window.openVipPopup = openVipPopup;
 window.setVipPopupData = (data) => {
   // Все поля заменяются одним объектом, без смешивания реальных данных с демо.
   vipPopupData = data;
+  if (data.integrated) popupUnavailable = !!data.unavailable;
+  if (data.level != null) popupLevel = data.level;
   if (popupActive?.matches(".vip-progress-popup")) renderVipPopupProgress();
   if (popupActive?.matches(".vip-deposits-popup")) {
     if (!popupDepositId || !renderVipPopupDetail(popupDepositId)) renderVipPopupDeposits();
@@ -341,7 +355,7 @@ function renderVipNewLevel() {
   return true;
 }
 document.addEventListener("DOMContentLoaded", () => {
-  if (![1, 2, 3, 4].includes(popupLevel)) return;
+  if (document.body.hasAttribute("data-vip-integration") || ![1, 2, 3, 4].includes(popupLevel)) return;
   const seen = document.cookie.split(";").some((cookie) => cookie.trim() === `vip_new_level_dismissed_${popupLevel}=1`);
   if (!seen && !popupActive) openVipPopup("new-level");
 });
@@ -607,22 +621,34 @@ window.setVipTimerData = (data) => {
 function renderVipTimer() {
   const m = document.querySelector(".vip-timer-popup");
   if (!m) return;
-  const d = vipTimerData, level = Math.max(1, popupLevel), max = level === 4, error = d.unavailable;
+  const d = vipTimerData, level = Math.max(1, d.level ?? popupLevel), max = level === 4, error = d.unavailable;
   const roman = ["I","II","III","IV"][level-1];
-  const money = n => "$" + Number(n).toLocaleString("es-AR");
+  const money = n => popupMoney(n, d.currency);
   const label = m.querySelector(".vip-timer-popup__label");
-  label.hidden = level !== 1 || error;
-  label.textContent = "Tu estado VIP I";
+  const countdown = level >= 1 && level <= 3;
+  label.hidden = !countdown || error;
+  label.textContent = `Tu estado VIP ${roman}`;
+  if (!label.hidden) {
+    const badge = document.createElement("img");
+    badge.src = `./img/vip-account-lvl-${level}.webp`;
+    badge.alt = "";
+    badge.width = 16;
+    badge.height = 16;
+    label.prepend(badge);
+  }
   const title = m.querySelector("h2");
-  title.textContent = error ? "LOADING…" : level === 1 ? d.remaining : "VIP " + roman;
-  if (!error && level > 1) {
+  stopVipCountdown();
+  title.classList.remove("vip-timer-popup__countdown");
+  title.textContent = error ? "LOADING…" : countdown ? (d.remaining || "—") : "VIP " + roman;
+  if (!error && countdown) startVipCountdown(title, d.endsAt);
+  if (!error && !countdown) {
     const badge = document.createElement("img"); badge.src = `./img/vip-account-lvl-${level}.webp`; badge.alt = ""; badge.width = 32; badge.height = 32; title.prepend(badge);
   }
   m.querySelector(".vip-timer-popup__dates").textContent = error ? "Tu estado es desconocido" : `Obtenido el ${d.received} · ${level === 1 ? "Hasta el " + d.deadline : "Válido de por vida"}`;
   m.querySelector(".vip-timer-popup__progress").hidden = max || error;
   m.querySelector(".vip-timer-popup__amounts strong").textContent = money(d.amount);
   m.querySelector(".vip-timer-popup__amounts span").textContent = money(d.target);
-  m.querySelector("progress").value = d.target > 0 ? Math.min(100, Math.max(0, d.amount / d.target * 100)) : 0;
+  m.querySelector("progress").value = d.target > 0 ? Math.min(100, Math.max(0, d.percent ?? d.amount / d.target * 100)) : 0;
   const offers = m.querySelector(".vip-timer-popup__offers");
   const offer = (n, text, detail) => `<div class="vip-timer-popup__offer" data-level="${n}"><div><p>${popupEscape(text)}</p><small>${popupEscape(detail)}</small></div><img src="./img/vip-icon-cup-${n}.webp" width="90" height="74" alt=""></div>`;
   offers.innerHTML = "";
@@ -637,9 +663,68 @@ function renderVipTimer() {
   m.querySelector(".vip-timer-popup__success").hidden = !max || error;
   m.querySelector(".vip-timer-popup__updated").hidden = max && !error;
   m.querySelector(".vip-timer-popup__cashback").hidden = !d.cashback || error || max;
+  if (d.integrated) {
+    m.querySelector(".vip-timer-popup__progress > small").textContent = d.period || "—";
+    m.querySelector(".vip-timer-popup__dates").textContent = error ? "Tu estado es desconocido" : `Obtenido el ${d.received} · Hasta el ${d.deadline} (ART)`;
+    m.querySelector(".vip-timer-popup__updated p").textContent = d.updated;
+    m.querySelector(".vip-timer-popup__note").hidden = true;
+    offers.innerHTML = !error && d.nextTier ? offer(d.nextTier, `Faltan ${money(Math.max(0, d.target - d.amount))} para VIP ${["I", "II", "III", "IV"][d.nextTier - 1]}`, `Fin del período: ${d.deadline} (ART)`) : "";
+  }
   const benefits = max || d.empty || d.renewed;
   m.querySelector('[data-timer-link="deposit"]').hidden = error || benefits;
   m.querySelector('[data-timer-link="benefits"]').hidden = error || !benefits;
   m.querySelector('[data-popup-view="support"]').hidden = !error;
   m.querySelector('[data-popup-view="progress"]').hidden = max && !error;
+}
+
+
+// Считаем от абсолютной даты API, поэтому фоновые вкладки не накапливают ошибку.
+let vipCountdownInterval = null;
+function stopVipCountdown() {
+  clearInterval(vipCountdownInterval);
+  vipCountdownInterval = null;
+}
+function startVipCountdown(title, endsAt) {
+  if (!endsAt) return;
+  const end = new Date(endsAt).getTime();
+  if (!Number.isFinite(end)) return;
+  title.classList.add("vip-timer-popup__countdown");
+  title.replaceChildren();
+  let previous = "";
+  const tick = () => {
+    const minutes = Math.max(0, Math.ceil((end - Date.now()) / 60000));
+    const days = String(Math.floor(minutes / 1440)).padStart(2, "0");
+    const hours = String(Math.floor(minutes / 60) % 24).padStart(2, "0");
+    const mins = String(minutes % 60).padStart(2, "0");
+    const value = `${days}D:${hours}H:${mins}M`;
+    if (value === previous) return;
+    title.setAttribute("aria-label", `${Number(days)} días, ${Number(hours)} horas, ${Number(mins)} minutos`);
+    const rebuild = value.length !== previous.length;
+    if (rebuild) title.replaceChildren();
+    [...value].forEach((char, index) => {
+      let slot = title.children[index];
+      if (!slot) {
+        slot = document.createElement("span");
+        slot.className = /\d/.test(char) ? "vip-timer-popup__digit" : "vip-timer-popup__separator";
+        slot.setAttribute("aria-hidden", "true");
+        title.append(slot);
+      }
+      if (!rebuild && char === previous[index]) return;
+      const old = slot.firstElementChild;
+      const next = document.createElement("span");
+      next.textContent = char;
+      slot.replaceChildren(next);
+      if (old && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        slot.append(old);
+        const options = { duration: 420, easing: "cubic-bezier(.22, 1, .36, 1)" };
+        next.animate([{ transform: "translateY(100%)", opacity: 0 }, { transform: "translateY(0)", opacity: 1 }], options);
+        const animation = old.animate([{ transform: "translateY(0)", opacity: 1 }, { transform: "translateY(-100%)", opacity: 0 }], options);
+        animation.onfinish = () => old.remove();
+      }
+    });
+    previous = value;
+    if (!minutes) stopVipCountdown();
+  };
+  vipCountdownInterval = setInterval(tick, 1000);
+  tick();
 }
