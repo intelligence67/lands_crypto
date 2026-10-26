@@ -1,0 +1,30 @@
+.responsible-notice {
+  margin: 38px 0 32px;
+  border-radius: 16px;
+  background: $background-black;
+
+  &__visual {
+    position: relative;
+    height: 90px;
+    border-radius: 16px 16px 0 0;
+    background: $background-notice;
+
+    img {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 164px;
+      height: 120px;
+      object-fit: cover;
+      object-position: center top;
+      transform: translateX(-50%);
+    }
+  }
+
+  p {
+    padding: 12px;
+    font-size: 12px;
+    line-height: 1.42;
+    text-align: center;
+  }
+}

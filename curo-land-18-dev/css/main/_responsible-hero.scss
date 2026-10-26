@@ -1,0 +1,46 @@
+.responsible-hero {
+  padding-bottom: 38px;
+  text-align: center;
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: 250px;
+    margin-bottom: 24px;
+    border-radius: 16px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__age {
+    margin-bottom: 8px;
+  }
+
+  &__description {
+    margin-top: 8px;
+    font-size: 16px;
+  }
+
+  .responsible-btn {
+    width: fit-content;
+    margin: 16px auto 0;
+    padding-right: 23px;
+    padding-left: 23px;
+  }
+
+  @include breakpoint($bp-md) {
+    .responsible__title span {
+      display: block;
+    }
+
+    &__description {
+      max-width: 285px;
+      margin-right: auto !important;
+      margin-left: auto !important;
+    }
+
+    .responsible-btn {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.responsible-limits {
+  padding: 38px 0;
+
+  > .responsible-card + .responsible__grid {
+    margin-top: 16px;
+  }
+}
+
+.responsible-reminder {
+  margin: 16px 0;
+  padding: 12px;
+  border: 1px solid $border-warning;
+  border-radius: 12px;
+  background: $background-warning;
+
+  h3 {
+    margin-bottom: 4px;
+    font-size: 18px;
+  }
+
+  p {
+    color: $color-text-orange;
+  }
+}

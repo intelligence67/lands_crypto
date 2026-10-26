@@ -1,0 +1,42 @@
+.responsible-help {
+  padding: 38px 0;
+
+  > .responsible-btn {
+    margin-top: 8px;
+  }
+
+  &__title {
+    margin: 40px 0 24px !important;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  &__note {
+    margin-top: 24px !important;
+    font-size: 12px;
+  }
+}
+
+.responsible-contact {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 12px;
+  border-radius: 16px;
+  background: $background-black;
+
+  h4 {
+    margin-bottom: 12px;
+    font-size: 26px;
+  }
+
+  p {
+    margin-bottom: 20px;
+    font-size: 12px;
+    line-height: 1.42;
+  }
+
+  .responsible-btn {
+    margin-top: auto;
+  }
+}

@@ -1,0 +1,13 @@
+.responsible-assessment {
+  padding: 38px 0;
+
+  .responsible-card > p {
+    max-width: 475px;
+  }
+
+   @include breakpoint($bp-sm) {
+    .responsible-card > p {
+      max-width: 205px;
+    }
+  }
+}
