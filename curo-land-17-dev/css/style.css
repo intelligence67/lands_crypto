@@ -3482,12 +3482,18 @@ body.vip-status--vip-3 .vip-modal {
   background: #382010;
 }
 .vip-support-popup__ribbon {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   background: color-mix(in srgb, var(--popup-accent) 18%, #0c0c18);
   color: var(--popup-accent);
   padding: 6px 12px;
   font-size: 12px;
   line-height: 120%;
+}
+.vip-support-popup__crown {
+  flex-shrink: 0;
 }
 .vip-support-popup__owner .vip-support-popup__ribbon {
   background: #ff5900;

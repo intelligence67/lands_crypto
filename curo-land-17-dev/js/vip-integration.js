@@ -5,6 +5,18 @@ const date = value => value && Number.isFinite(new Date(value).getTime()) ? new 
 const formatDate = (value, options = { day: 'numeric', month: 'short' }) => date(value)
   ? new Intl.DateTimeFormat('es-AR', { timeZone: zone, ...options }).format(date(value)).replace(/\./g, '') : '—';
 const formatTime = value => formatDate(value, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+const formatDepositDate = value => {
+  const parsed = date(value);
+  if (!parsed) return '—';
+  const parts = new Intl.DateTimeFormat('es-AR', {
+    timeZone: zone, day: 'numeric', month: 'short', year: 'numeric',
+  }).formatToParts(parsed);
+  const part = type => parts.find(item => item.type === type)?.value.replace(/\./g, '') || '';
+  return `${part('day')} ${part('month').slice(0, 3)} ${part('year')}`;
+};
+const formatDepositTime = value => formatDate(value, {
+  hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23',
+});
 const text = (selector, value) => document.querySelectorAll(selector).forEach(node => { node.textContent = value; });
 const money = (value, currency, compact = false) => value == null ? '—' : '$' + new Intl.NumberFormat('es-AR', {
   maximumFractionDigits: 2,
@@ -29,7 +41,7 @@ function depositsFrom(data, p) {
       id: String(row.id ?? row.transactionId ?? `deposit-${index}`),
       amount: number(row.amount), currency: row.currency || p.currency || 'ARS',
       status: ['confirmed', 'pending', 'expired', 'canceled'].includes(row.status) ? row.status : 'unknown',
-      date: formatDate(at, { day: 'numeric', month: 'short', year: 'numeric' }), time: formatTime(at),
+      date: formatDepositDate(at), time: formatDepositTime(at),
       timestamp: date(at)?.getTime() || 0, method: row.method, transaction: row.transactionId,
     };
   }).sort((a, b) => b.timestamp - a.timestamp);
@@ -89,6 +101,23 @@ function renderLevelRequirements(nextTier, confirmed, target, currency) {
   });
 }
 
+function renderPerkRequirements(nextTier, confirmed, target, currency) {
+  document.querySelectorAll('.vip-perks .perk-card.is-locked, .vip-perks .perk-row.is-locked, .vip-perks .perk-event.is-locked').forEach(card => {
+    const requiredLevel = Number(card.dataset.level || 1);
+    const requirement = card.querySelector('.perk-ribbon, .perk-event__requirement');
+    if (!requirement) return;
+    const image = requirement.querySelector('img');
+    const label = requirement.querySelector('span');
+    const detail = requirement.querySelector('small');
+    if (image) image.src = `./img/vip-account-lvl-${requiredLevel}.webp`;
+    const hasAmount = requiredLevel === nextTier && confirmed != null && target != null;
+    if (label) label.textContent = hasAmount
+      ? `Depositá ${money(Math.max(0, target - confirmed), currency)}${detail ? '' : ' para desbloquear este beneficio'}`
+      : `Disponible en VIP ${roman[requiredLevel - 1]}`;
+    if (detail) detail.hidden = !hasAmount;
+  });
+}
+
 export function showVipDataError() {
   window.setVipStatus?.('unavallable');
   renderLevelRequirements(null, null, null, 'ARS');
@@ -122,6 +151,7 @@ export function applyVipData(data) {
   window.setVipStatus?.(level ? `vip-${level}` : 'no-vip');
   setSecondary(level === 4);
   renderLevelRequirements(nextTier, confirmed, target, currency);
+  renderPerkRequirements(nextTier, confirmed, target, currency);
   text('.vip-progress__amount', money(confirmed, currency, true));
   text('.vip-progress__target span', money(target, currency, true));
   text('.vip-progress__period span', period);

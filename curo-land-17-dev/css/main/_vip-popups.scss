@@ -1509,12 +1509,18 @@ body.vip-status--vip-3 .vip-modal {
     background: #382010;
   }
   &__ribbon {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
     background: color-mix(in srgb, var(--popup-accent) 18%, #0c0c18);
     color: var(--popup-accent);
     padding: 6px 12px;
     font-size: 12px;
     line-height: 120%;
+  }
+  &__crown {
+    flex-shrink: 0;
   }
   &__owner &__ribbon {
     background: #ff5900;
