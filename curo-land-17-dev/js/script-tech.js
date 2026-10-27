@@ -73,7 +73,6 @@ function renderVipAccount(status) {
       `./img/vip-account-${unavailable || topLevel ? "chat" : "trend"}.svg#icon`,
     );
 
-  // Демонстрационные данные до подключения API.
   const currentLevel = Number(status.replace("vip-", "")) || 0;
   const targetLevel = Math.min(currentLevel + 1, 4);
   block.querySelector(".vip-progress__level img").src =
@@ -471,11 +470,12 @@ function renderVipPerks(status) {
           ? "Tu nivel"
           : "Disponible";
 
-
     const iconUrl = new URL(`./img/${icon}`, document.baseURI).href;
 
     group.querySelector(".benefit-level__status").innerHTML = `
-      <span class="benefit-level__icon" style="--icon: url('${iconUrl}')"></span>
+      ${unavailable
+        ? '<svg width="16" height="16" aria-hidden="true" style="flex-shrink: 0"><use href="./img/vip-unavailable-clock.svg#icon"></use></svg>'
+        : `<span class="benefit-level__icon" style="--icon: url('${iconUrl}')"></span>`}
       <span>${text}</span>
     `;
 

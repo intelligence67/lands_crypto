@@ -510,12 +510,21 @@
     line-height: 16px;
   }
 
+  &__mark {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-left: 2px;
+    vertical-align: -2px;
+    flex-shrink: 0;
+  }
+
   &--pending &__mark {
-    color: #e6c620;
+    color: #b3960c;
   }
 
   &--confirmed &__mark {
-    color: #00bf37;
+    color: #10b835;
   }
 
   &--expired &__amount,

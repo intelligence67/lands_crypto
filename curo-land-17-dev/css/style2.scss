@@ -259,14 +259,14 @@ h6 {
   transform: translateY(-50%) translateX(-10px);
 }
 
-@import "./main/hero";
-@import "./main/_vip-account";
-@import "./main/_vip-next";
-@import "./main/_vip-perks.scss";
-@import "./main/_vip-levels";
-@import "./main/_vip-benefits";
-@import "./main/_vip-banner";
-@import "./main/_faq";
-@import "./main/_vip-wins";
-@import "./main/_vip-withdrawals";
-@import "./main/vip-popups";
+@import './main/hero';
+@import './main/vip-account';
+@import './main/vip-next';
+@import './main/vip-perks';
+@import './main/vip-levels';
+@import './main/vip-benefits';
+@import './main/vip-banner';
+@import './main/faq';
+@import './main/vip-wins';
+@import './main/vip-withdrawals';
+@import './main/vip-popups';

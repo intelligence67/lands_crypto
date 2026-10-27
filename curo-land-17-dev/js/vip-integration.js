@@ -21,7 +21,7 @@ function updatedLabel(value) {
 function depositsFrom(data, p) {
   const history = Array.isArray(data.deposits) ? data.deposits : Array.isArray(p.deposits) ? p.deposits : null;
   const rows = history ?? (number(p.lastDepositAmount) != null ? [{
-    amount: p.lastDepositAmount, currency: p.lastDepositCurrency, createdAt: p.lastDepositAt,
+    amount: p.lastDepositAmount, currency: p.lastDepositCurrency, createdAt: p.lastDepositAt, status: 'confirmed',
   }] : []);
   return rows.filter(row => row && number(row.amount) != null).map((row, index) => {
     const at = row.createdAt ?? row.depositedAt ?? row.date;
@@ -43,10 +43,21 @@ function renderDeposits(deposits, currency, unavailable = false) {
   const labels = { confirmed: 'Confirmado', pending: 'En proceso', expired: 'Confirmado, vencido', canceled: 'Cancelado', unknown: 'Depósito' };
   deposits.slice(0, 3).forEach(deposit => {
     const row = document.createElement('li');
-    row.className = 'vip-deposit';
+    row.className = `vip-deposit vip-deposit--${deposit.status}`;
     row.dataset.depositId = deposit.id;
     row.innerHTML = '<button class="vip-deposit__button" type="button"><span class="vip-deposit__icon"><svg width="18" height="18" aria-hidden="true"><use href="./img/vip-popup-icons.svg#history"></use></svg></span><span class="vip-deposit__info"><span class="vip-deposit__status"></span><span class="vip-deposit__amount"></span></span><span class="vip-deposit__date"><span></span><span></span></span></button>';
     row.querySelector('.vip-deposit__status').textContent = labels[deposit.status];
+    const mark = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    mark.setAttribute('class', 'vip-deposit__mark');
+    mark.setAttribute('aria-hidden', 'true');
+    const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    const marks = { confirmed: 'check', pending: 'hourglass', expired: 'check', canceled: 'cancel', unknown: 'info' };
+    use.setAttribute('href', `./img/vip-popup-icons.svg#${marks[deposit.status] || 'info'}`);
+    mark.append(use);
+    row.querySelector('.vip-deposit__status').append(mark);
+    if (deposit.status === 'expired' || deposit.status === 'canceled') {
+      row.querySelector('.vip-deposit__icon use').setAttribute('href', './img/vip-popup-icons.svg#expired');
+    }
     row.querySelector('.vip-deposit__amount').textContent = money(deposit.amount, deposit.currency || currency);
     const dates = row.querySelectorAll('.vip-deposit__date span');
     dates[0].textContent = deposit.time; dates[1].textContent = deposit.date;

@@ -1,4 +1,4 @@
-// Демонстрационные данные. Для API передайте реальные значения через setVipPopupData().
+
 const popupParams = new URLSearchParams(location.search);
 let popupLevel = Number((popupParams.get("vip") || "").replace("vip-", "")) || 0;
 const popupThresholds = [1520, 7600000, 15200000, 76250000];
@@ -218,7 +218,7 @@ function initVipPopupFaq() {
     item.dataset.expanded = String(expanded);
 
     item.addEventListener("click", (event) => {
-      // Ссылки и другие элементы управления внутри ответа сохраняют своё действие.
+      
       if (event.target.closest("a, button, input, select, textarea")) return;
       event.preventDefault();
       const startHeight = item.getBoundingClientRect().height;
@@ -252,7 +252,7 @@ function initVipPopupFaq() {
 }
 
 function initVipPopups() {
-  // Навигация верхнего блока; обращения к поддержке остаются кнопками.
+  
   const secondary = document.querySelector(".vip-account__secondary");
   if (secondary && (popupLevel === 4 || popupUnavailable)) {
     const support = document.createElement("button");
@@ -263,7 +263,7 @@ function initVipPopups() {
     secondary.replaceWith(support);
   }
   initVipPopupFaq();
-  // Открываем отдельные попапы до общего обработчика perk-dialog.
+  
   document.addEventListener("click", (event) => {
     const trigger = event.target.closest('[data-benefit="limits"] .perk-info, [data-benefit="limits"] .perk-card__details, [data-popup-view="limits"], [data-benefit="methods"] .perk-info, [data-benefit="methods"] .perk-card__details, [data-popup-view="methods"], [data-benefit="processing"] .perk-info, [data-benefit="processing"] .perk-card__details, [data-popup-view="processing"], [data-benefit="odds"] .perk-info, [data-benefit="odds"] .perk-card__details, [data-popup-view="odds"], [data-benefit="support"] .perk-info, [data-benefit="support"] .perk-card__details, [data-popup-view="support"]');
     if (!trigger) return;
@@ -322,7 +322,7 @@ function popupOutside(modal, event) {
 }
 window.openVipPopup = openVipPopup;
 window.setVipPopupData = (data) => {
-  // Все поля заменяются одним объектом, без смешивания реальных данных с демо.
+  
   vipPopupData = data;
   if (data.integrated) popupUnavailable = !!data.unavailable;
   if (data.level != null) popupLevel = data.level;
@@ -332,7 +332,6 @@ window.setVipPopupData = (data) => {
   }
 };
 document.addEventListener("DOMContentLoaded", initVipPopups);
-
 
 function renderVipNewLevel() {
   if (![1, 2, 3, 4].includes(popupLevel)) return false;
@@ -360,13 +359,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!seen && !popupActive) openVipPopup("new-level");
 });
 
-// Подключение повторного запроса к API: обработчик должен вызвать setVipPopupData().
 setInterval(() => {
   if (vipPopupData.unavailable || vipPopupData.totalsUnavailable || vipPopupData.depositsUnavailable) {
     document.dispatchEvent(new CustomEvent("vip:refresh", { detail: { source: "vip-popup" } }));
   }
 }, 15 * 60 * 1000);
-
 
 function renderVipLimits() {
   const modal = document.querySelector(".vip-limits-popup");
@@ -390,14 +387,13 @@ function renderVipLimits() {
   upgrade.querySelector("p").textContent = level === 1 ? "Sin límites, sujeto al método de pago" : "Límites más altos";
   upgrade.querySelector("small").textContent = level === 1 ? "Disponible en VIP II · Depositá $4.500,00 más" : "Disponible en VIP I · Depositá $500,00 más";
   upgrade.querySelector("img").src = `./img/vip-icon-cup-${level === 1 ? 2 : 1}.webp`;
-  // El bloque de mejora cambia de posición entre no-vip y VIP I, como en el diseño.
+  
   if (level === 1) note.before(upgrade);
   else note.after(upgrade);
   modal.querySelector(".vip-limits-popup__error").hidden = !unavailable;
   modal.querySelector('[data-limits-link="deposit"]').hidden = unavailable || unlimited;
   modal.querySelector('[data-limits-link="support"]').hidden = !unavailable;
 }
-
 
 function renderVipMethods() {
   const modal = document.querySelector(".vip-methods-popup");
@@ -418,7 +414,6 @@ function renderVipMethods() {
   modal.querySelector('[data-methods-link="withdraw"]').hidden = !active;
   modal.querySelector('[data-methods-link="support"]').hidden = !popupUnavailable;
 }
-
 
 function renderVipProcessing() {
   const modal = document.querySelector(".vip-processing-popup");
@@ -441,7 +436,6 @@ function renderVipProcessing() {
   modal.querySelector('[data-processing-link="support"]').hidden = !popupUnavailable;
   modal.querySelector('[data-processing-link="details"]').hidden = !active && !popupUnavailable;
 }
-
 
 function renderVipOdds() {
   const modal = document.querySelector(".vip-odds-popup");
@@ -527,7 +521,6 @@ setInterval(() => {
   }
 }, 15 * 60 * 1000);
 
-// Та же длительность и кривая, что у FAQ; native details сохраняет клавиатурное управление.
 document.addEventListener("DOMContentLoaded", () => {
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   document.querySelectorAll("details.benefit-level").forEach((item) => {
@@ -570,7 +563,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Плавность применяется только к двум якорям, не к восстановлению прокрутки попапов.
 document.addEventListener("click", (event) => {
   const link = event.target.closest('a[href="#vip-perks"], a[href="#vip-next"]');
   if (!link || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
@@ -595,7 +587,7 @@ document.addEventListener("click", (event) => {
     return;
   }
   if (action === "deposit" || values.includes("deposit")) {
-    // Ссылка выполняет обычный переход после снятия блокировки страницы.
+    
     closeVipPopup();
     return;
   }
@@ -677,8 +669,6 @@ function renderVipTimer() {
   m.querySelector('[data-popup-view="progress"]').hidden = max && !error;
 }
 
-
-// Считаем от абсолютной даты API, поэтому фоновые вкладки не накапливают ошибку.
 let vipCountdownInterval = null;
 function stopVipCountdown() {
   clearInterval(vipCountdownInterval);

@@ -830,11 +830,19 @@ h6 {
   font-size: 12px;
   line-height: 16px;
 }
+.vip-deposit__mark {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: 2px;
+  vertical-align: -2px;
+  flex-shrink: 0;
+}
 .vip-deposit--pending .vip-deposit__mark {
-  color: #e6c620;
+  color: #b3960c;
 }
 .vip-deposit--confirmed .vip-deposit__mark {
-  color: #00bf37;
+  color: #10b835;
 }
 .vip-deposit--expired .vip-deposit__amount, .vip-deposit--expired .vip-deposit__date {
   color: #9caac4;
@@ -1388,7 +1396,7 @@ body.vip-status--unavallable .vip-progress__unavailable-bar {
   box-shadow: inset 0 0 0 1px rgba(0, 191, 55, 0.25);
 }
 .vip-next-card.is-available .vip-next-card__status .vip-next-card__status-icon {
-  mask-image: url("./../img/vip-next-check.svg");
+  mask-image: url("./../img/vip-account-check.svg");
 }
 .vip-next-card.is-unavailable .vip-next-card__status {
   background: #29230b;
