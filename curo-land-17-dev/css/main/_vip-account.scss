@@ -59,7 +59,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    // The transparent pot sits above the background, below all banner content.
+
     background-image: var(--vip-banner-pot), var(--vip-banner);
     background-position: var(--vip-banner-pot-position), center;
     background-size: var(--vip-banner-pot-size), cover;
@@ -195,11 +195,6 @@
     line-height: 120%;
   }
 
-  // button:focus-visible,
-  // a:focus-visible {
-  //   outline: 2px solid var(--vip-accent);
-  //   outline-offset: 3px;
-  // }
 }
 
 .vip-progress {
@@ -793,7 +788,6 @@ body.vip-status--unavallable {
   }
 }
 
-// Ссылки верхнего блока сохраняют размеры и оформление кнопок.
 .vip-account {
   a.vip-account__benefits, a.vip-account__secondary, a.vip-account__deposit-btn {
     text-decoration: none;

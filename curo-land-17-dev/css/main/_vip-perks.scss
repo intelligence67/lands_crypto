@@ -1063,7 +1063,7 @@ body.vip-status--unavallable .vip-perks .perk-ribbon {
   flex: 0 0 18px;
   color: #B3960C;
 }
-// Состояние назначения меняет подпись и стрелку сразу, open — после анимации.
+
 .benefit-level {
   &.is-animating { overflow: hidden; }
   &__toggle > span:last-child { transition: transform 260ms cubic-bezier(.2, 0, .2, 1); }

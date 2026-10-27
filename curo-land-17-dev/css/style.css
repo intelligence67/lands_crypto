@@ -215,6 +215,7 @@ h6 {
 
 .btn:hover,
 .btn:focus {
+  -webkit-filter: brightness(0.9);
   filter: brightness(0.9);
 }
 
@@ -687,9 +688,7 @@ h6 {
   margin-bottom: 24px;
   position: relative;
   pointer-events: none;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .hero__image::after {
   content: "";
@@ -715,8 +714,7 @@ h6 {
   display: block;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 16px;
 }
 @keyframes pulseObject {
@@ -807,8 +805,7 @@ h6 {
   z-index: 2;
   width: 28px;
   height: 28px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .vip-card__inner {
   position: relative;
@@ -981,10 +978,8 @@ h6 {
   height: 100%;
   inset: 0;
   transition: transform 0.35s ease, filter 0.35s ease;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center;
-     object-position: center;
+  object-fit: cover;
+  object-position: center;
   position: relative;
 }
 .vip-benefit-card--banner a::before {
@@ -1058,9 +1053,7 @@ h6 {
   right: 0;
   bottom: 0;
   pointer-events: none;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .vip-benefit-card__btns {
   display: flex;
@@ -1139,7 +1132,6 @@ h6 {
   text-align: center;
 }
 .vip-banner__badge {
-  width: -moz-fit-content;
   width: fit-content;
   margin: 0 auto 16px;
   padding: 8px 10px;
@@ -1219,14 +1211,10 @@ h6 {
   height: 90px;
   margin: 0;
   margin-bottom: 12px;
-  -o-object-fit: contain;
-     object-fit: contain;
-  -o-object-position: center;
-     object-position: center;
+  object-fit: contain;
+  object-position: center;
   pointer-events: none;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .vip-banner-card h3 {
   font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
@@ -1513,8 +1501,7 @@ h6 {
   display: block;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   transition: transform 0.35s ease, filter 0.35s ease;
 }
 .vip-win-card__image::before {
@@ -1614,8 +1601,7 @@ h6 {
 .vip-win-item__image img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 8px;
   transition: transform 0.35s ease, filter 0.35s ease;
 }
@@ -1944,7 +1930,6 @@ h6 {
   gap: 12px;
 }
 .footer__nav a {
-  width: -moz-fit-content;
   width: fit-content;
   font-size: 12px;
   color: #FFFFFF;
@@ -1984,8 +1969,8 @@ h6 {
 }
 
 .vip-modal {
-  --popup-accent: #ff5900;
-  --popup-glow: rgba(255, 89, 0, .4);
+  --popup-accent: #FF5900;
+  --popup-glow: rgba(255, 89, 0, 0.4);
   box-sizing: border-box;
   width: 600px;
   max-width: calc(100% - 32px);
@@ -2008,13 +1993,19 @@ h6 {
 .vip-modal::backdrop {
   background: rgba(0, 0, 0, 0.65);
 }
-.vip-modal[hidden], .vip-modal [hidden] {
+.vip-modal[hidden],
+.vip-modal [hidden] {
   display: none !important;
 }
-.vip-modal *, .vip-modal *::before, .vip-modal *::after {
+.vip-modal *,
+.vip-modal *::before,
+.vip-modal *::after {
   box-sizing: border-box;
 }
-.vip-modal p, .vip-modal h2, .vip-modal dl, .vip-modal dd {
+.vip-modal p,
+.vip-modal h2,
+.vip-modal dl,
+.vip-modal dd {
   margin: 0;
 }
 .vip-modal h2 {
@@ -2033,7 +2024,8 @@ h6 {
   font-family: inherit;
   cursor: pointer;
 }
-.vip-modal button:focus-visible, .vip-modal summary:focus-visible {
+.vip-modal button:focus-visible,
+.vip-modal summary:focus-visible {
   outline: 2px solid var(--popup-accent);
   outline-offset: 3px;
 }
@@ -2161,17 +2153,17 @@ h6 {
 
 body.vip-status--vip-1 .vip-modal {
   --popup-accent: #a88c79;
-  --popup-glow: rgba(168, 140, 121, .4);
+  --popup-glow: rgba(168, 140, 121, 0.4);
 }
 
 body.vip-status--vip-2 .vip-modal {
   --popup-accent: #e5c251;
-  --popup-glow: rgba(229, 194, 81, .4);
+  --popup-glow: rgba(229, 194, 81, 0.4);
 }
 
 body.vip-status--vip-3 .vip-modal {
   --popup-accent: #d52e9e;
-  --popup-glow: rgba(213, 46, 158, .4);
+  --popup-glow: rgba(213, 46, 158, 0.4);
 }
 
 .vip-progress-popup__summary {
@@ -2213,9 +2205,7 @@ body.vip-status--vip-3 .vip-modal {
   height: 2px;
   margin: 8px 0 12px;
   border: 0;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   background: #16162c;
   color: var(--popup-accent);
 }
@@ -2562,26 +2552,25 @@ body.vip-status--vip-3 .vip-modal {
   padding: 32px 0 0;
   border: 0;
   background: transparent;
-  --level-bottom: #785038;
-  --level-top: #160c05;
-  --level-background: none;
-  --level-cup: none;
+  --level-background: url("../img/vip-popup-background-1.webp");
+  --level-cup: url("../img/vip-popup-cup-1.webp");
 }
 .vip-new-level[data-level="2"] {
-  --level-bottom: #bb8b20;
-  --level-top: #1b1503;
+  --level-background: url("../img/vip-popup-background-2.webp");
+  --level-cup: url("../img/vip-popup-cup-2.webp");
 }
 .vip-new-level[data-level="3"] {
-  --level-bottom: #c83c7e;
-  --level-top: #290619;
+  --level-background: url("../img/vip-popup-background-3.webp");
+  --level-cup: url("../img/vip-popup-cup-3.webp");
 }
 .vip-new-level[data-level="4"] {
-  --level-bottom: #c76422;
-  --level-top: #271006;
+  --level-background: url("../img/vip-popup-background-4.webp");
+  --level-cup: url("../img/vip-popup-cup-4.webp");
 }
 .vip-new-level__surface {
   border-radius: 18px;
-  background-image: var(--level-background), linear-gradient(150deg, var(--level-top) 15%, var(--level-bottom));
+  background-color: #0C0C18;
+  background-image: var(--level-background);
   background-size: cover;
   background-position: center;
 }
@@ -2594,22 +2583,22 @@ body.vip-status--vip-3 .vip-modal {
 }
 .vip-new-level__cup {
   position: absolute;
-  right: 10px;
+  right: 0;
   bottom: 0;
-  width: 110px;
-  height: 76px;
+  width: 132px;
+  height: 86px;
   background: var(--level-cup) center bottom/contain no-repeat;
   pointer-events: none;
 }
 .vip-new-level__body {
-  padding: 16px 20px 20px;
+  padding: 12px 20px 20px;
 }
 .vip-new-level__body .vip-modal__head {
   margin-bottom: 8px;
   gap: 8px;
 }
 .vip-new-level__body h2 {
-  font-size: 24px;
+  font-size: 26px;
 }
 .vip-new-level__description {
   color: rgba(255, 255, 255, 0.5);
@@ -2635,8 +2624,7 @@ body.vip-status--vip-3 .vip-modal {
   flex: 0 0 40px;
   width: 40px;
   height: 40px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .vip-new-level__benefits strong {
   display: block;
@@ -2665,10 +2653,6 @@ body.vip-status--vip-3 .vip-modal {
   }
 }
 
-.vip-modal__close:focus, .vip-modal__close:focus-visible {
-  outline: none;
-  box-shadow: none;
-}
 .vip-modal__error {
   display: flex;
   align-items: flex-start;
@@ -2709,12 +2693,6 @@ body.vip-status--vip-3 .vip-modal {
   cursor: default;
 }
 
-.vip-modal .vip-modal__close:focus,
-.vip-modal .vip-modal__close:focus-visible {
-  outline: none;
-  box-shadow: none;
-}
-
 .vip-limits-popup {
   width: 480px;
   padding: 0;
@@ -2749,8 +2727,7 @@ body.vip-status--vip-3 .vip-modal {
   height: 88px;
   right: 16px;
   bottom: 0;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   pointer-events: none;
 }
 .vip-limits-popup__body {
@@ -2817,10 +2794,8 @@ body.vip-status--vip-3 .vip-modal {
   bottom: 0;
   width: 90px;
   height: 74px;
-  -o-object-fit: contain;
-     object-fit: contain;
-  -o-object-position: bottom;
-     object-position: bottom;
+  object-fit: contain;
+  object-position: bottom;
   pointer-events: none;
 }
 .vip-limits-popup__upgrade.is-gold {
@@ -2896,8 +2871,7 @@ body.vip-status--vip-3 .vip-modal {
   height: 88px;
   right: 16px;
   bottom: 0;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   pointer-events: none;
 }
 .vip-methods-popup__body {
@@ -2964,10 +2938,8 @@ body.vip-status--vip-3 .vip-modal {
   bottom: 0;
   width: 90px;
   height: 74px;
-  -o-object-fit: contain;
-     object-fit: contain;
-  -o-object-position: bottom;
-     object-position: bottom;
+  object-fit: contain;
+  object-position: bottom;
   pointer-events: none;
 }
 .vip-methods-popup__upgrade.is-gold {
@@ -3028,7 +3000,7 @@ body.vip-status--vip-3 .vip-modal {
 }
 .vip-processing-popup.is-locked {
   --popup-accent: #a88c79;
-  --popup-glow: rgba(168, 140, 121, .4);
+  --popup-glow: rgba(168, 140, 121, 0.4);
 }
 .vip-processing-popup.has-band {
   padding-top: 32px;
@@ -3058,8 +3030,7 @@ body.vip-status--vip-3 .vip-modal {
   height: 88px;
   right: 16px;
   bottom: 0;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   pointer-events: none;
 }
 .vip-processing-popup__body {
@@ -3126,10 +3097,8 @@ body.vip-status--vip-3 .vip-modal {
   bottom: 0;
   width: 90px;
   height: 74px;
-  -o-object-fit: contain;
-     object-fit: contain;
-  -o-object-position: bottom;
-     object-position: bottom;
+  object-fit: contain;
+  object-position: bottom;
   pointer-events: none;
 }
 .vip-processing-popup__upgrade.is-gold {
@@ -3179,7 +3148,7 @@ body.vip-status--vip-3 .vip-modal {
 }
 .vip-odds-popup.is-locked {
   --popup-accent: #a88c79;
-  --popup-glow: rgba(168, 140, 121, .4);
+  --popup-glow: rgba(168, 140, 121, 0.4);
 }
 .vip-odds-popup.has-band {
   padding-top: 32px;
@@ -3209,8 +3178,7 @@ body.vip-status--vip-3 .vip-modal {
   height: 72px;
   right: 0;
   bottom: 0;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   pointer-events: none;
 }
 .vip-odds-popup__body {
@@ -3277,10 +3245,8 @@ body.vip-status--vip-3 .vip-modal {
   bottom: 0;
   width: 90px;
   height: 74px;
-  -o-object-fit: contain;
-     object-fit: contain;
-  -o-object-position: bottom;
-     object-position: bottom;
+  object-fit: contain;
+  object-position: bottom;
   pointer-events: none;
 }
 .vip-odds-popup__upgrade.is-gold {
@@ -3290,7 +3256,8 @@ body.vip-status--vip-3 .vip-modal {
 .vip-odds-popup__upgrade.is-gold small {
   color: #e5c251;
 }
-.vip-odds-popup__error, .vip-odds-popup__upgrade, .vip-odds-popup__note, .vip-odds-popup .vip-modal__actions {
+.vip-odds-popup__error, .vip-odds-popup__upgrade, .vip-odds-popup__note,
+.vip-odds-popup .vip-modal__actions {
   margin-top: 16px;
 }
 .vip-odds-popup .vip-modal__actions a {
@@ -3356,8 +3323,7 @@ body.vip-status--vip-3 .vip-modal {
   height: 88px;
   right: 16px;
   bottom: 0;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   pointer-events: none;
 }
 .vip-support-popup__body {
@@ -3424,10 +3390,8 @@ body.vip-status--vip-3 .vip-modal {
   bottom: 0;
   width: 90px;
   height: 74px;
-  -o-object-fit: contain;
-     object-fit: contain;
-  -o-object-position: bottom;
-     object-position: bottom;
+  object-fit: contain;
+  object-position: bottom;
   pointer-events: none;
 }
 .vip-support-popup__upgrade.is-gold {
@@ -3555,8 +3519,7 @@ body.vip-status--vip-3 .vip-modal {
 .vip-support-popup__avatar img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .vip-support-popup__upgrade[data-next="2"] {
   background: #352e14;
@@ -3604,8 +3567,7 @@ body.vip-status--vip-3 .vip-modal {
 .vip-timer-popup__label img {
   width: 16px;
   height: 16px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   flex-shrink: 0;
 }
 .vip-timer-popup h2 {
@@ -3701,8 +3663,7 @@ body.vip-status--vip-3 .vip-modal {
   bottom: 0;
   width: 90px;
   height: 74px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .vip-timer-popup__offer[data-level="2"] {
   background: #352e14;
@@ -3757,8 +3718,7 @@ body.vip-status--vip-3 .vip-modal {
 .vip-timer-popup__cashback img {
   width: 85px;
   height: 45px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 @media screen and (max-width: 767.98px) {
   .vip-timer-popup__body {
@@ -3771,4 +3731,4 @@ body.vip-status--vip-3 .vip-modal {
     font-size: 24px;
     flex-shrink: 0;
   }
-}/*# sourceMappingURL=style.css.map */
+}
