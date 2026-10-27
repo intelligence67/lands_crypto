@@ -1,7 +1,7 @@
 .responsible-limits {
   padding: 38px 0;
 
-  > .responsible-card + .responsible__grid {
+  >.container>.responsible-card+.responsible__grid {
     margin-top: 16px;
   }
 }

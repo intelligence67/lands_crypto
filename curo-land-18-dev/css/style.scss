@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  font-family: "Manrope", Arial, sans-serif;
+  font-family: 'Manrope', Arial, sans-serif;
   font-size: 16px;
   line-height: 1.4;
   color: $color-text-white;
@@ -25,17 +25,24 @@ button {
   font: inherit;
 }
 
+.container {
+  max-width: 824px;
+  margin: 0 auto;
+  padding: 0 12px;
+
+  @include breakpoint($bp-xl) {
+    max-width: none;
+  }
+}
+
 .responsible {
-  color: $color-text-white;
   background: $background-main;
-  font-family: "Manrope", Arial, sans-serif;
   font-size: 14px;
-  line-height: 1.4;
   --responsible-scroll-offset: 80px;
 
   h3,
   h4 {
-    font-family: "Manrope", Arial, sans-serif;
+    font-family: 'Manrope', Arial, sans-serif;
     font-weight: 600;
     line-height: 1.2;
   }
@@ -54,12 +61,6 @@ button {
     outline-offset: 4px;
   }
 
-  &__container {
-    max-width: 824px;
-    margin: 0 auto;
-    padding: 0 12px;
-  }
-
   &__heading {
     margin-bottom: 24px;
     text-align: center;
@@ -72,7 +73,7 @@ button {
   }
 
   &__title {
-    font-family: "Zalando Sans Expanded", "Manrope", sans-serif;
+    font-family: 'Zalando Sans Expanded', 'Manrope', sans-serif;
     font-size: 30px;
     font-weight: 700;
     font-style: italic;
@@ -99,10 +100,6 @@ button {
   }
 
   @include breakpoint($bp-xl) {
-    &__container {
-      max-width: none;
-    }
-
     &__grid {
       grid-template-columns: minmax(0, 1fr);
     }
@@ -187,7 +184,7 @@ button {
   line-height: 1.4;
   text-align: center;
   cursor: pointer;
-  transition: background .3s ease;
+  transition: filter 0.4s ease;
 
   &:hover {
     filter: brightness(0.85);
@@ -196,15 +193,6 @@ button {
   &--primary {
     background: $background-btn;
     box-shadow: 0 4px 16px 0 $shadow-btn;
-
-    &:hover {
-      filter: brightness(0.85);
-    }
-  }
-
-  &:hover,
-  &:not(:hover) {
-    transition: All 0.4s ease;
   }
 }
 
@@ -249,7 +237,7 @@ button {
 
 .responsible-card {
   position: relative;
-  padding: 12px 80px 12px 12px;
+  padding: 12px 120px 12px 12px;
   border-radius: 16px;
   background: $background-black;
 
@@ -262,10 +250,10 @@ button {
 
   &__image {
     position: absolute;
-    top: -20px;
+    top: -25px;
     right: 0;
-    width: 80px;
-    height: 80px;
+    width: 130px;
+    height: 130px;
     object-fit: contain;
     pointer-events: none;
   }
@@ -290,8 +278,23 @@ button {
     }
   }
 
-  ol > li { list-style-type: decimal; }
-  ul > li { list-style-type: disc; }
+  ol>li {
+    list-style-type: decimal;
+  }
+
+  ul>li {
+    list-style-type: disc;
+  }
+
+  @include breakpoint($bp-md) {
+    padding: 12px 80px 12px 12px;
+
+    &__image {
+      top: -20px;
+      width: 90px;
+      height: 90px;
+    }
+  }
 }
 
 .responsible-top {
@@ -311,7 +314,10 @@ button {
   visibility: hidden;
   pointer-events: none;
   transform: translateY(8px);
-  transition: opacity .3s ease, transform .3s ease, visibility .3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    visibility 0.3s ease;
 
   &.is-visible {
     opacity: 1;

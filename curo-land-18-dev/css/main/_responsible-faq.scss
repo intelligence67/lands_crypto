@@ -11,17 +11,11 @@
     &.is-active {
       .faq__answer {
         grid-template-rows: 1fr;
-
-        // &::before {
-        //   opacity: 1;
-        //   transform: scaleX(1);
-        // }
       }
 
       .faq__answer-inner {
         opacity: 1;
         transform: translateY(0);
-        // padding: 18px 16px;
         padding: 6px 12px 12px 12px;
       }
 
@@ -56,15 +50,18 @@
     line-height: 130%;
 
     cursor: pointer;
-    transition: background .3s ease, border .3s ease, border-radius .3s ease;
+    transition:
+      background 0.3s ease,
+      border 0.3s ease,
+      border-radius 0.3s ease;
 
     span {
       width: 24px;
       height: 24px;
       flex-shrink: 0;
 
-      background: url("./../img/chevron-down.svg") center / contain no-repeat;
-      transition: transform .3s ease;
+      background: url('./../img/chevron-down.svg') center / contain no-repeat;
+      transition: transform 0.3s ease;
     }
 
     &:hover {
@@ -82,10 +79,10 @@
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
 
-    transition: grid-template-rows .65s cubic-bezier(.22, 1, .36, 1);
+    transition: grid-template-rows 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       width: 100%;
       left: 0;
@@ -95,10 +92,12 @@
       background: $color-text-white-20;
 
       opacity: 0;
-      transform: scaleX(.6);
+      transform: scaleX(0.6);
       transform-origin: center;
 
-      transition: opacity .35s ease, transform .45s ease;
+      transition:
+        opacity 0.35s ease,
+        transform 0.45s ease;
     }
   }
 
@@ -113,9 +112,9 @@
     transform: translateY(-8px);
 
     transition:
-      opacity .4s ease,
-      transform .4s ease,
-      padding .4s ease;
+      opacity 0.4s ease,
+      transform 0.4s ease,
+      padding 0.4s ease;
 
     p,
     ul,
@@ -138,7 +137,6 @@
     ul,
     ol {
       margin-top: 12px;
-
     }
 
     li {
@@ -146,12 +144,17 @@
       list-style-position: inside;
     }
 
-    ol > li { list-style-type: decimal; }
-    ul > li { list-style-type: disc; }
+    ol>li {
+      list-style-type: decimal;
+    }
+
+    ul>li {
+      list-style-type: disc;
+    }
 
     a {
       color: $color-text-orange;
-      transition: color .3s ease;
+      transition: color 0.3s ease;
 
       &:hover,
       &:focus {

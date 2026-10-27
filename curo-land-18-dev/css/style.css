@@ -94,14 +94,14 @@ button:focus-visible {
 
 html {
   min-width: 320px;
-  background: #05050A;
+  background: #05050a;
 }
 
 body {
   font-family: "Manrope", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.4;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 button,
@@ -113,12 +113,20 @@ button {
   font: inherit;
 }
 
+.container {
+  max-width: 824px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+@media screen and (max-width: 1279.98px) {
+  .container {
+    max-width: none;
+  }
+}
+
 .responsible {
-  color: #FFFFFF;
-  background: #05050A;
-  font-family: "Manrope", Arial, sans-serif;
+  background: #05050a;
   font-size: 14px;
-  line-height: 1.4;
   --responsible-scroll-offset: 80px;
 }
 .responsible h3,
@@ -135,13 +143,8 @@ button {
 }
 .responsible a:focus-visible,
 .responsible button:focus-visible {
-  outline: 2px solid #FF5900;
+  outline: 2px solid #ff5900;
   outline-offset: 4px;
-}
-.responsible__container {
-  max-width: 824px;
-  margin: 0 auto;
-  padding: 0 12px;
 }
 .responsible__heading {
   margin-bottom: 24px;
@@ -161,7 +164,7 @@ button {
   text-transform: uppercase;
 }
 .responsible__title span {
-  color: #FF5900;
+  color: #ff5900;
 }
 h2.responsible__title {
   font-size: 28px;
@@ -175,9 +178,6 @@ h2.responsible__title {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 @media screen and (max-width: 1279.98px) {
-  .responsible__container {
-    max-width: none;
-  }
   .responsible__grid {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -239,26 +239,20 @@ h2.responsible__title {
   padding: 12px 16px;
   border-radius: 12px;
   background: #16162c;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.4;
   text-align: center;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: filter 0.4s ease;
 }
 .responsible-btn:hover {
   filter: brightness(0.85);
 }
 .responsible-btn--primary {
-  background: #FF5900;
+  background: #ff5900;
   box-shadow: 0 4px 16px 0 rgba(255, 89, 0, 0.6);
-}
-.responsible-btn--primary:hover {
-  filter: brightness(0.85);
-}
-.responsible-btn:hover, .responsible-btn:not(:hover) {
-  transition: All 0.4s ease;
 }
 
 .responsible-item {
@@ -268,7 +262,7 @@ h2.responsible__title {
   min-width: 0;
   padding: 12px;
   border-radius: 16px;
-  background: #0C0C18;
+  background: #0c0c18;
 }
 .responsible-item__icon {
   display: flex;
@@ -297,23 +291,24 @@ h2.responsible__title {
 
 .responsible-card {
   position: relative;
-  padding: 12px 80px 12px 12px;
+  padding: 12px 120px 12px 12px;
   border-radius: 16px;
-  background: #0C0C18;
+  background: #0c0c18;
 }
 .responsible-card__label {
   display: block;
   margin-bottom: 8px;
-  color: #FF5900;
+  color: #ff5900;
   font-size: 12px;
 }
 .responsible-card__image {
   position: absolute;
-  top: -20px;
+  top: -25px;
   right: 0;
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
+  width: 130px;
+  height: 130px;
+  -o-object-fit: contain;
+     object-fit: contain;
   pointer-events: none;
 }
 .responsible-card > h3 {
@@ -340,6 +335,16 @@ h2.responsible__title {
 .responsible-card ul > li {
   list-style-type: disc;
 }
+@media screen and (max-width: 799.98px) {
+  .responsible-card {
+    padding: 12px 80px 12px 12px;
+  }
+  .responsible-card__image {
+    top: -20px;
+    width: 90px;
+    height: 90px;
+  }
+}
 
 .responsible-top {
   position: fixed;
@@ -353,7 +358,7 @@ h2.responsible__title {
   height: 50px;
   border-radius: 12px;
   background: #16162c;
-  color: #FFFFFF;
+  color: #ffffff;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -390,8 +395,10 @@ h2.responsible__title {
   height: 250px;
   margin-bottom: 24px;
   border-radius: 16px;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 .responsible-hero__age {
   margin-bottom: 8px;
@@ -401,6 +408,7 @@ h2.responsible__title {
   font-size: 16px;
 }
 .responsible-hero .responsible-btn {
+  width: -moz-fit-content;
   width: fit-content;
   margin: 16px auto 0;
   padding-right: 23px;
@@ -431,23 +439,23 @@ h2.responsible__title {
 .responsible-limits {
   padding: 38px 0;
 }
-.responsible-limits > .responsible-card + .responsible__grid {
+.responsible-limits > .container > .responsible-card + .responsible__grid {
   margin-top: 16px;
 }
 
 .responsible-reminder {
   margin: 16px 0;
   padding: 12px;
-  border: 1px solid #592E16;
+  border: 1px solid #592e16;
   border-radius: 12px;
-  background: #341F13;
+  background: #341f13;
 }
 .responsible-reminder h3 {
   margin-bottom: 4px;
   font-size: 18px;
 }
 .responsible-reminder p {
-  color: #FF5900;
+  color: #ff5900;
 }
 
 .responsible-pause {
@@ -480,7 +488,7 @@ h2.responsible__title {
   min-width: 0;
   padding: 12px;
   border-radius: 16px;
-  background: #0C0C18;
+  background: #0c0c18;
 }
 .responsible-pause__card h3 {
   margin-bottom: 10px;
@@ -501,6 +509,18 @@ h2.responsible__title {
   }
   .responsible-pause__intro > h3 span {
     display: inline;
+  }
+  .responsible-pause__intro .responsible-card__image {
+    top: -30px;
+    width: 130px;
+    height: 130px;
+  }
+}
+@media screen and (max-width: 799.98px) {
+  .responsible-pause__intro .responsible-card__image {
+    top: -20px;
+    width: 90px;
+    height: 90px;
   }
 }
 @media screen and (max-width: 575.98px) {
@@ -523,14 +543,14 @@ h2.responsible__title {
 .responsible-minors {
   padding: 38px 0;
 }
-.responsible-minors > .responsible-card + .responsible__list {
+.responsible-minors > .container > .responsible-card + .responsible__list {
   margin-top: 8px;
 }
 
 .responsible-help {
   padding: 38px 0;
 }
-.responsible-help > .responsible-btn {
+.responsible-help > .container > .responsible-btn {
   margin-top: 8px;
 }
 .responsible-help__title {
@@ -549,7 +569,7 @@ h2.responsible__title {
   min-width: 0;
   padding: 12px;
   border-radius: 16px;
-  background: #0C0C18;
+  background: #0c0c18;
 }
 .responsible-contact h4 {
   margin-bottom: 12px;
@@ -597,8 +617,8 @@ h2.responsible__title {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  background: #0C0C18;
-  color: #FFFFFF;
+  background: #0c0c18;
+  color: #ffffff;
   text-align: left;
   font-size: 16px;
   font-weight: 400;
@@ -620,7 +640,7 @@ h2.responsible__title {
   display: grid;
   grid-template-rows: 0fr;
   position: relative;
-  background: #0C0C18;
+  background: #0c0c18;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
   transition: grid-template-rows 0.65s cubic-bezier(0.22, 1, 0.36, 1);
@@ -677,7 +697,7 @@ h2.responsible__title {
   list-style-type: disc;
 }
 .faq__answer-inner a {
-  color: #FF5900;
+  color: #ff5900;
   transition: color 0.3s ease;
 }
 .faq__answer-inner a:hover, .faq__answer-inner a:focus {
@@ -686,8 +706,10 @@ h2.responsible__title {
 
 .responsible-notice {
   margin: 38px 0 32px;
+}
+.responsible-notice__card {
   border-radius: 16px;
-  background: #0C0C18;
+  background: #0c0c18;
 }
 .responsible-notice__visual {
   position: relative;
@@ -701,8 +723,10 @@ h2.responsible__title {
   left: 50%;
   width: 164px;
   height: 120px;
-  object-fit: cover;
-  object-position: center top;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center top;
+     object-position: center top;
   transform: translateX(-50%);
 }
 .responsible-notice p {
@@ -710,6 +734,4 @@ h2.responsible__title {
   font-size: 12px;
   line-height: 1.42;
   text-align: center;
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

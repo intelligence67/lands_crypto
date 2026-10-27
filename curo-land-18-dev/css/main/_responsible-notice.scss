@@ -1,7 +1,10 @@
 .responsible-notice {
   margin: 38px 0 32px;
-  border-radius: 16px;
-  background: $background-black;
+
+  &__card {
+    border-radius: 16px;
+    background: $background-black;
+  }
 
   &__visual {
     position: relative;
