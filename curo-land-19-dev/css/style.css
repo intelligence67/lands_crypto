@@ -958,19 +958,31 @@ a:focus-visible {
   gap: 10px;
 }
 .about-legal__link {
+  position: relative;
+  isolation: isolate;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
   min-height: 90px;
   padding: 18px 23px 18px 30px;
-  border: 1px solid #30303a;
+  border: 1px solid transparent;
   border-radius: 20px;
-  background: #0c0b17;
+  background: linear-gradient(#0c0c19, #0c0c19) padding-box, linear-gradient(72deg, rgba(255, 255, 255, 0.15), rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.15)) border-box, linear-gradient(#0c0c19, #0c0c19) border-box;
   font-size: 18px;
   line-height: 1.2;
   font-weight: 600;
-  transition: background-color 0.3s ease;
+}
+.about-legal__link::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  background: #fc6200;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 .about-legal__arrow {
   display: block;
@@ -989,8 +1001,8 @@ a:focus-visible {
   opacity: 0;
 }
 @media (hover: hover) {
-  .about-legal__link:hover {
-    background: #fc6200;
+  .about-legal__link:hover::before {
+    opacity: 1;
   }
   .about-legal__link:hover .about-legal__arrow use:first-child {
     opacity: 0;
@@ -1022,7 +1034,7 @@ a:focus-visible {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .about-legal__link, .about-legal__arrow use {
+  .about-legal__link::before, .about-legal__arrow use {
     transition: none;
   }
 }

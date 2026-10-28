@@ -6,19 +6,35 @@
   }
 
   &__link {
+    position: relative;
+    isolation: isolate;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
     min-height: 90px;
     padding: 18px 23px 18px 30px;
-    border: 1px solid $color-border;
+    border: 1px solid transparent;
     border-radius: 20px;
-    background: $background-card;
+    background:
+      linear-gradient($background-graphic-card, $background-graphic-card) padding-box,
+      $gradient-graphic-border border-box,
+      linear-gradient($background-graphic-card, $background-graphic-card) border-box;
     font-size: 18px;
     line-height: 1.2;
     font-weight: 600;
-    transition: background-color $transition-hover;
+  }
+
+  &__link::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: inherit;
+    background: $color-orange;
+    opacity: 0;
+    transition: opacity $transition-hover;
+    pointer-events: none;
   }
 
   &__arrow {
@@ -42,8 +58,8 @@
   }
 
   @media (hover: hover) {
-    &__link:hover {
-      background: $color-orange;
+    &__link:hover::before {
+      opacity: 1;
     }
 
     &__link:hover &__arrow use:first-child {
@@ -82,7 +98,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    &__link,
+    &__link::before,
     &__arrow use {
       transition: none;
     }
