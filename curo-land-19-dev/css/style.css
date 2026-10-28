@@ -394,8 +394,7 @@ a:focus-visible {
 .about-trust img {
   width: 120px;
   height: 120px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   margin: 0 auto 8px;
 }
 .about-trust h2 {
@@ -470,8 +469,7 @@ a:focus-visible {
   transform: translateY(-50%);
   width: 100px;
   height: 100px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   pointer-events: none;
 }
 .about-games h3 {
@@ -550,8 +548,7 @@ a:focus-visible {
 .about-explore img {
   width: 116px;
   height: 116px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   margin: 0 auto;
   transition: transform 0.3s ease;
 }
@@ -625,8 +622,7 @@ a:focus-visible {
   justify-content: center;
   gap: 10px;
   -webkit-user-select: none;
-  -moz-user-select: none;
-       user-select: none;
+  user-select: none;
   border: 1px solid transparent;
   background: linear-gradient(#0c0c19, #0c0c19) padding-box, linear-gradient(72deg, rgba(255, 255, 255, 0.15), rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.15)) border-box, linear-gradient(#0c0c19, #0c0c19) border-box;
   border-radius: 20px;
@@ -698,7 +694,7 @@ a:focus-visible {
   grid-template-columns: 43% 57%;
   min-height: 514px;
   padding: 42px 30px;
-  background: #0c0c19 url("../img/about-account-background.webp") left center/cover no-repeat;
+  background: url("../img/about-account-background.webp") left center/cover no-repeat padding-box, linear-gradient(72deg, rgba(255, 255, 255, 0.15), rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.15)) border-box, linear-gradient(#0c0c19, #0c0c19) border-box;
   border: 1px solid transparent;
   border-radius: 20px;
   overflow: hidden;
@@ -712,8 +708,7 @@ a:focus-visible {
 .about-account__shield {
   width: 346px;
   height: 431px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .about-account__steps {
   display: grid;
@@ -799,9 +794,7 @@ a:focus-visible {
     display: flex;
     flex-direction: column;
     padding: 25px 12px 30px 12px;
-    background-image: url("../img/about-account-background-mobile.webp");
-    background-position: center;
-    background-size: cover;
+    background: url("../img/about-account-background-mobile.webp") center/cover no-repeat padding-box, linear-gradient(72deg, rgba(255, 255, 255, 0.15), rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.15)) border-box, linear-gradient(#0c0c19, #0c0c19) border-box;
   }
   .about-account__steps {
     order: -1;
@@ -865,8 +858,7 @@ a:focus-visible {
 .about-help__image {
   width: 100%;
   height: 222px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .about-help__text {
   padding-left: 15px;
@@ -1048,4 +1040,4 @@ a:focus-visible {
   .about-legal__link::before, .about-legal__arrow use {
     transition: none;
   }
-}/*# sourceMappingURL=style.css.map */
+}

@@ -8,7 +8,10 @@
     grid-template-columns: 43% 57%;
     min-height: 514px;
     padding: 42px 30px;
-    background: $background-graphic-card url('../img/about-account-background.webp') left center / cover no-repeat;
+    background:
+      url('../img/about-account-background.webp') left center / cover no-repeat padding-box,
+      $gradient-graphic-border border-box,
+      linear-gradient($background-graphic-card, $background-graphic-card) border-box;
     border: 1px solid transparent;
     border-radius: 20px;
     overflow: hidden;
@@ -126,9 +129,10 @@
       display: flex;
       flex-direction: column;
       padding: 25px 12px 30px 12px;
-      background-image: url('../img/about-account-background-mobile.webp');
-      background-position: center;
-      background-size: cover;
+      background:
+        url('../img/about-account-background-mobile.webp') center / cover no-repeat padding-box,
+        $gradient-graphic-border border-box,
+        linear-gradient($background-graphic-card, $background-graphic-card) border-box;
     }
 
     &__steps {
