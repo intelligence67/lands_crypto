@@ -1,0 +1,229 @@
+.about-hero {
+  &__banner {
+    position: relative;
+    isolation: isolate;
+    min-height: 395px;
+    overflow: hidden;
+    border: 1px solid $color-border;
+    border-radius: 20px;
+    background: $background-graphic-card url('../img/about-hero-background-desktop.svg') center / 100% 100% no-repeat;
+  }
+
+  &__text {
+    position: relative;
+    z-index: 2;
+    padding: 103px 80px 102px;
+    pointer-events: none;
+  }
+
+  h1 {
+    font-family: $font-heading;
+    font-weight: 800;
+    font-style: italic;
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  &__lead {
+    color: $color-orange;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  p:not(.about-hero__lead) {
+    color: $color-hero-text;
+    font-size: 18px;
+  }
+
+  &__art {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &__art > img,
+  &__coin-large {
+    position: absolute;
+    transform-origin: top left;
+  }
+
+  &__chip {
+    width: 30.79%;
+    left: 54.24%;
+    top: 29.57%;
+    transform: rotate(-15deg);
+  }
+
+  &__football {
+    width: 20.06%;
+    left: 51.45%;
+    top: 60%;
+    transform: rotate(45deg);
+  }
+
+  &__roulette {
+    width: 27.2%;
+    left: 110.64%;
+    top: -29.11%;
+    transform: rotate(83.43deg);
+  }
+
+  &__gift {
+    width: 17.42%;
+    left: -6.28%;
+    top: -12.66%;
+    transform: rotate(7.02deg);
+  }
+
+  &__coin-top {
+    opacity: 0.5;
+    width: 6.66%;
+    left: 90.77%;
+    top: 84.3%;
+    transform: rotate(30deg);
+  }
+
+  &__coin-large {
+    width: 22.46%;
+    aspect-ratio: 270 / 249;
+    left: 62.65%;
+    top: -18.48%;
+    overflow: hidden;
+    transform: rotate(90deg);
+  }
+
+  &__coin-large img {
+    position: absolute;
+    width: 55.92%;
+    height: 60.6%;
+    max-width: none;
+    left: 19.14%;
+    top: 21.26%;
+  }
+
+  &__coin-small {
+    opacity: 0.3;
+    width: 3.49%;
+    left: 80.12%;
+    top: 90.63%;
+    transform: rotate(-90deg);
+  }
+
+  @include breakpoint($bp-xl) {
+    &__banner {
+      min-height: 0;
+      aspect-ratio: 1202 / 395;
+    }
+
+    &__text {
+      padding: 8.65% 6.7%;
+    }
+
+    h1 {
+      font-size: clamp(36px, 4.7vw, 60px);
+      margin-bottom: 10px;
+    }
+
+    &__lead {
+      font-size: clamp(13px, 1.7vw, 22px);
+      margin-bottom: 8px;
+    }
+
+    p:not(.about-hero__lead) {
+      font-size: clamp(11px, 1.42vw, 18px);
+    }
+  }
+
+  @include breakpoint($bp-md) {
+    &__banner {
+      min-height: 620px;
+      aspect-ratio: auto;
+      background-image: url('../img/about-hero-background-mobile.svg');
+    }
+
+    &__text {
+      padding: 64px 16px 0 32px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 9.66vw, 40px);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    &__lead {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    p:not(.about-hero__lead) {
+      max-width: 260px;
+      font-size: 14px;
+    }
+
+    &__chip {
+      width: min(86.13%, 322px);
+      left: max(-2.4%, calc(50% - 196px));
+      top: 73.84%;
+      transform: rotate(-45deg);
+    }
+
+    &__football {
+      width: min(64.46%, 241px);
+      left: calc(100% - min(9.23%, 35px));
+      top: 74.2%;
+      transform: rotate(45deg);
+    }
+
+    &__roulette {
+      width: min(52.3%, 196px);
+      left: 99.96%;
+      top: -17.42%;
+      transform: rotate(62.08deg);
+    }
+
+    &__gift {
+      width: min(43.18%, 162px);
+      left: max(-11.3%, -42px);
+      top: 38.06%;
+      transform: rotate(7.02deg);
+    }
+
+    &__coin-top {
+      width: min(21.39%, 80px);
+      left: min(15.78%, 59px);
+      top: -7.1%;
+      transform: rotate(30deg);
+    }
+
+    &__coin-large {
+      width: min(54.55%, 204px);
+      aspect-ratio: 204 / 189;
+      left: calc(100% + min(20.59%, 77px));
+      top: 28.39%;
+      transform: rotate(90deg);
+    }
+
+    &__coin-small {
+      width: min(11.23%, 42px);
+      left: min(8.56%, 32px);
+      top: 96.77%;
+      transform: rotate(-90deg);
+    }
+  }
+
+  @include breakpoint($bp-sm) {
+    &__text {
+      padding: 20% 7% 0 7%;
+    }
+
+    &__lead {
+      font-size: 18px;
+    }
+  }
+}

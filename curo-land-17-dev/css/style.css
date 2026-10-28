@@ -215,7 +215,6 @@ h6 {
 
 .btn:hover,
 .btn:focus {
-  -webkit-filter: brightness(0.9);
   filter: brightness(0.9);
 }
 
@@ -688,7 +687,9 @@ h6 {
   margin-bottom: 24px;
   position: relative;
   pointer-events: none;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .hero__image::after {
   content: "";
@@ -714,7 +715,8 @@ h6 {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 16px;
 }
 @keyframes pulseObject {
@@ -805,7 +807,8 @@ h6 {
   z-index: 2;
   width: 28px;
   height: 28px;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .vip-card__inner {
   position: relative;
@@ -978,8 +981,10 @@ h6 {
   height: 100%;
   inset: 0;
   transition: transform 0.35s ease, filter 0.35s ease;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
   position: relative;
 }
 .vip-benefit-card--banner a::before {
@@ -1053,7 +1058,9 @@ h6 {
   right: 0;
   bottom: 0;
   pointer-events: none;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .vip-benefit-card__btns {
   display: flex;
@@ -1132,6 +1139,7 @@ h6 {
   text-align: center;
 }
 .vip-banner__badge {
+  width: -moz-fit-content;
   width: fit-content;
   margin: 0 auto 16px;
   padding: 8px 10px;
@@ -1211,10 +1219,14 @@ h6 {
   height: 90px;
   margin: 0;
   margin-bottom: 12px;
-  object-fit: contain;
-  object-position: center;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: center;
+     object-position: center;
   pointer-events: none;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .vip-banner-card h3 {
   font-family: "Manrope", -apple-system, "BlinkMacSystemFont", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
@@ -1501,7 +1513,8 @@ h6 {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   transition: transform 0.35s ease, filter 0.35s ease;
 }
 .vip-win-card__image::before {
@@ -1601,7 +1614,8 @@ h6 {
 .vip-win-item__image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 8px;
   transition: transform 0.35s ease, filter 0.35s ease;
 }
@@ -1930,6 +1944,7 @@ h6 {
   gap: 12px;
 }
 .footer__nav a {
+  width: -moz-fit-content;
   width: fit-content;
   font-size: 12px;
   color: #FFFFFF;
@@ -2205,7 +2220,9 @@ body.vip-status--vip-3 .vip-modal {
   height: 2px;
   margin: 8px 0 12px;
   border: 0;
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   background: #16162c;
   color: var(--popup-accent);
 }
@@ -2552,20 +2569,20 @@ body.vip-status--vip-3 .vip-modal {
   padding: 32px 0 0;
   border: 0;
   background: transparent;
-  --level-background: url("../img/vip-popup-background-1.webp");
-  --level-cup: url("../img/vip-popup-cup-1.webp");
+  --level-background: url('../img/vip-popup-background-1.webp');
+  --level-cup: url('../img/vip-popup-cup-1.webp');
 }
 .vip-new-level[data-level="2"] {
-  --level-background: url("../img/vip-popup-background-2.webp");
-  --level-cup: url("../img/vip-popup-cup-2.webp");
+  --level-background: url('../img/vip-popup-background-2.webp');
+  --level-cup: url('../img/vip-popup-cup-2.webp');
 }
 .vip-new-level[data-level="3"] {
-  --level-background: url("../img/vip-popup-background-3.webp");
-  --level-cup: url("../img/vip-popup-cup-3.webp");
+  --level-background: url('../img/vip-popup-background-3.webp');
+  --level-cup: url('../img/vip-popup-cup-3.webp');
 }
 .vip-new-level[data-level="4"] {
-  --level-background: url("../img/vip-popup-background-4.webp");
-  --level-cup: url("../img/vip-popup-cup-4.webp");
+  --level-background: url('../img/vip-popup-background-4.webp');
+  --level-cup: url('../img/vip-popup-cup-4.webp');
 }
 .vip-new-level__surface {
   border-radius: 18px;
@@ -2624,7 +2641,8 @@ body.vip-status--vip-3 .vip-modal {
   flex: 0 0 40px;
   width: 40px;
   height: 40px;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .vip-new-level__benefits strong {
   display: block;
@@ -2727,7 +2745,8 @@ body.vip-status--vip-3 .vip-modal {
   height: 88px;
   right: 16px;
   bottom: 0;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   pointer-events: none;
 }
 .vip-limits-popup__body {
@@ -2794,8 +2813,10 @@ body.vip-status--vip-3 .vip-modal {
   bottom: 0;
   width: 90px;
   height: 74px;
-  object-fit: contain;
-  object-position: bottom;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: bottom;
+     object-position: bottom;
   pointer-events: none;
 }
 .vip-limits-popup__upgrade.is-gold {
@@ -2871,7 +2892,8 @@ body.vip-status--vip-3 .vip-modal {
   height: 88px;
   right: 16px;
   bottom: 0;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   pointer-events: none;
 }
 .vip-methods-popup__body {
@@ -2938,8 +2960,10 @@ body.vip-status--vip-3 .vip-modal {
   bottom: 0;
   width: 90px;
   height: 74px;
-  object-fit: contain;
-  object-position: bottom;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: bottom;
+     object-position: bottom;
   pointer-events: none;
 }
 .vip-methods-popup__upgrade.is-gold {
@@ -3030,7 +3054,8 @@ body.vip-status--vip-3 .vip-modal {
   height: 88px;
   right: 16px;
   bottom: 0;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   pointer-events: none;
 }
 .vip-processing-popup__body {
@@ -3097,8 +3122,10 @@ body.vip-status--vip-3 .vip-modal {
   bottom: 0;
   width: 90px;
   height: 74px;
-  object-fit: contain;
-  object-position: bottom;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: bottom;
+     object-position: bottom;
   pointer-events: none;
 }
 .vip-processing-popup__upgrade.is-gold {
@@ -3178,7 +3205,8 @@ body.vip-status--vip-3 .vip-modal {
   height: 72px;
   right: 0;
   bottom: 0;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   pointer-events: none;
 }
 .vip-odds-popup__body {
@@ -3245,8 +3273,10 @@ body.vip-status--vip-3 .vip-modal {
   bottom: 0;
   width: 90px;
   height: 74px;
-  object-fit: contain;
-  object-position: bottom;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: bottom;
+     object-position: bottom;
   pointer-events: none;
 }
 .vip-odds-popup__upgrade.is-gold {
@@ -3323,7 +3353,8 @@ body.vip-status--vip-3 .vip-modal {
   height: 88px;
   right: 16px;
   bottom: 0;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   pointer-events: none;
 }
 .vip-support-popup__body {
@@ -3390,8 +3421,10 @@ body.vip-status--vip-3 .vip-modal {
   bottom: 0;
   width: 90px;
   height: 74px;
-  object-fit: contain;
-  object-position: bottom;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: bottom;
+     object-position: bottom;
   pointer-events: none;
 }
 .vip-support-popup__upgrade.is-gold {
@@ -3525,7 +3558,8 @@ body.vip-status--vip-3 .vip-modal {
 .vip-support-popup__avatar img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .vip-support-popup__upgrade[data-next="2"] {
   background: #352e14;
@@ -3573,7 +3607,8 @@ body.vip-status--vip-3 .vip-modal {
 .vip-timer-popup__label img {
   width: 16px;
   height: 16px;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   flex-shrink: 0;
 }
 .vip-timer-popup h2 {
@@ -3669,7 +3704,8 @@ body.vip-status--vip-3 .vip-modal {
   bottom: 0;
   width: 90px;
   height: 74px;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .vip-timer-popup__offer[data-level="2"] {
   background: #352e14;
@@ -3724,7 +3760,8 @@ body.vip-status--vip-3 .vip-modal {
 .vip-timer-popup__cashback img {
   width: 85px;
   height: 45px;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 @media screen and (max-width: 767.98px) {
   .vip-timer-popup__body {
@@ -3737,4 +3774,4 @@ body.vip-status--vip-3 .vip-modal {
     font-size: 24px;
     flex-shrink: 0;
   }
-}
+}/*# sourceMappingURL=style.css.map */

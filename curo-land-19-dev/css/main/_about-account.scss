@@ -1,0 +1,179 @@
+.about-account {
+  margin-bottom: 30px;
+
+  &__panel {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: 43% 57%;
+    min-height: 514px;
+    padding: 42px 30px;
+    background: $background-graphic-card url('../img/about-account-background.svg') left center / cover no-repeat;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  &__art {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px 0 10px;
+  }
+
+  &__shield {
+    width: 346px;
+    height: 431px;
+    object-fit: contain;
+  }
+
+  &__steps {
+    display: grid;
+    gap: 35px;
+    align-content: center;
+  }
+
+  &__step {
+    display: grid;
+    grid-template-columns: 101px minmax(0, 1fr);
+    gap: 26px;
+    align-items: center;
+  }
+
+  &__number {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 101px;
+    height: 101px;
+    font-family: $font-heading;
+    font-size: 31px;
+    font-style: italic;
+    font-weight: 800;
+  }
+
+  &__number svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: $color-orange;
+  }
+
+  h3 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: $color-white-65;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  a {
+    color: $color-orange;
+    font-size: 14px;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 2px;
+    transition: text-decoration-color $transition-hover;
+  }
+
+  @media (hover: hover) {
+    a:hover {
+      text-decoration-color: currentColor;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a {
+      transition: none;
+    }
+  }
+
+  @include breakpoint($bp-lg) {
+    &__panel {
+      padding: 32px 20px;
+      grid-template-columns: 49% 51%;
+    }
+
+    &__art {
+      padding: 0 40px 0 0;
+    }
+
+    &__step {
+      grid-template-columns: 100px minmax(0, 1fr);
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 13px;
+    }
+
+    &__steps {
+      gap: 40px;
+    }
+  }
+
+  @include breakpoint($bp-md) {
+    &__panel {
+      display: flex;
+      flex-direction: column;
+      padding: 25px 12px 30px 12px;
+      background-image: url('../img/about-account-background-mobile.svg');
+      background-position: center;
+      background-size: cover;
+    }
+
+    &__steps {
+      order: -1;
+      gap: 40px;
+    }
+
+    &__step {
+      grid-template-columns: 100px minmax(0, 1fr);
+      gap: 20px;
+    }
+
+    &__art {
+      padding: 34px 0 0 0;
+    }
+
+    &__shield {
+      width: 100%;
+      height: auto;
+      max-width: 247px;
+    }
+  }
+
+  @include breakpoint($bp-sm) {
+    &__step {
+      grid-template-columns: 64px minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    &__steps {
+      gap: 25px;
+    }
+
+    &__number {
+      width: 64px;
+      height: 64px;
+      font-size: 24px;
+    }
+
+    h3 {
+      font-size: 18px;
+    }
+
+    a {
+      font-size: 13px;
+    }
+  }
+}

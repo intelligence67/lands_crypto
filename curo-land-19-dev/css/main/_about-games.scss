@@ -1,0 +1,84 @@
+.about-games {
+  padding-bottom: 60px;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  &__card {
+    position: relative;
+    isolation: isolate;
+    min-height: 120px;
+    padding: 15px 115px 20px 21px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    background:
+      url('../img/about-games-background.svg') right center / auto 100% no-repeat padding-box,
+      linear-gradient($background-graphic-card, $background-graphic-card) padding-box,
+      $gradient-games-border border-box;
+    overflow: hidden;
+  }
+
+  &__image {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  h3 {
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  p {
+    color: $color-white-65;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .about-btn {
+    padding-inline: 20px 18px;
+  }
+
+  @include breakpoint($bp-lg) {
+    padding-bottom: 40px;
+
+    &__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @include breakpoint($bp-md) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @include breakpoint($bp-sm) {
+
+    &__card {
+      padding: 15px 85px 20px 21px;
+    }
+
+    &__image {
+      width: 80px;
+      height: 80px;
+      right: 5px;
+    }
+
+    .about-btn {
+      padding-inline: 12px;
+      gap: 6px;
+      font-size: 13px;
+    }
+  }
+}

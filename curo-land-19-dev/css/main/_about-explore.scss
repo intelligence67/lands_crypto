@@ -1,0 +1,106 @@
+.about-explore {
+  margin-bottom: 60px;
+
+  &__band {
+    position: relative;
+    isolation: isolate;
+    padding-block: 51px 74px;
+  }
+
+  &__band::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset-block: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background: url('../img/about-explore-background.svg') center / cover no-repeat;
+    pointer-events: none;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  &__item {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    padding-top: 6px;
+  }
+
+  img {
+    width: 116px;
+    height: 116px;
+    object-fit: contain;
+    margin: 0 auto;
+    transition: transform $transition-hover;
+  }
+
+  @media (hover: hover) {
+    &__item:hover img {
+      transform: translateY(-5px);
+    }
+  }
+
+  @include breakpoint($bp-lg) {
+    margin-bottom: 40px;
+
+    &__band {
+      padding-block: 40px 43px;
+    }
+
+    &__item {
+      font-size: 18px;
+    }
+
+    img {
+      width: 70px;
+      height: 70px;
+    }
+  }
+
+  @include breakpoint($bp-md) {
+    &__band::before {
+      background-image: url('../img/about-explore-background-mobile.svg');
+      background-size: 100% 100%;
+    }
+
+    &__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 25px 10px;
+    }
+
+    &__band {
+      padding-block: 30px 35px;
+    }
+
+    &__item {
+      font-size: 18px;
+    }
+  }
+
+  @include breakpoint($bp-sm) {
+    &__grid {
+      gap: 15px 10px;
+    }
+
+    &__item {
+      font-size: 14px;
+    }
+
+    img {
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    img {
+      transition: none;
+    }
+  }
+}

@@ -1,0 +1,90 @@
+.about-legal {
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 90px;
+    padding: 18px 23px 18px 30px;
+    border: 1px solid $color-border;
+    border-radius: 20px;
+    background: $background-card;
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 600;
+    transition: background-color $transition-hover;
+  }
+
+  &__arrow {
+    display: block;
+    flex: 0 0 52px;
+    width: 52px;
+    height: 52px;
+  }
+
+  &__arrow svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__arrow use {
+    transition: opacity $transition-hover;
+  }
+
+  &__arrow use:last-child {
+    opacity: 0;
+  }
+
+  @media (hover: hover) {
+    &__link:hover {
+      background: $color-orange;
+    }
+
+    &__link:hover &__arrow use:first-child {
+      opacity: 0;
+    }
+
+    &__link:hover &__arrow use:last-child {
+      opacity: 1;
+    }
+  }
+
+  @include breakpoint($bp-lg) {
+    &__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @include breakpoint($bp-md) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @include breakpoint($bp-sm) {
+    &__link {
+      font-size: 16px;
+      padding-inline: 18px;
+      gap: 10px;
+    }
+
+    &__arrow {
+      flex-basis: 44px;
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__link,
+    &__arrow use {
+      transition: none;
+    }
+  }
+}

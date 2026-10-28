@@ -1,0 +1,149 @@
+.about-help {
+  padding-bottom: 60px;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  &__card {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: 44% 56%;
+    align-items: center;
+    min-height: 250px;
+    padding: 14px 70px 14px 21px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    overflow: hidden;
+    background:
+      url('../img/about-help-background.svg') left center / 100% 100% no-repeat padding-box,
+      linear-gradient($background-graphic-card, $background-graphic-card) padding-box,
+      $gradient-graphic-border border-box,
+      linear-gradient($background-graphic-card, $background-graphic-card) border-box;
+  }
+
+  &__image {
+    width: 100%;
+    height: 222px;
+    object-fit: contain;
+  }
+
+  &__text {
+    padding-left: 15px;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  p {
+    color: $color-white-65;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .about-btn {
+    padding-inline: 18px;
+    gap: 13px;
+  }
+
+  @include breakpoint($bp-xl) {
+    &__card {
+      padding: 14px 14px 14px 21px
+    }
+
+    .about-btn {
+      font-size: 12px;
+    }
+  }
+
+  @include breakpoint($bp-lg) {
+    padding-bottom: 40px;
+
+    &__image {
+      height: 126px;
+    }
+
+    &__card {
+      grid-template-columns: 38% 62%;
+      min-height: 190px;
+      padding: 14px 8px 20px 14px;
+    }
+
+    h2 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 13px;
+    }
+
+    .about-btn {
+      font-size: 11px;
+      padding-inline: 12px;
+      gap: 6px;
+      width: 100%;
+      max-width: 190px;
+      justify-content: space-between;
+    }
+
+    .about-btn svg {
+      width: 12px;
+      height: 10px;
+    }
+
+    &__text {
+      padding-left: 12px;
+    }
+  }
+
+  @include breakpoint($bp-md) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+
+    &__card {
+      padding: 14px 5px 20px 5px;
+      background:
+        linear-gradient($background-graphic-card, $background-graphic-card) padding-box,
+        $gradient-graphic-border border-box,
+        linear-gradient($background-graphic-card, $background-graphic-card) border-box;
+    }
+
+    &__card::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: url('../img/about-help-background.svg') left center / 100% 100% no-repeat;
+      transform: skewX(-6deg);
+      transform-origin: top left;
+      pointer-events: none;
+    }
+
+    &__image {
+      height: 139px;
+    }
+  }
+
+  @include breakpoint($bp-sm) {
+    &__card {
+      grid-template-columns: 31% 69%;
+    }
+
+    h2 {
+      font-size: 18px;
+    }
+
+    .about-btn {
+      padding-inline: 8px;
+      font-size: 10px;
+    }
+  }
+}

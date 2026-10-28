@@ -1,0 +1,79 @@
+.about-trust {
+  padding-block: 24px 60px;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  &__item {
+    text-align: center;
+    min-height: 215px;
+    padding-top: 6px;
+  }
+
+  img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin: 0 auto 8px;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  p {
+    color: $color-white-65;
+    font-size: 14px;
+  }
+
+  @include breakpoint($bp-lg) {
+    padding-block: 30px 40px;
+
+    &__grid {
+      gap: 0;
+    }
+
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+  @include breakpoint($bp-md) {
+
+    &__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px 10px;
+    }
+
+    img {
+      width: 120px;
+      height: 120px;
+    }
+
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+  @include breakpoint($bp-sm) {
+
+    img {
+      width: 100px;
+      height: 100px;
+    }
+
+    h2 {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 12px;
+    }
+  }
+}

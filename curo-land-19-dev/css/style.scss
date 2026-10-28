@@ -1,0 +1,107 @@
+@use './normalize';
+@use './vars' as *;
+@use './mixins' as *;
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Zalando+Sans+Expanded:ital,wght@1,800&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: $background-page;
+  color: $color-text;
+  font: 400 14px/1.2 $font-main;
+  min-width: 320px;
+}
+
+a {
+  color: inherit;
+}
+
+svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+a:focus-visible {
+  outline: 2px solid $color-orange;
+  outline-offset: 5px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1242px;
+  padding-inline: 20px;
+  margin-inline: auto;
+}
+
+.about {
+  padding-block: 40px 60px;
+  overflow: clip;
+}
+
+.about__title {
+  font-family: $font-heading;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+.about-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  min-height: 32px;
+  padding: 6px 20px;
+  border-radius: 10px;
+  background: $color-orange;
+  color: $color-text;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  box-shadow: $shadow-button;
+  transition:
+    filter $transition-hover,
+    transform $transition-hover;
+}
+
+.about-btn svg {
+  width: 15px;
+  height: 12px;
+}
+
+@include breakpoint($bp-xl) {
+  .about__title {
+    margin-bottom: 20px;
+  }
+}
+
+@media (hover: hover) {
+  .about-btn:hover {
+    filter: brightness(1.12);
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .about-btn {
+    transition: none;
+  }
+}
+
+@import './main/about-hero';
+@import './main/about-trust';
+@import './main/about-games';
+@import './main/about-explore';
+@import './main/about-payments';
+@import './main/about-account';
+@import './main/about-help';
+@import './main/about-legal';
