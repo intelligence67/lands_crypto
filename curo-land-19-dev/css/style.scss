@@ -80,6 +80,12 @@ a:focus-visible {
   }
 }
 
+@include breakpoint($bp-md) {
+  .container {
+    padding-inline: 12px;
+  }
+}
+
 @media (hover: hover) {
   .about-btn:hover {
     filter: brightness(1.12);
