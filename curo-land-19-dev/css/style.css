@@ -389,8 +389,7 @@ a:focus-visible {
 .about-trust img {
   width: 120px;
   height: 120px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   margin: 0 auto 8px;
 }
 .about-trust h2 {
@@ -465,8 +464,7 @@ a:focus-visible {
   transform: translateY(-50%);
   width: 100px;
   height: 100px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   pointer-events: none;
 }
 .about-games h3 {
@@ -528,7 +526,7 @@ a:focus-visible {
   left: 50%;
   width: 100vw;
   transform: translateX(-50%);
-  background: url("../img/about-explore-background.svg") center/cover no-repeat;
+  background: url("../img/about-explore-background.svg") center/100% 100% no-repeat;
   pointer-events: none;
 }
 .about-explore__grid {
@@ -545,8 +543,7 @@ a:focus-visible {
 .about-explore img {
   width: 116px;
   height: 116px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   margin: 0 auto;
   transition: transform 0.3s ease;
 }
@@ -620,8 +617,7 @@ a:focus-visible {
   justify-content: center;
   gap: 10px;
   -webkit-user-select: none;
-  -moz-user-select: none;
-       user-select: none;
+  user-select: none;
   border: 1px solid transparent;
   background: linear-gradient(#0c0c19, #0c0c19) padding-box, linear-gradient(72deg, rgba(255, 255, 255, 0.15), rgba(0, 0, 0, 0.15) 50%, rgba(255, 255, 255, 0.15)) border-box, linear-gradient(#0c0c19, #0c0c19) border-box;
   border-radius: 20px;
@@ -707,8 +703,7 @@ a:focus-visible {
 .about-account__shield {
   width: 346px;
   height: 431px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .about-account__steps {
   display: grid;
@@ -860,8 +855,7 @@ a:focus-visible {
 .about-help__image {
   width: 100%;
   height: 222px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .about-help__text {
   padding-left: 15px;
@@ -1031,4 +1025,4 @@ a:focus-visible {
   .about-legal__link, .about-legal__arrow use {
     transition: none;
   }
-}/*# sourceMappingURL=style.css.map */
+}
