@@ -468,6 +468,7 @@ h2.responsible__title {
 }
 .responsible-pause__intro {
   min-width: 0;
+  padding-right: 80px;
 }
 .responsible-pause__intro .responsible-card__image {
   top: -20px;
