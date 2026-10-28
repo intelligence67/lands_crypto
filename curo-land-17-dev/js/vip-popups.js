@@ -1,3 +1,4 @@
+import { startVipCountdown, stopVipCountdown } from "./vip-countdown.js";
 
 const popupParams = new URLSearchParams(location.search);
 let popupLevel = Number((popupParams.get("vip") || "").replace("vip-", "")) || 0;
@@ -141,7 +142,7 @@ function renderVipPopupDetail(id) {
     impact: deposit.status === "confirmed" ? "Cuenta para el progreso" : deposit.status === "pending" ? "Pendiente de confirmación" : "No cuenta para el progreso",
   };
   if (vipPopupData.integrated) {
-    fields.ars = deposit.currency === "ARS" ? popupMoney(deposit.amount, "ARS") : "—";
+    fields.ars = deposit.ars != null ? popupMoney(deposit.ars, "ARS") : deposit.currency === "ARS" ? popupMoney(deposit.amount, "ARS") : "—";
     fields.rate = deposit.rate == null ? "—" : `1 USD = ${deposit.rate} ARS`;
     fields.usd = deposit.currency === "USD" ? popupMoney(deposit.amount, "USD") : "—";
     fields.method = deposit.method || "—";
@@ -521,60 +522,6 @@ setInterval(() => {
   }
 }, 15 * 60 * 1000);
 
-document.addEventListener("DOMContentLoaded", () => {
-  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-  document.querySelectorAll("details.benefit-level").forEach((item) => {
-    const summary = item.querySelector(":scope > summary");
-    if (!summary) return;
-    let expanded = item.open;
-    let animation = null;
-    const sync = () => { item.dataset.expanded = String(expanded); };
-    const finish = () => {
-      if (animation) { animation.onfinish = null; animation.cancel(); animation = null; }
-      item.open = expanded;
-      item.classList.remove("is-animating");
-      sync();
-    };
-    sync();
-    summary.addEventListener("click", (event) => {
-      if (event.target.closest("a, button, input, select, textarea")) return;
-      event.preventDefault();
-      const start = item.getBoundingClientRect().height;
-      if (animation) { animation.onfinish = null; animation.cancel(); animation = null; }
-      expanded = !expanded;
-      sync();
-      item.open = true;
-      const styles = getComputedStyle(item);
-      const closed = summary.getBoundingClientRect().height
-        + parseFloat(styles.paddingTop) + parseFloat(styles.paddingBottom)
-        + parseFloat(styles.borderTopWidth) + parseFloat(styles.borderBottomWidth);
-      const end = expanded ? item.getBoundingClientRect().height : closed;
-      if (reducedMotion.matches) { finish(); return; }
-      item.classList.add("is-animating");
-      animation = item.animate({ height: [start + "px", end + "px"] },
-        { duration: 260, easing: "cubic-bezier(.2, 0, .2, 1)" });
-      animation.onfinish = finish;
-    });
-    item.addEventListener("toggle", () => {
-      if (!animation) { expanded = item.open; sync(); }
-    });
-    window.addEventListener("resize", () => { if (animation) finish(); });
-    reducedMotion.addEventListener("change", () => { if (animation && reducedMotion.matches) finish(); });
-  });
-});
-
-document.addEventListener("click", (event) => {
-  const link = event.target.closest('a[href="#vip-perks"], a[href="#vip-next"]');
-  if (!link || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-  const target = document.getElementById(link.hash.slice(1));
-  if (!target || target.hidden) return;
-  event.preventDefault();
-  if (location.hash !== link.hash) history.pushState(null, "", link.hash);
-  target.setAttribute("tabindex", "-1");
-  target.focus({ preventScroll: true });
-  target.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" });
-});
-
 document.addEventListener("click", (event) => {
   const control = event.target.closest("a, button");
   const modal = control?.closest(".vip-modal");
@@ -667,55 +614,4 @@ function renderVipTimer() {
   m.querySelector('[data-timer-link="benefits"]').hidden = error || !benefits;
   m.querySelector('[data-popup-view="support"]').hidden = !error;
   m.querySelector('[data-popup-view="progress"]').hidden = max && !error;
-}
-
-let vipCountdownInterval = null;
-function stopVipCountdown() {
-  clearInterval(vipCountdownInterval);
-  vipCountdownInterval = null;
-}
-function startVipCountdown(title, endsAt) {
-  if (!endsAt) return;
-  const end = new Date(endsAt).getTime();
-  if (!Number.isFinite(end)) return;
-  title.classList.add("vip-timer-popup__countdown");
-  title.replaceChildren();
-  let previous = "";
-  const tick = () => {
-    const minutes = Math.max(0, Math.ceil((end - Date.now()) / 60000));
-    const days = String(Math.floor(minutes / 1440)).padStart(2, "0");
-    const hours = String(Math.floor(minutes / 60) % 24).padStart(2, "0");
-    const mins = String(minutes % 60).padStart(2, "0");
-    const value = `${days}D:${hours}H:${mins}M`;
-    if (value === previous) return;
-    title.setAttribute("aria-label", `${Number(days)} días, ${Number(hours)} horas, ${Number(mins)} minutos`);
-    const rebuild = value.length !== previous.length;
-    if (rebuild) title.replaceChildren();
-    [...value].forEach((char, index) => {
-      let slot = title.children[index];
-      if (!slot) {
-        slot = document.createElement("span");
-        slot.className = /\d/.test(char) ? "vip-timer-popup__digit" : "vip-timer-popup__separator";
-        slot.classList.toggle("vip-timer-popup__separator--colon", char === ":");
-        slot.setAttribute("aria-hidden", "true");
-        title.append(slot);
-      }
-      if (!rebuild && char === previous[index]) return;
-      const old = slot.firstElementChild;
-      const next = document.createElement("span");
-      next.textContent = char;
-      slot.replaceChildren(next);
-      if (old && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        slot.append(old);
-        const options = { duration: 420, easing: "cubic-bezier(.22, 1, .36, 1)" };
-        next.animate([{ transform: "translateY(100%)", opacity: 0 }, { transform: "translateY(0)", opacity: 1 }], options);
-        const animation = old.animate([{ transform: "translateY(0)", opacity: 1 }, { transform: "translateY(-100%)", opacity: 0 }], options);
-        animation.onfinish = () => old.remove();
-      }
-    });
-    previous = value;
-    if (!minutes) stopVipCountdown();
-  };
-  vipCountdownInterval = setInterval(tick, 1000);
-  tick();
 }
