@@ -436,6 +436,10 @@
     margin-top: auto;
   }
 
+  &__requirement:not([hidden]) + &__actions {
+    margin-top: 0;
+  }
+
   &__action {
     flex: 1;
   }

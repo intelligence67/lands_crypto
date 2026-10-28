@@ -77,6 +77,7 @@ function renderVipPopupProgress() {
   set(".vip-modal__updated", data.updated);
   modal.querySelector(".vip-modal__error").hidden = !data.unavailable;
   modal.querySelector("progress").value = data.unavailable || !data.target ? 0 : Math.min(100, data.percent ?? data.confirmed / data.target * 100);
+  modal.querySelector("progress").style.visibility = data.missingProgress ? "hidden" : "";
 }
 function renderVipPopupError(node) {
   node.innerHTML = `${popupIcon("info", "", 18)}<div><p>No se pudieron cargar los datos</p><small>Actualizaremos automáticamente en aproximadamente 15 minutos</small></div>`;
@@ -89,6 +90,10 @@ function renderVipPopupDeposits() {
   const failed = data.unavailable || totalsUnavailable || depositsUnavailable;
   const error = modal.querySelector(".vip-modal__error");
   renderVipPopupError(error);
+  if (data.missingProgress) {
+    error.querySelector("p").textContent = depositsUnavailable ? "Información de depósitos no disponible" : "Información del progreso no disponible";
+    error.querySelector("small").textContent = depositsUnavailable ? "La plataforma no envió el historial de depósitos." : "La plataforma no envió los datos del progreso.";
+  }
   if (depositsUnavailable) modal.querySelector(".vip-deposits-popup__list").after(error);
   else modal.querySelector(".vip-deposits-popup__summary").append(error);
   modal.querySelector('.vip-deposits-popup__list-view [data-popup-action="deposit"]').hidden = !!failed;

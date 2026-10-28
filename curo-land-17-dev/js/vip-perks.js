@@ -142,7 +142,7 @@ export function renderVipPerks(status) {
       1: 4,
       2: 17,
       3: 19,
-      4: level === 4 ? 16 : 18,
+      4: 18,
       5: 2,
       6: 16,
     };
@@ -152,8 +152,9 @@ export function renderVipPerks(status) {
       const image = card.querySelector(".perk-event__image");
 
       if (image && imageNumber !== undefined) {
-        image.src =
-          `./img/vip-icons-table/vip-icon-${imageLevel}_${imageNumber}.webp`;
+        image.src = card.dataset.event === "4" && level === 4
+          ? "./img/vip-iphone-duo.webp"
+          : `./img/vip-icons-table/vip-icon-${imageLevel}_${imageNumber}.webp`;
       }
     });
 

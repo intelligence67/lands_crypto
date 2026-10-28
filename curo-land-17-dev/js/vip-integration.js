@@ -81,7 +81,7 @@ function depositsFrom(data, p) {
   }).sort((a, b) => b.timestamp - a.timestamp);
 }
 
-function renderDeposits(deposits, currency, unavailable = false) {
+function renderDeposits(deposits, currency, unavailable = false, historyUnknown = false) {
   const list = document.querySelector('.vip-deposits__list[data-vip-visible*="vip-1"]');
   if (!list) return;
   list.replaceChildren();
@@ -109,7 +109,13 @@ function renderDeposits(deposits, currency, unavailable = false) {
     dates[0].textContent = deposit.time; dates[1].textContent = deposit.date;
     list.append(row);
   });
-  document.querySelectorAll('.vip-deposits__empty, .vip-deposits__first').forEach(node => { node.hidden = unavailable || deposits.length > 0; });
+  document.querySelectorAll('.vip-deposits__empty').forEach(node => {
+    node.textContent = historyUnknown ? 'Información de depósitos no disponible' : 'Todavía no hay depósitos realizados';
+    node.hidden = unavailable || (!historyUnknown && deposits.length > 0);
+  });
+  document.querySelectorAll('.vip-deposits__first').forEach(node => {
+    node.hidden = unavailable || historyUnknown || deposits.length > 0;
+  });
 }
 
 function renderNextCards(level, nextTier, remaining, currency, days) {
@@ -185,8 +191,9 @@ export function showVipDataError() {
 }
 
 export function applyVipData(data) {
-  const p = data.progress;
-  if (!p || typeof p !== 'object') { showVipDataError(); return; }
+  const missingProgress = !data.progress || typeof data.progress !== 'object' || Array.isArray(data.progress);
+  if (missingProgress && data.isVip !== false) { showVipDataError(); return; }
+  const p = missingProgress ? {} : data.progress;
   const parsedLevel = number(p.observedTier) ?? number(data.level) ?? number((data.levelName || p.tierName || '').match(/\d+/)?.[0]);
   const noVip = p.programMembership === 'no-vip' || p.programMembership === 'none' || data.isVip === false || parsedLevel === 0;
   if (!noVip && ![1, 2, 3, 4].includes(parsedLevel)) { showVipDataError(); return; }
@@ -197,8 +204,8 @@ export function applyVipData(data) {
   const target = number(p.nextTierThresholds?.[currency]) ?? number(p.nextTierThreshold);
   const nextTier = [1, 2, 3, 4].includes(number(p.nextTier)) ? number(p.nextTier) : null;
   const percent = Math.max(0, Math.min(100, number(p.nextTierProgress) ?? (target > 0 && confirmed != null ? confirmed / target * 100 : 0)));
-  const period = `${formatDate(p.cycleStartedAt)} → ${formatDate(p.cycleEndsAt)}`;
-  const updated = updatedLabel(p.updatedAt);
+  const period = missingProgress ? '—' : `${formatDate(p.cycleStartedAt)} → ${formatDate(p.cycleEndsAt)}`;
+  const updated = missingProgress ? 'Datos de progreso no disponibles' : updatedLabel(p.updatedAt);
   const remainingMs = date(p.cycleEndsAt) ? Math.max(0, date(p.cycleEndsAt).getTime() - Date.now()) : null;
   const days = remainingMs == null ? number(p.daysRemaining) : Math.ceil(remainingMs / 86400000);
   const expiry = days == null ? 'Período no disponible' : days <= 0 ? 'Período finalizado' : `Fin del período: ${days} ${days === 1 ? 'día' : 'días'}`;
@@ -212,16 +219,17 @@ export function applyVipData(data) {
   text('.vip-progress__period span', period);
   text('.vip-progress__head > p', updated);
   text('.vip-account__expiry span', expiry);
-  text('.vip-progress__level span', nextTier ? `VIP ${roman[nextTier - 1]}` : 'Nivel máximo');
+  text('.vip-progress__level span', nextTier ? `VIP ${roman[nextTier - 1]}` : level === 0 ? 'VIP I' : level === 4 ? 'Nivel máximo' : 'Nivel no disponible');
   const badge = document.querySelector('.vip-progress__level img');
-  if (badge) { badge.hidden = !nextTier; if (nextTier) badge.src = `./img/vip-account-lvl-${nextTier}.webp`; }
-  document.querySelectorAll('.vip-progress__bar').forEach(node => { node.value = percent; });
+  if (badge) { const badgeLevel = nextTier ?? (level === 0 ? 1 : null); badge.hidden = !badgeLevel; if (badgeLevel) badge.src = `./img/vip-account-lvl-${badgeLevel}.webp`; }
+  document.querySelectorAll('.vip-progress__bar').forEach(node => { node.value = percent; node.style.visibility = missingProgress ? 'hidden' : ''; });
   const deposits = depositsFrom(data, p);
-  renderDeposits(deposits, currency);
+  const historyUnknown = missingProgress && ![data.deposits, data.recentDeposits].some(Array.isArray);
+  renderDeposits(deposits, currency, false, historyUnknown);
   window.setVipPopupData?.({
     integrated: true, level, currency, confirmed, target, percent,
-    targetLevel: nextTier ?? 4, pending: number(p.pendingDeposits), period, updated,
-    unavailable: false, totalsUnavailable: confirmed == null, depositsUnavailable: false, deposits,
+    targetLevel: nextTier ?? (level === 0 ? 1 : 4), pending: number(p.pendingDeposits), period, updated,
+    unavailable: false, missingProgress, totalsUnavailable: confirmed == null, depositsUnavailable: historyUnknown, deposits,
   });
   window.setVipTimerData?.({
     integrated: true, unavailable: false, level, currency, nextTier,
